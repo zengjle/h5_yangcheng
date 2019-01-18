@@ -31,8 +31,6 @@ const DataMgr = (function () {
                 console.log('用户信息是字符串，尝试转换成对象失败：', e);
             }
         }
-        if (data === '')
-            data = null;
         if (!data) {
             var time = Global.time;
             _t.data = null;
@@ -42,37 +40,44 @@ const DataMgr = (function () {
                 mission: {                              //任务
                     1: {
                         id: 1,
-                        num: 0
+                        num: 0,
+                        is_receive: 1
                     },
                     2: {
                         id: 2,
-                        num: 0
+                        num: 0,
+                        is_receive: 1
                     },
                     3: {
                         id: 3,
-                        num: 0
+                        num: 0,
+                        is_receive: 1
                     },
                     4: {
                         id: 4,
-                        num: 0
+                        num: 0,
+                        is_receive: 1
                     },
                     5: {
                         id: 5,
-                        num: 0
+                        num: 0,
+                        is_receive: 1
                     },
                     6: {
                         id: 6,
-                        num: 0
+                        num: 0,
+                        is_receive: 1
                     },
                     7: {
                         id: 7,
-                        num: 0
+                        num: 0,
+                        is_receive: 1
                     }
                 },
                 wen_chang_men_max_source: 0,            //文昌门最高分
-                gu_jie_men_max_source: 0,               //古街最高分
+                gu_jie_max_source: 0,                   //古街最高分
                 prop: {                                 //道具
-                    1: {        
+                    1: {
                         id: 1,
                         num: 1
                     },
@@ -101,12 +106,35 @@ const DataMgr = (function () {
                         num: 0
                     }
                 },
-                last_receive: {}                        //上一次领取奖励的时间
+                integration_num: 0,                     //福缘积分
+                mission_score_max: 0,                   //任务分数
+                last_receive: {},                       //上一次领取奖励的时间
+                is_sign_in: false,                      //是否签到
             };
         } else {
             _t.data = data;
+            _t._timing_day_update_data();
         }
         Global.Observer.emit('DataMgr_init_data_ok', data);
+    };
+
+    //是否是第二天
+    _p._is_tomorrow = function () {
+        var day_time = 1000 * 60 * 60 * 24;                             //一天的时间
+        var cur_time = Math.floor(Global.time * 1000 / day_time);       //现在的时间
+        var last_time = Math.floor(this.time * 1000 / day_time);        //离线时间
+        if (cur_time - last_time === 0) {
+            return false;
+        }
+        return true;
+    };
+
+    //每天更新一次
+    _p._timing_day_update_data = function () {
+        if (this._is_tomorrow()) {
+            //刷新每天更新的数据
+            this.is_sign_in = false;
+        }
     };
 
     /**返回任务信息
@@ -115,6 +143,7 @@ const DataMgr = (function () {
     _p.get_mission_data = function () {
         var mission = config.data.mission;
         for (let i in mission) {
+            mission[i].info[2] = this.mission[i].is_receive;
             mission[i].info[3] = this.mission[i].num;
         }
         return mission;
@@ -125,47 +154,73 @@ const DataMgr = (function () {
      */
     _p.initGetSet = function () {
         //get
-        cc.js.get(this, 'fish', function () {
+        cc.js.get(this, 'fish', function () {       //鱼信息
             return this.data.fish;
         });
 
-        cc.js.get(this, 'mission', function () {
+        cc.js.get(this, 'mission', function () {    //任务
             return this.data.mission;
         });
 
-        cc.js.get(this, 'prop', function () {
+        cc.js.get(this, 'prop', function () {       //道具
             return this.data.prop;
         });
 
-        cc.js.get(this, 'lv', this.get_lv);
+        cc.js.get(this, 'lv', this.get_lv);         //鱼的最高等级
 
         //set
 
         //getset
-        cc.js.getset(this, 'time', function () {
+        cc.js.getset(this, 'time', function () {    //离线时间
             return this.data.time;
         }, function (val) {
             this.data.time = val;
         });
 
-        cc.js.getset(this, 'last_receive', function () {
+        cc.js.getset(this, 'last_receive', function () {    //上一次领取奖励的时间
             return this.data.last_receive
         }, function (val) {
             this.data.last_receive = val;
         });
 
-        cc.js.getset(this, 'wen_chang_men_max_source', function () {
+        cc.js.getset(this, 'wen_chang_men_max_source', function () {        //文昌门最高分
             return this.data.wen_chang_men_max_source
         }, function (val) {
+            if (val < this.data.wen_chang_men_max_source) {
+                return;
+            }
             this.data.wen_chang_men_max_source = val;
         });
 
-        cc.js.getset(this, 'gu_jie_men_max_source', function () {
-            return this.data.gu_jie_men_max_source
+        cc.js.getset(this, 'gu_jie_max_source', function () {               //古街最高分
+            return this.data.gu_jie_max_source
         }, function (val) {
-            this.data.gu_jie_men_max_source = val;
+            if (val < this.data.gu_jie_max_source) {
+                return;
+            }
+            this.data.gu_jie_max_source = val;
         });
 
+        cc.js.getset(this, 'is_sign_in', function () {                      //是否签到
+            return this.data.is_sign_in
+        }, function (val) {
+            this.data.is_sign_in = val;
+        });
+
+        cc.js.getset(this, 'integration_num', function () {                 //福缘积分
+            return this.data.integration_num
+        }, function (val) {
+            this.data.integration_num = val;
+        });
+
+        cc.js.getset(this, 'mission_score_max', function () {               //任务分数
+            return this.data.mission_score_max
+        }, function (val) {
+            if (val < this.data.mission_score_max) {
+                return;
+            }
+            this.data.mission_score_max = val;
+        });
     };
 
     /**获取当前最高级
@@ -245,9 +300,16 @@ const DataMgr = (function () {
      * @param num   数量
      */
     _p.add_prop = function (id, num) {
-        var cur_num = this.prop[id] || 0;
-        cur_num += num;
-        this.prop[id] = cur_num;
+        this.prop[id].num += num;
+    };
+
+    /**使用道具
+     *
+     * @param id    道具id
+     * @param num   数量
+     */
+    _p.use_prop = function (id, num) {
+        this.prop[id].num -= num;
     };
 
     /**获取用户数据
@@ -313,5 +375,5 @@ const DataMgr = (function () {
     };
 
     return DataMgr;
-}());
+} ());
 module.exports = DataMgr;

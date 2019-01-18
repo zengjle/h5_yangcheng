@@ -8,7 +8,7 @@ const HTTP = (function () {
     };
 
     HTTP.prototype.send = function (mode, path, data, callback, remedyCallback, extraUrl = URL) {
-        const fn = function (data, status, xhr) {
+        var fn = function (data, status, xhr) {
             if (status === 'success') {
                 console.log("http res:", data)
                 var ret = data;

@@ -20,14 +20,22 @@ let net = cc.Class({
         this.on("enter_mission", this.enter_mission.bind(this));
         this.on("enter_friend", this.enter_friend.bind(this));
         this.on("enter_bag", this.enter_bag.bind(this));
+        this.on("get_mission_reward", this.get_mission_reward.bind(this));
+        this.on("start_mission_game", this.start_mission_game.bind(this));
+
 
         this.on("enter_old_town", this.enter_old_town.bind(this));
         this.on("get_old_town_food", this.get_old_town_food.bind(this));
         this.on("get_friend_food", this.get_friend_food.bind(this));
 
+
         this.on("feed_fish", this.feed_fish.bind(this));
         this.on("create_fish_data", this.create_fish_data.bind(this));
         this.on("add_props", this.add_props.bind(this));
+
+        this.on("get_dayly_reward", this.get_dayly_reward.bind(this));
+        this.on("dayly_question_answer", this.dayly_question_answer.bind(this));
+        this.on("get_dayly_question_answer_reward", this.get_dayly_question_answer_reward.bind(this));
     },
 
     //进入任务界面
@@ -45,12 +53,13 @@ let net = cc.Class({
         }.bind(this));
     },
 
+    //背包数据
     enter_bag: function (_event_name) {
         var emit_msg = _event_name.type + "_ret";
         this.emit(emit_msg, Global.DataMgr.prop);
     },
 
-    //进入任务
+    //进入文昌门
     enter_mission_page: function (_event_name, id) {
         var emit_msg = _event_name.type + "_ret";
         var index, title;
@@ -59,11 +68,16 @@ let net = cc.Class({
             index = 'wen_chang_men_max_source';
             title = '文昌门';
         } else {
-            index = 'gu_jie_men_max_source';
+            index = 'gu_jie_max_source';
             title = '古街';
         }
 
         this.emit(emit_msg, { title: title, max_source: Global.DataMgr[index] });
+    },
+
+    //开始文昌阁活动
+    start_mission_game: function () {
+        this.enter_mission_page(_event_name, id);
     },
 
     //进入古镇
@@ -91,6 +105,13 @@ let net = cc.Class({
     //获取好友食物
     get_friend_food: function (_event_name, id, shop_id) {
 
+    },
+
+    //文昌阁活动结束领取奖励
+    get_mission_reward: function (_event_name, msg) {
+        Global.DataMgr.wen_chang_men_max_source = msg.mission_score;
+        var reward_prop = [];
+        this.emit(_event_name.type + "_ret", { reward_prop: reward_prop });
     },
 
     enter_game: function (_, _event_name) {
@@ -123,7 +144,7 @@ let net = cc.Class({
         if (fish.exp >= fish.max_exp) {
             fish.lv += 1;
             fish.exp -= fish.max_exp;
-            fish.max_exp = Math.floor(200*Math.pow(fish.lv, 2));
+            fish.max_exp = Math.floor(200 * Math.pow(fish.lv, 2));
         }
         // let _ret = {
         //     lv: fish.lv,
@@ -149,7 +170,7 @@ let net = cc.Class({
             info.splice(1, 0, prop_info.type);
             info.splice(2, 0, prop_info.addition);
         }
-        Global.DataMgr.prop[prop[0]]--;
+        Global.DataMgr.use_prop(prop[0], 1);
         this.emit(_event_name.type + "_ret", { info: info });
     },
 
@@ -157,8 +178,25 @@ let net = cc.Class({
     add_props: function (_event_name, _msg) {
         Global.DataMgr.add_prop(id, num);
         this.emit(_event_name.type + "_ret")
-    }
+    },
 
+    //每日领取食袋
+    get_dayly_reward: function (_event_name) {
+        var prop = Global.DataMgr.is_sign_in ? [] : [6, 2, 0, 1];
+        Global.DataMgr.is_sign_in = true;
+        this.emit(_event_name.type + "_ret", { prop: prop })
+    },
+
+    //每日问答
+    dayly_question_answer: function (_event_name) {
+        this.emit(_event_name.type + "_ret", { question_answer_id: 0 })
+    },
+
+    //领取每日问答奖励
+    get_dayly_question_answer_reward: function (_event_name, _msg) {
+        var prop = _msg.answer ? [7, 2, 0, 1] : [6, 2, 0, 1];
+        this.emit(_event_name.type + "_ret", { prop: prop })
+    },
 });
 
 module.exports = new net();
