@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "7dfc63bb-bfbc-4652-938e-b61101484d0e",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "bag_food_3": {
+      "ver": "1.0.3",
+      "uuid": "97cf3257-b396-4326-b9f4-b624da1a0c77",
+      "rawTextureUuid": "7dfc63bb-bfbc-4652-938e-b61101484d0e",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 120,
+      "height": 120,
+      "rawWidth": 120,
+      "rawHeight": 120,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

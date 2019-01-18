@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "96726c4c-e577-4f59-bb00-56683393c210",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "food_rubbish_1": {
+      "ver": "1.0.3",
+      "uuid": "83446422-78c3-4ef0-acfb-99e650350d53",
+      "rawTextureUuid": "96726c4c-e577-4f59-bb00-56683393c210",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 114,
+      "height": 110,
+      "rawWidth": 114,
+      "rawHeight": 110,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

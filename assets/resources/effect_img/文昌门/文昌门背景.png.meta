@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "18886bc7-f1e3-4b25-bcc6-4d446d61e55e",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "文昌门背景": {
+      "ver": "1.0.3",
+      "uuid": "3bb6804e-1dc3-4f07-8d59-093c7661bfb9",
+      "rawTextureUuid": "18886bc7-f1e3-4b25-bcc6-4d446d61e55e",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 720,
+      "height": 1280,
+      "rawWidth": 720,
+      "rawHeight": 1280,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

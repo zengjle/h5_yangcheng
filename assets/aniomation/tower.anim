@@ -1,0 +1,33 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "tower",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 5,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": "22",
+  "curveData": {
+    "props": {
+      "opacity": [
+        {
+          "frame": 0,
+          "value": 0
+        },
+        {
+          "frame": 1,
+          "value": 255
+        },
+        {
+          "frame": 4,
+          "value": 255
+        },
+        {
+          "frame": 5,
+          "value": 0
+        }
+      ]
+    }
+  },
+  "events": []
+}

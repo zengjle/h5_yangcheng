@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "9d936493-a5c7-4001-9aa2-b0718fc34075",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "仓库物品底底": {
+      "ver": "1.0.3",
+      "uuid": "15859e48-4465-48c2-91a4-f90fffafb1d9",
+      "rawTextureUuid": "9d936493-a5c7-4001-9aa2-b0718fc34075",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 212,
+      "height": 284,
+      "rawWidth": 212,
+      "rawHeight": 284,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
