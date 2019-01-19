@@ -1,41 +1,42 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+let ui_window       = require("ui_window");
+let constant        = require("constant");
+let ui              = require("ui");
+
 
 cc.Class({
-    extends: cc.Component,
+    extends: require("view_cell"),
 
-    properties: {
-        // foo: {
-        //     // ATTRIBUTES:
-        //     default: null,        // The default value will be used only when the component attaching
-        //                           // to a node for the first time
-        //     type: cc.SpriteFrame, // optional, default is typeof default
-        //     serializable: true,   // optional, default is true
-        // },
-        // bar: {
-        //     get () {
-        //         return this._bar;
-        //     },
-        //     set (value) {
-        //         this._bar = value;
-        //     }
-        // },
+    properties:{
+        img_food_icon:cc.Sprite,
+        node_shiny:cc.Node,
+        atlas_food:cc.SpriteAtlas,
     },
 
-    // LIFE-CYCLE CALLBACKS:
+    onLoad:function () {
 
-    // onLoad () {},
-
-    start () {
 
     },
 
-    // update (dt) {},
+    onEnable:function () {
+        this._super();
+      
+    },
+
+    _register_handler:function () {
+      
+    },
+
+    _unregister_handler:function () {
+
+    },
+
+    init_comp:function(_food_id){
+        this.img_food_icon.spriteFrame = this.atlas_food.getSpriteFrame("icon_bag_" + _food_id);
+        
+    },
+
+    on_open_sys:function (_,_uiName) {
+        ui.open(_uiName);
+    },
+
 });
