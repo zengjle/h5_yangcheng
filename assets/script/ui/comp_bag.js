@@ -9,6 +9,7 @@ cc.Class({
     properties:{
         item_constont:cc.Node,
         node_list:cc.Node,
+        lbl_no_food_tips:cc.Node,
     },
 
     onLoad:function () {
@@ -32,11 +33,13 @@ cc.Class({
     init_bag:function(_bag_info){
         let _all_prop_items = this.item_constont.children;
         let _idx = 1;
+        
         for(let _prop_item of _all_prop_items){
             let _node_num = _prop_item.getChildByName("node_food_num");
             if(_bag_info[_idx].num <= 0){
-                _node_num.active = false;
+                _prop_item.active = false;
             }else{
+                _prop_item.active = true;
                 _node_num.getChildByName("Label").getComponent(cc.Label).string = _bag_info[_idx].num;
             }
         }

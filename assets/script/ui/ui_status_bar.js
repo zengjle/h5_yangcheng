@@ -49,13 +49,14 @@ cc.Class({
         }, this.node)
         net.on("feed_fish_ret", this.init_bar.bind(this));
         net.on("enter_bag_ret", (_msg) => {
-            this.lbl_bar_title.string = "任务";
+            this.lbl_bar_title.string = "库存";
             this.node_bag.active = true;
             this.node_bag.getComponent("comp_bag").init_bag(_msg);
             this.show_bar();
         }, this.node);
         net.on("enter_mission_ret", (_msg) => {
             this.lbl_bar_title.string = "任务";
+            this.node_mission.active = true;
             this.node_mission.getComponent("comp_mission").init_mission(_msg.mission_info);
             this.show_bar();
 
@@ -95,7 +96,7 @@ cc.Class({
 
     show_bar: function () {
         this.node_mission_bar.active = true;
-        let _bar_move_to = cc.moveTo(0.3, cc.v2(0, -150));
+        let _bar_move_to = cc.moveTo(0.3, cc.v2(0, 406));
         this.node_mission_mask.active = true;
         this.node_mission_bar.runAction(cc.sequence(_bar_move_to, cc.callFunc(() => {
             ui.emit("touch_enable", false);
@@ -116,8 +117,13 @@ cc.Class({
         let _state = parseInt(state);
         ui.emit("touch_enable", true);
         if (_state) {
+            if(_state === 1){
+                tips.show("好友功能暂未开启!");
+                ui.emit("touch_enable", false);
+                return;
+            }
             net.emit("enter_" + constant.BAR_ID[_state]);
-            this.title_icon.spriteFram = this.atlas_title_icon.getSpriteFrame("icon_" + _state);
+            this.title_icon.spriteFrame = this.atlas_title_icon.getSpriteFrame("icon_" + constant.BAR_ID[_state]);
         } else {
             _bar_move_to = cc.moveTo(0.3, cc.v2(0, -640));
             this.node_mission_bar.runAction(cc.sequence(_bar_move_to, cc.callFunc(() => {

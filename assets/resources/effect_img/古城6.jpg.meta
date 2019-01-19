@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "d14f506b-c8b9-4906-9309-4d1ebd6525c2",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "古城6": {
+      "ver": "1.0.3",
+      "uuid": "f353a050-442b-4df0-acec-1a7310711720",
+      "rawTextureUuid": "d14f506b-c8b9-4906-9309-4d1ebd6525c2",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 720,
+      "height": 1280,
+      "rawWidth": 720,
+      "rawHeight": 1280,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
