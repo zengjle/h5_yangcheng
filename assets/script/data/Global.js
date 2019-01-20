@@ -75,6 +75,7 @@ if (!CC_EDITOR) {
         initMgr: function () {
             DataMgr.init();
             FishMgr.init();
+            ActionMgr.init();
         },
 
         /**获取url中的参数值

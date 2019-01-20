@@ -4,9 +4,15 @@
 const ActionMgr = (function () {
     'use strict';
     function ActionMgr() {
+        this.updateCallBack = [];
     };
 
     const _p = ActionMgr.prototype;
+
+    _p.init = function () {
+        Global.getNewId(this);
+        cc.director.getScheduler().scheduleUpdateForTarget(this);
+    };
 
     /**创建动作
      *
@@ -25,9 +31,32 @@ const ActionMgr = (function () {
 
     /**进度条前进
      *
+     * @param progress      进度条组件或他的节点
+     * @param percentage    要前进到多少
+     * @param num           升多少级
      */
-    _p.progress = function () {
-
+    _p.progress = function (progress, percentage, num) {
+        if (percentage > 1)
+            percentage /= 100;
+        if (progress.ProgressBar)
+            progress = progress.ProgressBar;
+        var fn = (function () {
+            progress.progress += 0.01;
+            if (progress.progress >= 1) {
+                progress.progress = 0;
+                num--
+            }
+            if (num < 1 && progress.progress >= percentage) {
+                this.updateCallBack.splice(this.updateCallBack.indexOf(fn), 1);
+                fn = null;
+                progress = null;
+                percentage = null;
+                num = null;
+            }
+        }.bind(this));
+        return cc.callFunc(function () {
+            this.updateCallBack.push(fn);
+        }, this);
     };
 
     _p._runAction = function (action, target, loop_num, is_loop, cb) {
@@ -42,6 +71,13 @@ const ActionMgr = (function () {
             action = cc.sequence(action, cc.callFunc(cb));
         }
         target.runAction(action);
+    };
+
+    //每帧更新
+    _p.update = function (dt) {
+        this.updateCallBack.forEach((fn) => {
+            fn(dt);
+        });
     };
 
     return ActionMgr;
