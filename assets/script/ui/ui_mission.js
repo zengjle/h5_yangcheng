@@ -12,19 +12,17 @@ cc.Class({
         ui_gameStart: cc.Node,
         label_gameTime: cc.Label,
         node_gameOver: cc.Node,
+        label_Label: [cc.Label],
         over_score: cc.Label,
+        label_topScore: cc.Label,
+        node_ui_again: cc.Node,
     },
 
     // use this for initialization
     onLoad: function () {
         cc.vv.ui_mission = this;
 
-        this.garbage = config.data.ui_mission[6].speed;
-        this.score = 0;
-        this.gameTime = 15;
-        this.mission_action = true;
-        this.init_ui(this.mission_action);
-        this.label_gameTime.string = this.gameTime;
+        this.gameinit();
         this.foodPool = new cc.NodePool();
         for (let i = 0; i < 10; i++) {
             let food = cc.instantiate(this.prefab_fall_food);
@@ -38,7 +36,13 @@ cc.Class({
     },
     //游戏初始化
     gameinit() {
-
+        this.garbage = config.data.ui_mission[6].speed;
+        this.score = 0;
+        this.gameTime = 15;
+        this.mission_action = true;
+        this.label_gameTime.string = this.gameTime;
+        this.label_score.string = this.score;
+        this.node_gameOver.active = false;
     },
     //开始游戏
     gameStart: function () {
@@ -69,7 +73,8 @@ cc.Class({
     },
     //再来一局
     gameAgain() {
-        this.s
+        this.gameinit();
+        this.gameStart();
     },
     //添加食物
     add_food: function () {
@@ -95,8 +100,29 @@ cc.Class({
 
     _register_handler: function () {
         net.on("enter_mission_page_ret", (_msg) => {
-            _msg.max_mission_score
-            init()
+            this.label_topScore.string = "历史最高：" + _msg.max_mission_score;
+            if (_msg.action_num <= 0) {
+                this.node_gameOver.active = true;
+                this.label_Label[0].string = "历史最高";
+                this.label_Label[1].string = "";
+                this.over_score.string = _msg.max_mission_score;
+                this.node_ui_again.active = false;
+                this.label_Label[2].string = "";
+            }
+
+        });
+
+        net.on("get_mission_reward_ret", (_msg) => {
+            !!_msg.max_mission_score && (this.label_topScore.string = "历史最高：" + _msg.max_mission_score);
+            if (_msg.action_num <= 0) {
+                this.node_ui_again.active = false;
+                this.label_Label[2].string = "";
+            }
+            //次数未用完
+            else {
+                this.label_Label[3].string = "";
+                ////
+            }
         })
         //     this.node.on('touchstart', function (event) {
         //         let clickPos = event.getLocation();
@@ -110,7 +136,9 @@ cc.Class({
         //             this.node_get_man.x = pos.x;
         //         }, this)
     },
-
+    ui_close() {
+        ui.close("ui_mission");
+    },
     init_ui: function (_action_state) {
 
     },
