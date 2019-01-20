@@ -16,6 +16,7 @@ cc.Class({
         over_score: cc.Label,
         label_topScore: cc.Label,
         node_ui_again: cc.Node,
+        node_comp_reward_light:cc.Node,
     },
 
     // use this for initialization
@@ -42,6 +43,7 @@ cc.Class({
         this.mission_action = true;
         this.label_gameTime.string = this.gameTime;
         this.label_score.string = this.score;
+        this.node_gameOver.scale = 0;
         this.node_gameOver.active = false;
     },
     //开始游戏
@@ -66,7 +68,14 @@ cc.Class({
     gameOver: function () {
         this.unschedule(this.add_food);
         this.unschedule(this.mission_gameTime);
+        for (let i = this.layer_food.children.length-1; i >= 0; i--) {
+            this.layer_food.children[i].stopAllActions();
+            this.foodPool.put(this.layer_food.children[i]);
+            
+        }
+        
         this.node_gameOver.active = true;
+        this.node_gameOver.runAction(cc.scaleTo(0.2, 1));
         this.node_get_man.active = false;
         this.over_score.string = this.score;
         net.emit("get_mission_reward", { mission_score: this.score })
@@ -103,10 +112,13 @@ cc.Class({
             this.label_topScore.string = "历史最高：" + _msg.max_mission_score;
             if (_msg.action_num <= 0) {
                 this.node_gameOver.active = true;
+                this.ui_gameStart.active = false;
+                this.node_gameOver.runAction(cc.scaleTo(0.2, 1));
                 this.label_Label[0].string = "历史最高";
                 this.label_Label[1].string = "";
                 this.over_score.string = _msg.max_mission_score;
                 this.node_ui_again.active = false;
+                this.node_comp_reward_light.active = false;
                 this.label_Label[2].string = "";
             }
 
@@ -116,13 +128,13 @@ cc.Class({
             !!_msg.max_mission_score && (this.label_topScore.string = "历史最高：" + _msg.max_mission_score);
             if (_msg.action_num <= 0) {
                 this.node_ui_again.active = false;
-                this.label_Label[2].string = "";
+                this.label_Label[2].string = "今日奖励已达上线";
             }
             //次数未用完
             else {
                 this.label_Label[3].string = "";
-                ////
             }
+            cc.vv.comp_reward_lightCom.init_comp(_msg.reward_prop[0]);
         })
         //     this.node.on('touchstart', function (event) {
         //         let clickPos = event.getLocation();

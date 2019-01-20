@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "be_get_lingh",
+    "_name": "comp_reward_light",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -161,7 +161,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "22DPhGTiFLTLAgzKweftg/",
+    "fileId": "b2cOVhytJD9pWwQ1Q++Quh",
     "sync": false
   },
   {
@@ -248,7 +248,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "f39zLCd9hJ/a1CJjltioNQ",
+    "fileId": "f6uamL5zlLm7BVZb6aACsX",
     "sync": false
   },
   {
@@ -309,7 +309,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "d8NoqYX0BOIrTgMFBd+fO5",
+    "fileId": "1dKmqBZllFEbHtbv1HdwUl",
     "sync": false
   },
   {
@@ -359,7 +359,9 @@
     "atlas_food": {
       "__uuid__": "026034c5-0497-4f56-8d0e-c43131262879"
     },
-    "lbl_name_sum": null
+    "lbl_name_sum": {
+      "__id__": 6
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -369,7 +371,7 @@
     "asset": {
       "__id__": 0
     },
-    "fileId": "f0pUPGfclAQIANpRmjjccZ",
+    "fileId": "27cMj6U2xCwqAhm6N22igI",
     "sync": false
   }
 ]
