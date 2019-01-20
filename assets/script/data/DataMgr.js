@@ -74,8 +74,6 @@ const DataMgr = (function () {
                         is_receive: 1
                     }
                 },
-                wen_chang_men_max_source: 0,            //文昌门最高分
-                gu_jie_max_source: 0,                   //古街最高分
                 prop: {                                 //道具
                     1: {
                         id: 1,
@@ -106,8 +104,11 @@ const DataMgr = (function () {
                         num: 0
                     }
                 },
+                wen_chang_men_max_source: 0,            //文昌门最高分
+                gu_jie_max_source: 0,                   //古街最高分
                 integration_num: 0,                     //福缘积分
                 mission_score_max: 0,                   //任务分数
+                wen_chang_men_action_num: 3,            //还可以进行的文昌阁游戏次数
                 last_receive: {},                       //上一次领取奖励的时间
                 is_sign_in: false,                      //是否签到
                 is_question: false,                     //今日是否已经答题
@@ -136,6 +137,7 @@ const DataMgr = (function () {
             //刷新每天更新的数据
             this.is_sign_in = false;
             this.is_question = false;
+            this.wen_chang_men_action_num = 3;
         }
     };
 
@@ -231,6 +233,12 @@ const DataMgr = (function () {
                 return;
             }
             this.data.is_question = val;
+        });
+
+        cc.js.getset(this, 'wen_chang_men_action_num', function () {        //还可以进行的文昌阁游戏次数
+            return this.data.wen_chang_men_action_num
+        }, function (val) {
+            this.data.wen_chang_men_action_num = val;
         });
     };
 
@@ -388,7 +396,7 @@ const DataMgr = (function () {
     _p.get_game_info = function () {
         if (Global.DEBUG) {
             this.init_data(Global.getData('game_data', null));
-            Global.schedule(this.set_game_info, this, 1);
+            // Global.schedule(this.set_game_info, this, 10);
             return;
         }
 
@@ -416,7 +424,7 @@ const DataMgr = (function () {
             return;
         }
 
-        cc.vv.HTTP.send("GET", '', {
+        Global.HTTP.send("GET", '', {
             module: 'StorageService.updateGameUser',
             userid: Global.UserMgr.id,
             Infojson: JSON.stringify(this.data)

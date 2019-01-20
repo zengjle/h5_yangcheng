@@ -21,7 +21,7 @@ let net = cc.Class({
         this.on("enter_friend", this.enter_friend.bind(this));
         this.on("enter_bag", this.enter_bag.bind(this));
         this.on("get_mission_reward", this.get_mission_reward.bind(this));
-        this.on("start_mission_game", this.start_mission_game.bind(this));
+        // this.on("start_mission_game", this.start_mission_game.bind(this));
 
 
         this.on("enter_old_town", this.enter_old_town.bind(this));
@@ -74,8 +74,11 @@ let net = cc.Class({
             index = 'gu_jie_max_source';
             title = '古街';
         }
-
-        this.emit(emit_msg, {title: title, max_mission_score: Global.DataMgr[index]});
+        this.emit(emit_msg, {
+            title: title,
+            max_mission_score: Global.DataMgr[index],
+            action_num: Global.DataMgr.wen_chang_men_action_num
+        });
     },
 
     //开始文昌阁活动
@@ -115,10 +118,14 @@ let net = cc.Class({
     //文昌阁活动结束领取奖励
     get_mission_reward: function (msg, _event_name) {
         Global.DataMgr.wen_chang_men_max_source = msg.mission_score;
+        Global.DataMgr.wen_chang_men_action_num--;
+
         var reward_prop = Global.DataMgr.get_wen_chang_men_reward(msg.mission_score);
-        var data = {reward_prop: reward_prop};
+        var data = {reward_prop: reward_prop, action_num: Global.DataMgr.wen_chang_men_action_num};
+
         if (Global.DataMgr.wen_chang_men_max_source === msg.mission_score)
             data.max_mission_score = msg.mission_score;
+
         this.emit(_event_name.type + "_ret", data);
     },
 
@@ -157,6 +164,8 @@ let net = cc.Class({
             fish.max_exp = Math.floor(200 * Math.pow(fish.lv, 2));
             level_up++;
         }
+
+        Global.DataMgr.use_prop(_msg.food[0], 1);
 
         this.emit(_event_name.type + "_ret", {
             lv: fish.lv,

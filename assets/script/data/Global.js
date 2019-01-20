@@ -98,6 +98,61 @@ if (!CC_EDITOR) {
             return uuid;
         },
 
+        /**转换成Unicode编码
+         *
+         * @param str   需要转换的字符串
+         */
+        encodeUnicode: function (str) {
+            var res = [];
+            for (var i = 0; i < str.length; i++) {
+                res[i] = ("00" + str.charCodeAt(i).toString(16)).slice(-4);
+            }
+            return "\\u" + res.join("\\u");
+        },
+
+        /**Unicode编码转换成UTF-8
+         *
+         * @param str   需要转换的字符串
+         */
+        decodeUnicode: function (str) {
+            str = str.replace(/\\/g, "%");
+            return unescape(str);
+        },
+
+        /**转换成html编码
+         *
+         * @param str   需要转换的字符串
+         */
+        htmlEncodeByRegExp: function (str) {
+            var s = "";
+            if (str.length == 0)
+                return "";
+            s = str.replace(/&/g, "&amp;");
+            s = s.replace(/</g, "&lt;");
+            s = s.replace(/>/g, "&gt;");
+            s = s.replace(/ /g, "&nbsp;");
+            s = s.replace(/\'/g, "&#39;");
+            s = s.replace(/\"/g, "&quot;");
+            return s;
+        },
+
+        /**html编码转换成
+         *
+         * @param str   需要转换的字符串
+         */
+        UTFByHtmlEncode: function (str) {
+            var s = "";
+            if (str.length == 0)
+                return "";
+            s = str.replace(/&amp;/g, "&");
+            s = s.replace(/&lt;/g, "<");
+            s = s.replace(/&gt;/g, ">");
+            s = s.replace(/&nbsp;/g, " ");
+            s = s.replace(/&#39;/g, "\'");
+            s = s.replace(/&quot;/g, "\"");
+            return s;
+        },
+
         /**是否是食物领取时间
          *
          */
