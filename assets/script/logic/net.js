@@ -159,10 +159,7 @@ let net = cc.Class({
         Global.DataMgr.use_prop(_msg.food[0], 1);
 
         this.emit(_event_name.type + "_ret", {
-            lv: fish.lv,
-            exp: fish.exp,
-            max_exp: fish.max_exp,
-            level_up: level_up,
+            fish: Global.FishMgr.fish[1],
             integral: add_exp / 10
         })
     },
