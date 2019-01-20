@@ -23,48 +23,48 @@ module.exports = {
             "name": "麻糍",
             "type": 1,
             "addition": 100,
-            "introduce": "香糯可口的麻糍,Q中带脆",
+            "introduce": "增加微量成长值",
             "protect_time": 15
         },
         "2": {
             "name": "五香",
             "type": 1,
             "addition": 200,
-            "introduce": "",
+            "introduce": "增加少量成长值",
             "protect_time": 30
         },
         "3": {
             "name": "四果汤",
             "type": 1,
             "addition": 400,
-            "introduce": "",
+            "introduce": "增加中量成长值",
             "protect_time": 45
         },
         "4": {
             "name": "豆花粉丝",
             "type": 1,
             "addition": 800,
-            "introduce": "",
+            "introduce": "增加大量成长值",
             "protect_time": 60
         },
         "5": {
             "name": "漳州卤面",
             "type": 1,
             "addition": 1600,
-            "introduce": "",
+            "introduce": "增加巨量成长值",
             "protect_time": 90
         },
         "6": {
-            "name": "小食盒",                                //名字
+            "name": "小食盒",                               //名字
             "type": 2,                                      //类型
             "addition": 0,                                  //增加的成长值
-            "introduce": "有概率开出麻糍,五香,四果汤",        //简介
+            "introduce": "有概率开出麻糍,五香或者四果汤",   //简介
             "openNumMin": 1,                                //一次最低开出几个
             "openNumMax": 3,                                //一次最多开出几个
             "open": [                                       //打开后可以获得的道具信息
-                { "id": 1, "probability": 50 },             //id 道具ID   ;;  probability 开出的概率
-                { "id": 2, "probability": 30 },
-                { "id": 3, "probability": 20 }
+                {"id": 1, "probability": 50},             //id 道具ID   ;;  probability 开出的概率
+                {"id": 2, "probability": 30},
+                {"id": 3, "probability": 20}
             ]
         },
         "7": {
@@ -75,8 +75,8 @@ module.exports = {
             "openNumMin": 1,
             "openNumMax": 3,
             "open": [
-                { "id": 4, "probability": 80 },
-                { "id": 5, "probability": 20 }
+                {"id": 4, "probability": 80},
+                {"id": 5, "probability": 20}
             ]
         }
     },
@@ -303,5 +303,47 @@ module.exports = {
             "4": 2,
             "5": 1
         }
+    },
+    "wen_chang_men_reward": {
+        "1": {
+            "score": 0,
+            "reward": [{"id": 1, "num": 1}]
+        },
+        "2": {
+            "score": 100,
+            "reward": [{"id": 1, "num": 2}]
+        },
+        "3": {
+            "score": 150,
+            "reward": [{"id": 2, "num": 2}]
+        },
+        "4": {
+            "score": 200,
+            "reward": [{"id": 2, "num": 3}]
+        },
+        "5": {
+            "score": 250,
+            "reward": [{"id": 3, "num": 2}]
+        },
+        "6": {
+            "score": 300,
+            "reward": [{"id": 3, "num": 3}]
+        },
+        "7": {
+            "score": 350,
+            "reward": [{"id": 4, "num": 2}]
+        },
+        "8": {
+            "score": 400,
+            "reward": [{"id": 4, "num": 3}]
+        },
+        "9": {
+            "score": 450,
+            "reward": [{"id": 5, "num": 2}]
+        },
+        "10": {
+            "score": 500,
+            "reward": [{"id": 5, "num": 3}]
+        },
     }
 };

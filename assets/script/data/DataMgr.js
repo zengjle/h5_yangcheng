@@ -110,6 +110,7 @@ const DataMgr = (function () {
                 mission_score_max: 0,                   //任务分数
                 last_receive: {},                       //上一次领取奖励的时间
                 is_sign_in: false,                      //是否签到
+                is_question: false,                     //今日是否已经答题
             };
         } else {
             _t.data = data;
@@ -134,6 +135,7 @@ const DataMgr = (function () {
         if (this._is_tomorrow()) {
             //刷新每天更新的数据
             this.is_sign_in = false;
+            this.is_question = false;
         }
     };
 
@@ -221,6 +223,15 @@ const DataMgr = (function () {
             }
             this.data.mission_score_max = val;
         });
+
+        cc.js.getset(this, 'is_question', function () {                     //今日是否已经答题
+            return this.data.is_question
+        }, function (val) {
+            if (val < this.data.is_question) {
+                return;
+            }
+            this.data.is_question = val;
+        });
     };
 
     /**获取当前最高级
@@ -252,7 +263,7 @@ const DataMgr = (function () {
      *
      */
     _p.get_cur_receive_data = function () {
-        return config.receive[this.get_round_lv()];
+        return config.data.receive[this.get_round_lv()];
     };
 
     /**是否可以领取
@@ -294,6 +305,31 @@ const DataMgr = (function () {
         this.last_receive[id] = new Date();
     };
 
+    /**古镇福利是否领取
+     *
+     */
+    _p.get_is_receive = function (shop_id, receive_info) {
+        if (!receive_info) {
+            receive_info = this.get_cur_receive_data();
+        }
+        var is_reward = receive_info[shop_id] ? this.is_receive() : 1,
+            is_unlock = is_reward === 1 ? 0 : 1;
+        return [is_reward, is_unlock, shop_id];
+    };
+
+    /**获取所有古镇福利是否领取
+     *
+     */
+    _p.get_all_is_receive = function () {
+        var info = [];
+        var receive_info = this.get_cur_receive_data();
+        var len = Object.keys(config.data.shop).length;
+        for (let i = 1; i <= len; i++) {
+            info.push(this.get_is_receive(i, receive_info));
+        }
+        return info;
+    };
+
     /**获得道具
      *
      * @param id    道具id
@@ -310,6 +346,21 @@ const DataMgr = (function () {
      */
     _p.use_prop = function (id, num) {
         this.prop[id].num -= num;
+    };
+
+    /**获取文昌门活动对应奖励
+     *
+     */
+    _p.get_wen_chang_men_reward = function (score) {
+        var wen_chang_men_reward = config.data.wen_chang_men_reward;
+        var data = null;
+        for (let i = 10; i > 0; i--) {
+            if (score >= wen_chang_men_reward[i].score) {
+                data = wen_chang_men_reward[i].reward[0];
+            }
+        }
+        var info = config.data.prop[id];
+        return [[data.id, info.type, info.addition, data.num]];
     };
 
     /**获取用户数据
@@ -334,7 +385,7 @@ const DataMgr = (function () {
     };
 
     /**开启道具
-     * 
+     *
      * @param id    道具id
      */
     _p.opne_prop = function (id) {
@@ -375,5 +426,5 @@ const DataMgr = (function () {
     };
 
     return DataMgr;
-} ());
+}());
 module.exports = DataMgr;

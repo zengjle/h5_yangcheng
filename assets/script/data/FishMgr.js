@@ -1,44 +1,42 @@
 /**鱼
- * 
+ *
  */
 const Fish = (function () {
     'use strict';
-    function Fish(fish, data, uid) {
-        this._init_fish_data(fish, data, uid);
-        this._init_fish_getset(fish);
+    function Fish(data, uid) {
+        this._init_fish_data(data, uid);
+        this._init_fish_getset();
     };
     const _p = Fish.prototype;
 
     /**初始化鱼的信息
-        *
-        * @param fish
-        */
-    _p._init_fish_data = function (fish, data, uid) {
+     *
+     */
+    _p._init_fish_data = function (data, uid) {
         if (data) {
-            fish.data = data;
+            this.data = data;
             return;
         }
-        fish.data = config.data['fish_init_data'];
-        fish.data.uid = uid;
+        this.data = config.data['fish_init_data'];
+        this.data.uid = uid;
     };
 
     /**初始化鱼的getset事件
      *
-     * @param fish
      */
-    _p._init_fish_getset = function (fish) {
+    _p._init_fish_getset = function () {
         //get
-        cc.js.get(fish, 'uid', function () {
+        cc.js.get(this, 'uid', function () {
             return this.data.uid;
         });
-        cc.js.get(fish, 'name', function () {
+        cc.js.get(this, 'name', function () {
             return this.data.name;
         });
 
         //getset
-        cc.js.get(fish, 'lv', this.get_lv, this.set_lv);
-        cc.js.get(fish, 'exp', this.get_exp, this.set_exp);
-        cc.js.get(fish, 'max_exp', this.get_max_exp, this.set_max_exp);
+        cc.js.get(this, 'lv', this.get_lv, this.set_lv);
+        cc.js.get(this, 'exp', this.get_exp, this.set_exp);
+        cc.js.get(this, 'max_exp', this.get_max_exp, this.set_max_exp);
     };
 
     _p.get_lv = function () {
@@ -69,7 +67,7 @@ const Fish = (function () {
     };
 
     return Fish;
-} ());
+}());
 
 /**管理鱼
  *
@@ -100,13 +98,14 @@ const FishMgr = (function () {
      *
      * @param fish
      */
-    _p.create_fish_data = function (fish, data) {
-        fish.class = new Fish(fish, data, this._get_uid());
+    _p.create_fish_data = function (data) {
+        var fish = new Fish(data, this._get_uid());
         this.fish[fish.uid] = fish.data;
+        return fish;
     };
 
     /**更新鱼信息
-     * 
+     *
      */
     _p.update_fish_data = function (fish) {
         this.fish[fish.uid] = fish.data;
@@ -122,5 +121,5 @@ const FishMgr = (function () {
     };
 
     return FishMgr;
-} ());
+}());
 module.exports = FishMgr;
