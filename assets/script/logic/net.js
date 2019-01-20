@@ -153,7 +153,7 @@ let net = cc.Class({
         while (fish.exp >= fish.max_exp) {
             fish.lv += 1;
             fish.exp -= fish.max_exp;
-            fish.max_exp = Math.floor(200 * Math.pow(fish.lv, 2));
+            fish.max_exp = Math.floor(200 * Math.pow(fish.lv, 1.5))
             level_up++;
         }
 
@@ -161,9 +161,12 @@ let net = cc.Class({
 
         Global.DataMgr.mission[6].num++;
 
+        Global.DataMgr.integration_num += add_exp / 10;
+
         this.emit(_event_name.type + "_ret", {
             fish: Global.FishMgr.fish[1],
-            integral: add_exp / 10
+            level_up: level_up,
+            integral: Global.DataMgr.integration_num
         })
     },
 

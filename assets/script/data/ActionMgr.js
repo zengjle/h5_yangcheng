@@ -14,7 +14,7 @@ const ActionMgr = (function () {
         cc.director.getScheduler().scheduleUpdateForTarget(this);
     };
 
-    /**创建动作
+    /**创建动作并执行
      *
      * @param name          动作函数名字
      * @param target        目标节点
@@ -23,10 +23,67 @@ const ActionMgr = (function () {
      * @param is_loop       是否循环
      * @param cb            结束的时候回调
      */
-    _p.create = function (name, target, param, loop_num = 1, is_loop, cb) {
-        var action = this[name].apply(this, param);
+    _p.create = function (name, target, param, loop_num = 1, is_loop, cb, is_run = true) {
+        var action = this._create(name, param);
 
-        this._runAction(action, target, loop_num, is_loop, cb);
+        is_run && this._runAction(action, target, loop_num, is_loop, cb);
+
+        return action;
+    };
+
+    _p._create = function (name, param) {
+        return this[name].apply(this, param || []);
+    };
+
+    /**创建顺序动作
+     *
+     * @param data  {name:'',param:[]}
+     */
+    _p.sequence = function (data) {
+        var action = [];
+        for (let i in data) {
+            action.push(this._create(data[i].name, data[i].param));
+        }
+        return cc.sequence.apply(cc.sequence, action);
+    };
+
+    /**颤抖
+     *
+     */
+    _p.tremble = function () {
+        return cc.sequence(
+            cc.moveBy(0.02, cc.p(0, 10)),
+            cc.moveBy(0.02, cc.p(0, 10)),
+            cc.moveBy(0.02, cc.p(0, 6)),
+            cc.moveBy(0.02, cc.p(0, -12)),
+            cc.moveBy(0.02, cc.p(0, 10)),
+            cc.moveBy(0.02, cc.p(0, -16)),
+            cc.moveBy(0.02, cc.p(0, -20)),
+            cc.moveBy(0.02, cc.p(0, 20)),
+            cc.moveBy(0.02, cc.p(0, -16))
+        );
+    };
+
+    /**缩放指定倍数
+     *
+     * @param x         x缩放
+     * @param y         y缩放
+     */
+    _p.scaleTo = function (x, y) {
+        return cc.scaleTo(0.2, x, y);
+    };
+
+    /**跳跃到某个地方
+     *
+     * @param xOrV2     x或者cc.Vec2
+     * @param y         y
+     */
+    _p.jumpTo = function (xOrV2, y) {
+        if (typeof xOrV2 === 'object') {
+            y = xOrV2.y;
+            xOrV2 = xOrV2.x;
+        }
+        return cc.jumpTo(0.2, xOrV2, y, 300, 1);
     };
 
     /**飘动效果
@@ -34,9 +91,9 @@ const ActionMgr = (function () {
      */
     _p.flutter = function () {
         return cc.sequence(
-            cc.moveBy(1, 50, 0),
-            cc.moveBy(2, -100, 0),
-            cc.moveBy(1, 50, 0)
+            cc.moveBy(0.8, 0, 20),
+            cc.moveBy(1.6, 0, -40),
+            cc.moveBy(0.8, 0, 20)
         );
     };
 

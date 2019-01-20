@@ -1,46 +1,48 @@
-let ui_window       = require("ui_window");
-let constant        = require("constant");
-let ui              = require("ui");
+let ui_window = require("ui_window");
+let constant = require("constant");
+let ui = require("ui");
 
 cc.Class({
     extends: ui_window,
 
-    properties:{
+    properties: {
         window_type: constant.WINDOW_TYPE.BASE,
 
 
     },
 
-    onLoad:function () {
-    this.food = [1,1,100,1];
+    onLoad: function () {
+        this.food = [1, 1, 100, 1];
+        cc.vv.fish = this.node._$node_fish;
 
+        Global.ActionMgr.create('flutter', this.node._$node_fish, null, 0, true)
     },
 
-    onEnable:function () {
+    onEnable: function () {
         this._super();
     },
 
-    _register_handler:function () {
-      
-    },
-
-    _unregister_handler:function () {
+    _register_handler: function () {
 
     },
 
-    init_ui:function(){
+    _unregister_handler: function () {
 
     },
 
-    update_repoint:function () {
-       
-    },
-
-    on_feed:function(){
+    init_ui: function () {
 
     },
 
-    on_open_sys:function (_,_uiName) {
+    update_repoint: function () {
+
+    },
+
+    on_feed: function () {
+
+    },
+
+    on_open_sys: function (_, _uiName) {
         ui.open(_uiName);
     },
 

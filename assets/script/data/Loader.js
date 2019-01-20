@@ -9,7 +9,7 @@
 function animationCallBack(clip) {
     if (!this.isValid)
         return;
-    var com = this.Animation;
+    var com = this.$Animation;
     if (!com)
         com = this.addComponent(cc.Animation);
     com.addClip(clip, clip.$$newName);
@@ -185,7 +185,7 @@ const Loader = (function () {
             if (!node.isValid)
                 return;
             spriteFrame._uuid = texture._uuid;
-            let component = node.Sprite || node.Mask;
+            let component = node.$Sprite || node.$Mask;
             if (!component) {
                 if (node instanceof cc.Sprite || node instanceof cc.Mask)
                     component = node;
@@ -352,7 +352,7 @@ const Loader = (function () {
         if (!path)
             throw `替换字体没有传入路径`;
         this.loadFont(path, tOrB, function (font) {
-            var com = node.Label;
+            var com = node.$Label;
             if (!com)
                 throw `替换字体的节点没有label组件`;
             com.font = font;

@@ -363,7 +363,7 @@ const DataMgr = (function () {
                 data = wen_chang_men_reward[i].reward[0];
             }
         }
-        var info = config.data.prop[id];
+        var info = config.data.prop[data.id];
         return [[data.id, info.type, info.addition, data.num]];
     };
 
@@ -392,7 +392,7 @@ const DataMgr = (function () {
     _p.get_game_info = function () {
         if (Global.DEBUG) {
             this.init_data(Global.getData('game_data', null));
-            // Global.schedule(this.set_game_info, this, 10);
+            Global.schedule(this.set_game_info, this, 1);
             return;
         }
 

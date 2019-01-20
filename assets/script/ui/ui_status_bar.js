@@ -19,7 +19,7 @@ cc.Class({
         lbl_fish_lv: cc.Label,
         lbl_user_lv: cc.Label,
         lbl_integral: cc.Label,
-        lbl_feed_tips:cc.Label,
+        lbl_feed_tips: cc.Label,
 
         spriteatlas_food: cc.SpriteAtlas,
 
@@ -31,10 +31,9 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-
     },
 
-    start:function(){
+    start: function () {
         net.emit("create_fish_data");
     },
 
@@ -50,13 +49,33 @@ cc.Class({
     },
     _register_handler: function () {
         ui.on("choose_food", (_msg) => {
+            this.img_food.node.scale = 1;
             this.food = [_msg.prop_id, 1, data.prop[_msg.prop_id].addition, 1];
             this.lbl_feed_tips.string = "喂食";
             this.img_food.spriteFrame = this.spriteatlas_food.getSpriteFrame("bag_food_" + _msg.prop_id);
             this.on_chick_active_bar(null, false);
         }, this.node)
-        net.on("create_fish_data_ret",this.init_bar.bind(this));
-        net.on("feed_fish_ret", this.init_bar.bind(this));
+        net.on("create_fish_data_ret", this.init_bar.bind(this));
+        net.on("feed_fish_ret", (_msg) => {
+            var pos = Global.getNodeAToNodeBPoint(cc.vv.fish, this.img_food.node.parent);
+            Global.ActionMgr.create('sequence', this.img_food.node, [[{
+                name: 'jumpTo',
+                param: [pos]
+            }, {
+                name: 'scaleTo',
+                param: [0]
+            }
+            ]
+            ], 0, false, function () {
+                this.init_bar(_msg);
+                Global.ActionMgr.create('tremble', cc.vv.fish, [], 0, false);
+                _msg = null;
+            }.bind(this));
+            //
+            // Global.ActionMgr.create('jumpTo', this.img_food.node, [pos], 0, false, function () {
+            //
+            // }.bind(this));
+        });
         net.on("enter_bag_ret", (_msg) => {
             this.lbl_bar_title.string = "库存";
             this.node_bag.active = true;
@@ -80,15 +99,21 @@ cc.Class({
     },
 
     init_bar: function (_msg) {
-        let _fish = _msg.fish;
+        var _fish = _msg.fish;
         this.lbl_integral.string = _msg.integral;
-        this.progressbar_fish_exp.progress = _fish.exp / _fish.max_exp;
         this.lbl_fish_lv.string = "lv." + _fish.lv;
         this.lbl_user_lv.string = _fish.lv;
         this.img_food.spriteFrame = null;
         this.lbl_feed_tips.string = "选择食物";
-        this.food = null;
 
+        this.progressbar_fish_exp.progress = _fish.exp / _fish.max_exp;
+
+        if (_msg.level_up) {
+            var psbar_fish_exp = this.progressbar_fish_exp;
+            Global.ActionMgr.create('progress', psbar_fish_exp.node, [psbar_fish_exp, _fish.exp / _fish.max_exp, _msg.level_up || 0], 0, false);
+        }
+
+        this.food = null;
     },
 
     init_plate: function (_id) {
@@ -121,8 +146,9 @@ cc.Class({
     },
 
     on_feed_fish: function () {
+        this.img_food.node.setPosition(cc.v2());
         !this.food && this.on_chick_active_bar(null, 3)
-        !!this.food && net.emit("feed_fish", {food: this.food });
+        !!this.food && net.emit("feed_fish", {food: this.food});
     },
 
     on_chick_active_bar(_, state) {
@@ -130,7 +156,7 @@ cc.Class({
         let _state = parseInt(state);
         ui.emit("touch_enable", true);
         if (_state) {
-            if(_state === 1){
+            if (_state === 1) {
                 tips.show("好友功能暂未开启!");
                 ui.emit("touch_enable", false);
                 return;

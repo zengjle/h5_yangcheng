@@ -328,6 +328,45 @@ if (!CC_EDITOR) {
             }
         },
 
+        /**节点坐标转成世界坐标
+         *
+         * @param node  需要转换的节点
+         * @param pos   需要转换的坐标
+         */
+        getNodeToWorldPoint: function (node, pos) {
+            return node.convertToWorldSpaceAR(pos || cc.p());
+        },
+
+        /**世界坐标转成节点坐标
+         *
+         * @param node  需要转换的节点
+         * @param pos   需要转换的坐标
+         */
+        getWorldToNodePoint: function (node, pos) {
+            return node.convertToNodeSpaceAR(pos || cc.p());
+        },
+
+        /**节点A的坐标切换到节点B的坐标
+         *
+         * @param nodeA
+         * @param nodeB
+         */
+        getNodeAToNodeBPoint: function (nodeA, nodeB, pos) {
+            pos = Global.getNodeToWorldPoint(nodeA, pos);
+            return Global.getWorldToNodePoint(nodeB, pos);
+        },
+
+        /**切换父节点并保持坐标不变
+         *
+         * @param node     需要切换的节点
+         * @param parent   需要切换的父节点
+         */
+        changeParent: function (node, parent) {
+            var pos = Global.getNodeAToNodeBPoint(node, parent);
+            node.parent = parent;
+            node.setPosition(pos);
+        },
+
         /**打印消息
          *
          */

@@ -16,7 +16,7 @@ module.exports = {
         "name": "锦鲤",
         "lv": 1,
         "exp": 0,
-        "max_exp": Math.floor(200 * Math.pow(1, 2))
+        "max_exp": Math.floor(200 * Math.pow(1, 1.5))
     },
     "prop": {       //道具信息
         "1": {
