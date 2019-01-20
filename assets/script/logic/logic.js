@@ -28,7 +28,6 @@ module.exports = cc.Class({
                 args.push(event.detail[i]);
             }
             args.push(event);
-            args.push(event_name);
             cb.apply(null, args);
         }, node);
     },
@@ -38,6 +37,9 @@ module.exports = cc.Class({
             let args = [];
             for (let i = 0; i < event.detail.length; i++) {
                 args.push(event.detail[i]);
+            }
+            if(event.detail.length < 0){
+                args.push({});
             }
             args.push(event);
             cb.apply(null, args);

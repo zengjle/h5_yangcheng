@@ -51,6 +51,7 @@ cc.Class({
         let _img_answer = this.node_results.getChildByName("img_answer");
         let _reward_light = this.node_results.getChildByName("comp_reward_light");
         _img_answer.getComponent(cc.Sprite).spriteFrame = this.spriteFrame_answer[_msg.answer];
+        _reward_light.getComponent("comp_reward_lig").init_comp(_msg.info);
         _reward_light.scale = 0;
         this.scheduleOnce(()=>{
             _reward_light.runAction(cc.scaleTo(0.1, 1, 1));
@@ -96,6 +97,10 @@ cc.Class({
 
     on_close: function () {
 
+    },
+
+    on_close_answer: function () {
+        this.node_dayly_question_answer.active = false;
     },
 
     on_close_reward_bar:function(){

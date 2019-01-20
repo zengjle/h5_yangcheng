@@ -14,9 +14,12 @@ cc.Class({
         title_icon: cc.Sprite,
         lbl_bar_title: cc.Label,
         atlas_title_icon: cc.SpriteAtlas,
-        progressbar_fishi_exp: cc.ProgressBar,
+        progressbar_fish_exp: cc.ProgressBar,
         img_food: cc.Sprite,
         lbl_fish_lv: cc.Label,
+        lbl_user_lv: cc.Label,
+        lbl_integral: cc.Label,
+        lbl_feed_tips:cc.Label,
 
         spriteatlas_food: cc.SpriteAtlas,
 
@@ -28,6 +31,11 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+
+    },
+
+    start:function(){
+        net.emit("create_fish_data");
     },
 
     _init_data: function (_info) {
@@ -39,14 +47,15 @@ cc.Class({
     },
     onEnable: function () {
         this._super();
-
     },
     _register_handler: function () {
         ui.on("choose_food", (_msg) => {
             this.food = [_msg.prop_id, 1, data.prop[_msg.prop_id].addition, 1];
-            this.img_food.spriteFram = this.spriteatlas_food.getSpriteFrame("food_" + _food_id);
+            this.lbl_feed_tips.string = "喂食";
+            this.img_food.spriteFrame = this.spriteatlas_food.getSpriteFrame("bag_food_" + _msg.prop_id);
             this.on_chick_active_bar(null, false);
         }, this.node)
+        net.on("create_fish_data_ret",this.init_bar.bind(this));
         net.on("feed_fish_ret", this.init_bar.bind(this));
         net.on("enter_bag_ret", (_msg) => {
             this.lbl_bar_title.string = "库存";
@@ -71,9 +80,13 @@ cc.Class({
     },
 
     init_bar: function (_msg) {
-        this.progressbar_fishi_exp.Progress = _msg.exp / _msg.max_exp;
-        this.lbl_fish_lv = _msg.lv;
-        this.img_food.spriteFram = null;
+        let _fish = _msg.fish;
+        this.lbl_integral.string = _msg.integral;
+        this.progressbar_fish_exp.progress = _fish.exp / _fish.max_exp;
+        this.lbl_fish_lv.string = "lv." + _fish.lv;
+        this.lbl_user_lv.string = _fish.lv;
+        this.img_food.spriteFrame = null;
+        this.lbl_feed_tips.string = "选择食物";
         this.food = null;
 
     },
@@ -109,7 +122,7 @@ cc.Class({
 
     on_feed_fish: function () {
         !this.food && this.on_chick_active_bar(null, 3)
-        !!this.food && net.emit("feed_fish", { food: this.food });
+        !!this.food && net.emit("feed_fish", {food: this.food });
     },
 
     on_chick_active_bar(_, state) {

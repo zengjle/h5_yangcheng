@@ -7,9 +7,9 @@ cc.Class({
     extends: require("view_cell"),
 
     properties:{
-        img_food_icon:cc.Sprite,
-        node_shiny:cc.Node,
-        atlas_food:cc.SpriteAtlas,
+        window_type :constant.WINDOW_TYPE.POPUP,
+
+        node_reward_light:cc.Node,
     },
 
     onLoad:function () {
@@ -30,9 +30,16 @@ cc.Class({
 
     },
 
-    init_comp:function(_food_id){
-        this.img_food_icon.spriteFrame = this.atlas_food.getSpriteFrame("icon_bag_" + _food_id);
-        
+    init_comp:function(_food){
+        this.node_reward_light.getComponent("comp_reward_light").init_comp(_food);
+        this.node_reward_light.scale = 0;
+        this.scheduleOnce(()=>{
+        this.node_reward_light.runAction(cc.scaleTo(0.1, 1, 1))
+        },0.1);
+    },
+
+    on_close: function () {
+        ui.close();
     },
 
     on_open_sys:function (_,_uiName) {
