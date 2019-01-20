@@ -25,7 +25,7 @@ const $ui = {
      */
     _bindComponent(target, component) {
         var name = this._getComponentName(component);
-        name = `${name}`;
+        name = `$${name}`;
         target[name] = component;
     },
 
@@ -36,7 +36,7 @@ const $ui = {
      */
     _removeComponent(target, component) {
         var name = this._getComponentName(component);
-        name = `${name}`;
+        name = `$${name}`;
         delete target[name];
     },
 

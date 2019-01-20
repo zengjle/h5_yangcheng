@@ -29,6 +29,17 @@ const ActionMgr = (function () {
         this._runAction(action, target, loop_num, is_loop, cb);
     };
 
+    /**飘动效果
+     *
+     */
+    _p.flutter = function () {
+        return cc.sequence(
+            cc.moveBy(1, 50, 0),
+            cc.moveBy(2, -100, 0),
+            cc.moveBy(1, 50, 0)
+        );
+    };
+
     /**进度条前进
      *
      * @param progress      进度条组件或他的节点
