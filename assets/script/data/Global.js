@@ -2,7 +2,7 @@
 if (!CC_EDITOR) {
     require('jQuery');
     require('generater-Id');
-
+    cc.vv = {};
     var $data = require('data');
 
     var d = require('DataMgr');
