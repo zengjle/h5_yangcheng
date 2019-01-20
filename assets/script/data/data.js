@@ -23,42 +23,42 @@ module.exports = {
             "name": "麻糍",
             "type": 1,
             "addition": 100,
-            "introduce": "香糯可口的麻糍,Q中带脆",
+            "introduce": "增加微量成长值",
             "protect_time": 15
         },
         "2": {
             "name": "五香",
             "type": 1,
             "addition": 200,
-            "introduce": "",
+            "introduce": "增加少量成长值",
             "protect_time": 30
         },
         "3": {
             "name": "四果汤",
             "type": 1,
             "addition": 400,
-            "introduce": "",
+            "introduce": "增加中量成长值",
             "protect_time": 45
         },
         "4": {
             "name": "豆花粉丝",
             "type": 1,
             "addition": 800,
-            "introduce": "",
+            "introduce": "增加大量成长值",
             "protect_time": 60
         },
         "5": {
             "name": "漳州卤面",
             "type": 1,
             "addition": 1600,
-            "introduce": "",
+            "introduce": "增加巨量成长值",
             "protect_time": 90
         },
         "6": {
             "name": "小食盒",                                //名字
             "type": 2,                                      //类型
             "addition": 0,                                  //增加的成长值
-            "introduce": "有概率开出麻糍,五香,四果汤",        //简介
+            "introduce": "有概率开出麻糍,五香或者四果汤",        //简介
             "openNumMin": 1,                                //一次最低开出几个
             "openNumMax": 3,                                //一次最多开出几个
             "open": [                                       //打开后可以获得的道具信息
