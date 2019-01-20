@@ -363,7 +363,7 @@ const DataMgr = (function () {
                 data = wen_chang_men_reward[i].reward[0];
             }
         }
-        var info = config.data.prop[id];
+        var info = config.data.prop[data.id];
         return [[data.id, info.type, info.addition, data.num]];
     };
 

@@ -14,7 +14,7 @@ cc.Class({
     },
 
     onLoad:function () {
-
+        cc.vv.comp_reward_lightCom = this;
 
     },
 
@@ -32,8 +32,8 @@ cc.Class({
     },
 
     init_comp:function(_food){
-        this.img_food_icon.spriteFrame = this.atlas_food.getSpriteFrame("icon_bag_" + _food_id[0]);
-        this.lbl_name_sum.string = data.prop[_food[0].name] + "×" + _food[3];
+        this.img_food_icon.spriteFrame = this.atlas_food.getSpriteFrame("bag_food_" + _food[0]);
+        this.lbl_name_sum.string = data.prop[_food[0]].name + "×" + _food[3];
     },
 
     on_open_sys:function (_,_uiName) {
