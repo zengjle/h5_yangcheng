@@ -62,9 +62,9 @@ module.exports = {
             "openNumMin": 1,                                //一次最低开出几个
             "openNumMax": 3,                                //一次最多开出几个
             "open": [                                       //打开后可以获得的道具信息
-                {"id": 1, "probability": 50},             //id 道具ID   ;;  probability 开出的概率
-                {"id": 2, "probability": 30},
-                {"id": 3, "probability": 20}
+                { "id": 1, "probability": 50 },             //id 道具ID   ;;  probability 开出的概率
+                { "id": 2, "probability": 30 },
+                { "id": 3, "probability": 20 }
             ]
         },
         "7": {
@@ -75,8 +75,8 @@ module.exports = {
             "openNumMin": 1,
             "openNumMax": 3,
             "open": [
-                {"id": 4, "probability": 80},
-                {"id": 5, "probability": 20}
+                { "id": 4, "probability": 80 },
+                { "id": 5, "probability": 20 }
             ]
         }
     },
@@ -307,43 +307,81 @@ module.exports = {
     "wen_chang_men_reward": {
         "1": {
             "score": 0,
-            "reward": [{"id": 1, "num": 1}]
+            "reward": [{ "id": 1, "num": 1 }]
         },
         "2": {
             "score": 100,
-            "reward": [{"id": 1, "num": 2}]
+            "reward": [{ "id": 1, "num": 2 }]
         },
         "3": {
             "score": 150,
-            "reward": [{"id": 2, "num": 2}]
+            "reward": [{ "id": 2, "num": 2 }]
         },
         "4": {
             "score": 200,
-            "reward": [{"id": 2, "num": 3}]
+            "reward": [{ "id": 2, "num": 3 }]
         },
         "5": {
             "score": 250,
-            "reward": [{"id": 3, "num": 2}]
+            "reward": [{ "id": 3, "num": 2 }]
         },
         "6": {
             "score": 300,
-            "reward": [{"id": 3, "num": 3}]
+            "reward": [{ "id": 3, "num": 3 }]
         },
         "7": {
             "score": 350,
-            "reward": [{"id": 4, "num": 2}]
+            "reward": [{ "id": 4, "num": 2 }]
         },
         "8": {
             "score": 400,
-            "reward": [{"id": 4, "num": 3}]
+            "reward": [{ "id": 4, "num": 3 }]
         },
         "9": {
             "score": 450,
-            "reward": [{"id": 5, "num": 2}]
+            "reward": [{ "id": 5, "num": 2 }]
         },
         "10": {
             "score": 500,
-            "reward": [{"id": 5, "num": 3}]
+            "reward": [{ "id": 5, "num": 3 }]
         },
-    }
+    },
+
+    "ui_mission": {
+        "1": {
+            "name": "麻糍",
+            "speed": 2.5,
+            "score": 5,
+        },
+        "2": {
+            "name": "五香",
+            "speed": 2.25,
+            "score": 10,
+        },
+        "3": {
+            "name": "四果汤",
+            "speed": 2,
+            "score": 12,
+        },
+        "4": {
+            "name": "豆花粉丝",
+            "speed": 1.75,
+            "score": 20,
+        },
+        "5": {
+            "name": "漳州卤面",
+            "speed": 1.5,
+            "score": 25,
+        },
+        "6": {
+            "name": "鱼骨",
+            "speed": 1.5,
+            "score": 0,
+        },
+        "7": {
+            "name": "菜叶",
+            "speed": 3,
+            "score": 0,
+        },
+    },
 };
