@@ -363,6 +363,25 @@ const DataMgr = (function () {
         return [[data.id, info.type, info.addition, data.num]];
     };
 
+    /**开启道具
+     *
+     * @param id    道具id
+     */
+    _p.opne_prop = function (id) {
+        var info = config.data.prop[id],
+            num = Global.getRandomNum_Round(info.openNumMin, info.openNumMax, -1),
+            open_info = info.open,
+            len = open_info.length,
+            random = Math.random() * 100,
+            probability = 0;
+        for (let i = 0; i < len; i++) {
+            probability += open_info[i].probability;
+            if (probability > random) {
+                return [open_info[i].id, num];  // 食物id     数量
+            }
+        }
+    };
+
     /**获取用户数据
      *
      */
@@ -382,25 +401,6 @@ const DataMgr = (function () {
         }.bind(this), function () {
             tips.show('获取数据失败');
         });
-    };
-
-    /**开启道具
-     *
-     * @param id    道具id
-     */
-    _p.opne_prop = function (id) {
-        var info = config.data.prop[id],
-            num = Global.getRandomNum_Round(info.openNumMin, info.openNumMax, -1),
-            open_info = info.open,
-            len = open_info.length,
-            random = Math.random() * 100,
-            probability = 0;
-        for (let i = 0; i < len; i++) {
-            probability += open_info[i].probability;
-            if (probability > random) {
-                return [open_info[i].id, num];  // 食物id     数量                
-            }
-        }
     };
 
     /**存储用户数据

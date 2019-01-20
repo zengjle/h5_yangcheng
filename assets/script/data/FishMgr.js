@@ -75,6 +75,7 @@ const Fish = (function () {
 const FishMgr = (function () {
     'use strict';
     function FishMgr() {
+        this.fish = {};
     };
 
     const _p = FishMgr.prototype;
@@ -117,6 +118,7 @@ const FishMgr = (function () {
             if (!this.fish[count]) {
                 return count;
             }
+            count++;
         }
     };
 

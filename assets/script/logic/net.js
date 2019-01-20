@@ -134,10 +134,10 @@ let net = cc.Class({
         var fn = function () {
             var fish = Global.FishMgr.create_fish_data(Global.DataMgr.fish[1]);
             this.emit(_event_name.type + "_ret", {fish: fish});
-        };
+        }.bind(this);
 
-        if (Global.DataMgr.fish/* && Object.keys(Global.DataMgr.fish)*/) {
-            fn();
+        if (Global.DataMgr.fish[1]/* && Object.keys(Global.DataMgr.fish)*/) {
+            fn.call(this);
         } else {
             Global.Observer.once('DataMgr_init_data_ok', fn, this);
         }
@@ -215,4 +215,4 @@ let net = cc.Class({
     },
 });
 
-module.exports = new net();
+module.exports = window.aaa = new net();

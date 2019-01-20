@@ -67,6 +67,37 @@ if (!CC_EDITOR) {
             FishMgr.init();
         },
 
+        /**获取url中的参数值
+         *
+         * @param name  参数名
+         */
+        getQueryString: function (name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
+            }
+            return null;
+        },
+
+        /**获取uuid
+         *
+         * @returns {string} uuid
+         */
+        getUuid: function () {
+            var s = [];
+            var hexDigits = "0123456789abcdef";
+            for (var i = 0; i < 36; i++) {
+                s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+            }
+            s[14] = "4";
+            s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);
+            s[8] = s[13] = s[18] = s[23] = "-";
+
+            var uuid = s.join("");
+            return uuid;
+        },
+
         /**是否是食物领取时间
          *
          */
