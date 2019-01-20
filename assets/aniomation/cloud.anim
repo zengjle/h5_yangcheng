@@ -1,0 +1,71 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "cloud",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 31.366666666666667,
+  "sample": 30,
+  "speed": 1,
+  "wrapMode": "22",
+  "curveData": {
+    "paths": {
+      "node_cloud_1": {
+        "props": {
+          "x": [
+            {
+              "frame": 0,
+              "value": 477
+            },
+            {
+              "frame": 20.433333333333334,
+              "value": -473
+            }
+          ]
+        }
+      },
+      "node_cloud_4": {
+        "props": {
+          "x": [
+            {
+              "frame": 0,
+              "value": 502
+            },
+            {
+              "frame": 18.033333333333335,
+              "value": -420
+            }
+          ]
+        }
+      },
+      "node_cloud_3": {
+        "props": {
+          "x": [
+            {
+              "frame": 0,
+              "value": -463
+            },
+            {
+              "frame": 21.7,
+              "value": 463
+            }
+          ]
+        }
+      },
+      "node_cloud_2": {
+        "props": {
+          "x": [
+            {
+              "frame": 0,
+              "value": 527
+            },
+            {
+              "frame": 31.366666666666667,
+              "value": -447
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "71d5542c-7afe-481c-99d6-756ec144818f",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "bg_old_town": {
+      "ver": "1.0.3",
+      "uuid": "8b41b7df-5f39-480f-8e3b-2a64d037c054",
+      "rawTextureUuid": "71d5542c-7afe-481c-99d6-756ec144818f",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 720,
+      "height": 1280,
+      "rawWidth": 720,
+      "rawHeight": 1280,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

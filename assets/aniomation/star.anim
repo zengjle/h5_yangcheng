@@ -1,0 +1,219 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "star",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 8.033333333333333,
+  "sample": 30,
+  "speed": 1,
+  "wrapMode": "2",
+  "curveData": {
+    "paths": {
+      "node_star_1": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 255
+            },
+            {
+              "frame": 1.9666666666666666,
+              "value": 0
+            },
+            {
+              "frame": 2.566666666666667,
+              "value": 255
+            },
+            {
+              "frame": 4.866666666666666,
+              "value": 255
+            },
+            {
+              "frame": 7.1,
+              "value": 0
+            },
+            {
+              "frame": 8.033333333333333,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "node_star_2": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 1.6333333333333333,
+              "value": 255
+            },
+            {
+              "frame": 3.6,
+              "value": 0
+            },
+            {
+              "frame": 5.533333333333333,
+              "value": 0
+            },
+            {
+              "frame": 7.6,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "node_star_6": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 3.9,
+              "value": 255
+            },
+            {
+              "frame": 5,
+              "value": 0
+            },
+            {
+              "frame": 6.533333333333333,
+              "value": 0
+            },
+            {
+              "frame": 7.366666666666666,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "node_star_3": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0.9666666666666667,
+              "value": 255
+            },
+            {
+              "frame": 1.4,
+              "value": 0
+            },
+            {
+              "frame": 2.2666666666666666,
+              "value": 225
+            },
+            {
+              "frame": 3.8666666666666667,
+              "value": 225
+            },
+            {
+              "frame": 4.5,
+              "value": 0
+            },
+            {
+              "frame": 5.233333333333333,
+              "value": 0
+            },
+            {
+              "frame": 6.333333333333333,
+              "value": 150
+            },
+            {
+              "frame": 7.033333333333333,
+              "value": 50
+            },
+            {
+              "frame": 7.333333333333333,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "node_star_4": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 3.1333333333333333,
+              "value": 255
+            },
+            {
+              "frame": 5.933333333333334,
+              "value": 0
+            },
+            {
+              "frame": 7.033333333333333,
+              "value": 0
+            },
+            {
+              "frame": 7.633333333333334,
+              "value": 225
+            }
+          ]
+        }
+      },
+      "node_star_7": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 0,
+              "value": 255
+            },
+            {
+              "frame": 0.8666666666666667,
+              "value": 0
+            },
+            {
+              "frame": 2.8,
+              "value": 0
+            },
+            {
+              "frame": 4.433333333333334,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "node_star_8": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 1.7,
+              "value": 255
+            },
+            {
+              "frame": 2.466666666666667,
+              "value": 100
+            },
+            {
+              "frame": 3.5,
+              "value": 255
+            }
+          ]
+        }
+      },
+      "node_star_9": {
+        "props": {
+          "opacity": [
+            {
+              "frame": 2.3333333333333335,
+              "value": 200
+            },
+            {
+              "frame": 3.8,
+              "value": 0
+            },
+            {
+              "frame": 5.166666666666667,
+              "value": 255
+            },
+            {
+              "frame": 6.066666666666666,
+              "value": 180
+            },
+            {
+              "frame": 7.033333333333333,
+              "value": 255
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

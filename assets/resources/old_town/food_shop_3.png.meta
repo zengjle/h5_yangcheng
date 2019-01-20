@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "328c863a-40c6-4ce7-9f29-40295a9e48ab",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "food_shop_3": {
+      "ver": "1.0.3",
+      "uuid": "28d964b9-801c-47d7-b858-08aa32a93335",
+      "rawTextureUuid": "328c863a-40c6-4ce7-9f29-40295a9e48ab",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 119,
+      "height": 179,
+      "rawWidth": 119,
+      "rawHeight": 179,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
