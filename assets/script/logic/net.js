@@ -189,7 +189,7 @@ let net = cc.Class({
 
     //每日问答
     dayly_question_answer: function (_event_name) {
-        let _question_id =  Math.floor(Math.random()*data.question.answer.length);
+        let _question_id = Math.floor(Math.random() * data.question.answer.length);
         this.emit(_event_name.type + "_ret", { question_answer_id: _question_id })
     },
 
