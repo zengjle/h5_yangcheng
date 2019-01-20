@@ -59,6 +59,11 @@ const $ui = {
         if (!target) {
             throw new Error('初始化ui没有传入节点或组件');
         }
+
+        if (target.$$isInitUi)
+            return;
+        target.$$isInitUi = true;
+
         this.bindGetSet(target);
         this.bindComponent(target);
         this.bindDescendantsNode(target);
