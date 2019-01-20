@@ -62,9 +62,9 @@ module.exports = {
             "openNumMin": 1,                                //一次最低开出几个
             "openNumMax": 3,                                //一次最多开出几个
             "open": [                                       //打开后可以获得的道具信息
-                { "id": 1, "probability": 50 },             //id 道具ID   ;;  probability 开出的概率
-                { "id": 2, "probability": 30 },
-                { "id": 3, "probability": 20 }
+                {"id": 1, "probability": 50},             //id 道具ID   ;;  probability 开出的概率
+                {"id": 2, "probability": 30},
+                {"id": 3, "probability": 20}
             ]
         },
         "7": {
@@ -75,36 +75,40 @@ module.exports = {
             "openNumMin": 1,
             "openNumMax": 3,
             "open": [
-                { "id": 4, "probability": 80 },
-                { "id": 5, "probability": 20 }
+                {"id": 4, "probability": 80},
+                {"id": 5, "probability": 20}
             ]
         }
     },
     "mission": {        //任务信息
         "1": {
             "id": 1,    //["任务名", "任务内容",是否已领取奖励(0已领取,1未领取),当前任务次数 ,'任务最多次数',场景ID(0为没有场景ID),该任务奖励]
-            "info": ["每日登陆", "每天登陆游戏获得丰厚奖励", null, null, 3, 1, [6, 2, 0, 1]]
+            "info": ["领取每日福袋", "每天登陆游戏获得丰厚奖励", null, null, 1, 1, [6, 2, 0, 1]]
         },
         "2": {
             "id": 2,
-            "info": ["古镇", " 每到饭点古镇小吃店老板会送上好吃的小吃,快来领取吧!", null, null, 3, 2, [2, 1, 200, 5]]
+            "info": ["文昌门", " 人们在文昌门送上了美味的漳州小吃,快来拿吧!", null, null, 3, 1, [1, 1, 100, 2]]
         },
         "3": {
             "id": 3,
-            "info": ["购买商品", " 每天在商城购买商品可以获得奖励哦!", null, null, 1, 0, [4, 1, 800, 1]]
+            "info": ["古镇", " 每到饭点古镇小吃店老板会送上好吃的小吃,快来领取吧!", null, null, 3, 2, [2, 1, 200, 5]]
         },
         "4": {
             "id": 4,
-            "info": ["古镇问答", " 在古镇回答问题可以获得丰厚奖励。", null, null, 1, 2, [2, 1, 200, 2]]
+            "info": ["购买商品", " 每天在商城购买商品可以获得奖励哦!", null, null, 1, 0, [4, 1, 800, 1]]
         },
         "5": {
             "id": 5,
-            "info": ["喂养锦鲤", "每日用小吃喂养锦鲤可以获得丰厚奖励。 ", null, null, 3, 0, [2, 1, 200, 2]]
+            "info": ["古镇问答", " 在古镇回答问题可以获得丰厚奖励。", null, null, 1, 2, [2, 1, 200, 2]]
         },
         "6": {
             "id": 6,
-            "info": ["呼朋唤友", "叫上你的朋友一起来喂养锦鲤吧!", null, null, 1, 0, [5, 1, 1600, 1]]
-        }
+            "info": ["喂养锦鲤", "每日用小吃喂养锦鲤可以获得丰厚奖励。 ", null, null, 3, 0, [2, 1, 200, 2]]
+        },
+        // "6": {
+        //     "id": 6,
+        //     "info": ["呼朋唤友", "叫上你的朋友一起来喂养锦鲤吧!", null, null, 1, 0, [5, 1, 1600, 1]]
+        // }
     },
     "shop": {           //商店信息
         "1": {
@@ -308,39 +312,39 @@ module.exports = {
     "wen_chang_men_reward": {
         "1": {
             "score": 0,
-            "reward": [{ "id": 1, "num": 1 }]
+            "reward": [{"id": 1, "num": 1}]
         },
         "2": {
             "score": 100,
-            "reward": [{ "id": 1, "num": 2 }]
+            "reward": [{"id": 1, "num": 2}]
         },
         "3": {
             "score": 150,
-            "reward": [{ "id": 2, "num": 2 }]
+            "reward": [{"id": 2, "num": 2}]
         },
         "4": {
             "score": 200,
-            "reward": [{ "id": 2, "num": 3 }]
+            "reward": [{"id": 2, "num": 3}]
         },
         "5": {
             "score": 250,
-            "reward": [{ "id": 3, "num": 2 }]
+            "reward": [{"id": 3, "num": 2}]
         },
         "6": {
             "score": 300,
-            "reward": [{ "id": 3, "num": 3 }]
+            "reward": [{"id": 3, "num": 3}]
         },
         "7": {
             "score": 350,
-            "reward": [{ "id": 4, "num": 2 }]
+            "reward": [{"id": 4, "num": 2}]
         },
         "8": {
             "score": 400,
-            "reward": [{ "id": 4, "num": 3 }]
+            "reward": [{"id": 4, "num": 3}]
         },
         "9": {
             "score": 450,
-            "reward": [{ "id": 5, "num": 2 }]
+            "reward": [{"id": 5, "num": 2}]
         },
         "10": {
             "score": 500,

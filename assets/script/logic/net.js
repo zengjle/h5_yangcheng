@@ -39,13 +39,13 @@ let net = cc.Class({
     },
 
     //进入任务界面
-    enter_mission: function (_msg,_event_name) {
+    enter_mission: function (_msg, _event_name) {
         var emit_msg = _event_name.type + "_ret";
         this.emit(emit_msg, {mission_info: Global.DataMgr.get_mission_data()});
     },
 
     //进入好友界面
-    enter_friend: function (_msg,_event_name) {
+    enter_friend: function (_msg, _event_name) {
         var emit_msg = _event_name.type + "_ret";
 
         Global.UserMgr.get_friend_info(function (info) {
@@ -54,7 +54,7 @@ let net = cc.Class({
     },
 
     //背包数据
-    enter_bag: function (_msg,_event_name) {
+    enter_bag: function (_msg, _event_name) {
         var emit_msg = _event_name.type + "_ret";
         this.emit(emit_msg, Global.DataMgr.prop);
     },
@@ -95,6 +95,8 @@ let net = cc.Class({
         Global.DataMgr.update_receive_time(msg.shop_id);
         Global.DataMgr.add_prop(msg.shop_id, num);
 
+        Global.DataMgr.mission[3].num++;
+
         this.emit(_event_name.type + "_ret", {
             info: [msg.shop_id, prop_data.type, prop_data.addition, num],
             shop_info: Global.DataMgr.get_is_receive(msg.shop_id)
@@ -116,15 +118,18 @@ let net = cc.Class({
 
         if (Global.DataMgr.wen_chang_men_max_source === msg.mission_score)
             data.max_mission_score = msg.mission_score;
+
+        Global.DataMgr.mission[2].num++;
+
         this.emit(_event_name.type + "_ret", data);
     },
 
     enter_game: function (_, _event_name) {
-       
+
     },
 
     //初始化鱼信息
-    create_fish_data: function (_msg,_event_name) {
+    create_fish_data: function (_msg, _event_name) {
         var fn = function () {
             var fish = Global.FishMgr.create_fish_data(Global.DataMgr.fish[1]);
             this.emit(_event_name.type + "_ret", {fish: fish, integral: Global.DataMgr.integration_num});
@@ -153,6 +158,8 @@ let net = cc.Class({
         }
 
         Global.DataMgr.use_prop(_msg.food[0], 1);
+
+        Global.DataMgr.mission[6].num++;
 
         this.emit(_event_name.type + "_ret", {
             fish: Global.FishMgr.fish[1],
@@ -191,6 +198,9 @@ let net = cc.Class({
     get_dayly_reward: function (_msg, _event_name) {
         var prop = Global.DataMgr.is_sign_in ? [] : [6, 2, 0, 1];
         Global.DataMgr.is_sign_in = true;
+
+        Global.DataMgr.mission[1].num++;
+
         this.emit(_event_name.type + "_ret", {prop: prop})
     },
 
@@ -198,6 +208,9 @@ let net = cc.Class({
     dayly_question_answer: function (_msg, _event_name) {
         var _question_id = Math.floor(Math.random() * data.question.answer.length);
         Global.DataMgr.is_question = true;
+
+        Global.DataMgr.mission[5].num++;
+
         this.emit(_event_name.type + "_ret", {question_answer_id: _question_id})
     },
 
@@ -208,4 +221,4 @@ let net = cc.Class({
     },
 });
 
-module.exports =  new net();
+module.exports = new net();

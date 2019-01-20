@@ -138,6 +138,11 @@ const DataMgr = (function () {
             this.is_sign_in = false;
             this.is_question = false;
             this.wen_chang_men_action_num = 3;
+            var mission = this.mission;
+            for (let i in mission) {
+                mission[i].num = 0;
+                mission[i].is_receive = 1;
+            }
         }
     };
 
