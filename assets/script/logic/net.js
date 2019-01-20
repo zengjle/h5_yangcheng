@@ -1,9 +1,6 @@
-// let fish = null;
+'use strict';
 let net = cc.Class({
     extends: require("logic"),
-    // ctor: function () {
-    // fish = require("FishMgr")
-    // },
 
     init: function () {
         this.read_query = [];
@@ -65,15 +62,9 @@ let net = cc.Class({
     //进入文昌门
     enter_mission_page: function (msg, _event_name) {
         var emit_msg = _event_name.type + "_ret";
-        var index, title;
-
-        if (msg.id === 1) {
-            index = 'wen_chang_men_max_source';
+        var index = 'wen_chang_men_max_source',
             title = '文昌门';
-        } else {
-            index = 'gu_jie_max_source';
-            title = '古街';
-        }
+
         this.emit(emit_msg, {
             title: title,
             max_mission_score: Global.DataMgr[index],
@@ -140,7 +131,7 @@ let net = cc.Class({
     create_fish_data: function (msg, _event_name) {
         var fn = function () {
             var fish = Global.FishMgr.create_fish_data(Global.DataMgr.fish[1]);
-            this.emit(_event_name.type + "_ret", {fish: fish});
+            this.emit(_event_name.type + "_ret", {fish: fish, integral: Global.DataMgr.integration_num});
         }.bind(this);
 
         if (Global.DataMgr.fish[1]/* && Object.keys(Global.DataMgr.fish)*/) {
@@ -172,7 +163,7 @@ let net = cc.Class({
             exp: fish.exp,
             max_exp: fish.max_exp,
             level_up: level_up,
-            score: add_exp / 10
+            integral: add_exp / 10
         })
     },
 
@@ -180,7 +171,7 @@ let net = cc.Class({
     //更改福缘
     change_score: function (msg, _event_name) {
         Global.DataMgr.integration_num += msg.score;
-        this.emit(_event_name.type + "_ret", {score: Global.DataMgr.integration_num});
+        this.emit(_event_name.type + "_ret", {integral: Global.DataMgr.integration_num});
     },
 
     //使用道具

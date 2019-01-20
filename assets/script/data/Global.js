@@ -1,6 +1,7 @@
 'use strict';
 if (!CC_EDITOR) {
     require('jQuery');
+    require('bindUI');
     require('generater-Id');
     cc.vv = {};
     var $data = require('data');
@@ -20,7 +21,14 @@ if (!CC_EDITOR) {
     var f = require('FishMgr');
     var FishMgr = new f();
 
-    window.config = { data: $data };
+    var a = require('ActionMgr');
+    var ActionMgr = new a();
+
+    var l = require('Loader');
+    var Loader = new l();
+
+    cc.vv = {};
+    window.config = {data: $data};
     document.cookie = "agent=Web";
     window.Global = {
         DEBUG: true,
@@ -29,6 +37,8 @@ if (!CC_EDITOR) {
         Observer: Observer,
         UserMgr: UserMgr,
         FishMgr: FishMgr,
+        ActionMgr: ActionMgr,
+        Loader: Loader,
 
         /**初始化
          *
@@ -272,7 +282,7 @@ if (!CC_EDITOR) {
         },
 
         /**获取随机数
-         * 
+         *
          * @param min 最小值
          * @param max 最大值
          */

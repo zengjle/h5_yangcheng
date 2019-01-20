@@ -4,6 +4,7 @@
 const DataMgr = (function () {
     'use strict';
     function DataMgr() {
+
     };
 
     const _p = DataMgr.prototype;
@@ -105,7 +106,6 @@ const DataMgr = (function () {
                     }
                 },
                 wen_chang_men_max_source: 0,            //文昌门最高分
-                gu_jie_max_source: 0,                   //古街最高分
                 integration_num: 0,                     //福缘积分
                 mission_score_max: 0,                   //任务分数
                 wen_chang_men_action_num: 3,            //还可以进行的文昌阁游戏次数
@@ -194,15 +194,6 @@ const DataMgr = (function () {
                 return;
             }
             this.data.wen_chang_men_max_source = val;
-        });
-
-        cc.js.getset(this, 'gu_jie_max_source', function () {               //古街最高分
-            return this.data.gu_jie_max_source
-        }, function (val) {
-            if (val < this.data.gu_jie_max_source) {
-                return;
-            }
-            this.data.gu_jie_max_source = val;
         });
 
         cc.js.getset(this, 'is_sign_in', function () {                      //是否签到
