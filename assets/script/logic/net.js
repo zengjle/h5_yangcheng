@@ -228,6 +228,7 @@ let net = cc.Class({
     //领取每日问答奖励
     get_dayly_question_answer_reward: function (_msg, _event_name) {
         var prop = _msg.answer ? [7, 2, 0, 1] : [6, 2, 0, 1];
+        Global.DataMgr.add_prop(prop[0], prop[3]);
         this.emit(_event_name.type + "_ret", {prop: prop})
     },
 });

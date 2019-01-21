@@ -49,8 +49,9 @@ cc.Class({
         let node_question_ing = this.node_dayly_question_answer.getChildByName("node_answer_ing");
         node_question_ing.getChildByName("btn_anwser_1").getChildByName("Label").getComponent(cc.Label).string = _question_info.option[0];
         node_question_ing.getChildByName("btn_anwser_2").getChildByName("Label").getComponent(cc.Label).string = _question_info.option[1];
-        this.node_dayly_question_answer.getChildByName("lbl_food_detials").getComponent(cc.Label).string = _msg._question_info.subject;
+        this.node_dayly_question_answer.getChildByName("lbl_food_detials").getComponent(cc.Label).string = _question_info.subject;
         this.node_dayly_question_answer.active = true;
+        node_question_ing.active = true;
         this.node_results.active = false;
        },this.node);
 
@@ -60,8 +61,8 @@ cc.Class({
         this.node_results.active = true;
         let _img_answer = this.node_results.getChildByName("img_answer");
         let _reward_light = this.node_results.getChildByName("comp_reward_light");
-        _img_answer.getComponent(cc.Sprite).spriteFrame = this.spriteFrame_answer[_msg.answer];
-        _reward_light.getComponent("comp_reward_lig").init_comp(_msg.info);
+        _img_answer.getComponent(cc.Sprite).spriteFrame = this.spriteFrame_answer[_msg.prop[0] === 6?0:1];
+        _reward_light.getComponent("comp_reward_light").init_comp(_msg.prop);
         _reward_light.scale = 0;
         this.scheduleOnce(()=>{
             _reward_light.runAction(cc.scaleTo(0.1, 1, 1));
@@ -77,7 +78,7 @@ cc.Class({
     
     init_ui:function(_msg){
         this.shop_info = _msg.shop_info;
-        this.btn_question_answer.node.active = !_msg.question;
+        //this.btn_question_answer.node.active = !_msg.question;
     },
 
     init_shop_info:function(_shop_id){
