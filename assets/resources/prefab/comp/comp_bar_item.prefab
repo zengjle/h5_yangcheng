@@ -31,17 +31,17 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 25
-      },
-      {
         "__id__": 26
       },
       {
         "__id__": 27
+      },
+      {
+        "__id__": 28
       }
     ],
     "_prefab": {
-      "__id__": 28
+      "__id__": 29
     },
     "_id": "",
     "_opacity": 255,
@@ -383,11 +383,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 23
+        "__id__": 24
       }
     ],
     "_prefab": {
-      "__id__": 24
+      "__id__": 25
     },
     "_id": "",
     "_opacity": 255,
@@ -535,7 +535,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 22
+      "__id__": 23
     },
     "_id": "",
     "_opacity": 255,
@@ -711,7 +711,11 @@
     },
     "duration": 0.1,
     "zoomScale": 0.9,
-    "clickEvents": [],
+    "clickEvents": [
+      {
+        "__id__": 22
+      }
+    ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
     "_N$normalColor": {
@@ -749,6 +753,15 @@
     "_N$target": {
       "__id__": 16
     }
+  },
+  {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 1
+    },
+    "component": "comp_bar_item",
+    "handler": "on_click",
+    "customEventData": ""
   },
   {
     "__type__": "cc.PrefabInfo",

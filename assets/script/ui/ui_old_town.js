@@ -1,6 +1,8 @@
 let ui_window = require("ui_window");
 let constant = require("constant");
 let net = require("net");
+let data = require("data");
+
 cc.Class({
     extends: ui_window,
 
@@ -18,13 +20,18 @@ cc.Class({
         node_results:cc.Node,
         node_answer_ing:cc.Node,
         spriteFrame_answer:[cc.SpriteFrame],
+        spriteFrame_reward_btn:[cc.SpriteFrame],
     },
 
     // use this for initialization
     onLoad: function () {
-        net.emit("enter_old_town");
     },
     
+    start: function () {
+        net.emit("enter_old_town");
+
+    },
+
     onEnable:function () {
         this._super();
     },
@@ -34,19 +41,22 @@ cc.Class({
     },
     
     _register_handler:function () {
-        net.on("enter_old_town",this.init_ui.bind(this));
+        net.on("enter_old_town_ret",this.init_ui.bind(this));
 
        net.on("dayly_question_answer_ret",(_msg)=>{
         this.question_id = _msg.question_answer_id;
         let _question_info = data.question.info[_msg.question_answer_id];
-        this.node_dayly_question_answer.getChildByName("btn_anwser_1").getChildByName("Label").getComponent(cc.Label).string = _question_info.option[0];
-        this.node_dayly_question_answer.getChildByName("btn_anwser_2").getChildByName("Label").getComponent(cc.Label).string = _question_info.option[1];
+        let node_question_ing = this.node_dayly_question_answer.getChildByName("node_answer_ing");
+        node_question_ing.getChildByName("btn_anwser_1").getChildByName("Label").getComponent(cc.Label).string = _question_info.option[0];
+        node_question_ing.getChildByName("btn_anwser_2").getChildByName("Label").getComponent(cc.Label).string = _question_info.option[1];
         this.node_dayly_question_answer.getChildByName("lbl_food_detials").getComponent(cc.Label).string = _msg._question_info.subject;
         this.node_dayly_question_answer.active = true;
+        this.node_results.active = false;
        },this.node);
 
        net.on("get_dayly_question_answer_reward_ret",(_msg)=>{
         net.emit("enter_old_town");
+        this.node_dayly_question_answer.getChildByName("node_answer_ing").active = false;
         this.node_results.active = true;
         let _img_answer = this.node_results.getChildByName("img_answer");
         let _reward_light = this.node_results.getChildByName("comp_reward_light");
@@ -72,15 +82,16 @@ cc.Class({
 
     init_shop_info:function(_shop_id){
         this.shop_id = _shop_id;
-        if(!!this.shop_info[_shop_id + 1]){
-            this.node_shop_info.getChildByName("node_food_details").getChildByName("label").getComponent(cc.Label).string = data.shop[_shop_id].detalis;
+        if(!!this.shop_info[_shop_id]){
+            this.node_shop_info.getChildByName("node_food_details").getChildByName("lbl_food_details").getComponent(cc.Label).string = data.shop[_shop_id].detalis;
             this.node_shop_info.getChildByName("lbl_food_name").getComponent(cc.Label).string = data.shop[_shop_id].title;
             this.node_shop_info.getChildByName("img_food_icon").getComponent(cc.Sprite).spriteFrame = this.atals_food.getSpriteFrame("bag_food_" + _shop_id);
-            this.node_shop_info.getChildByName("node_show_get_time").active = this.shop_info[_shop_id + 1][0] === 2;
+            this.node_shop_info.getChildByName("node_show_get_time").active = this.shop_info[_shop_id][0] === 2;
             let _btn_be_get = this.node_shop_info.getChildByName("btn_get_food");
-            _btn_be_get.active = this.shop_info[_shop_id + 1][0] !== 2;
-            _btn_be_get.getComponent(cc.Button).enabled = !this.shop_info[_shop_id + 1][0];
-            _btn_be_get.getChildByName("Label").getComponent(cc.Label).string = !this.shop_info[_shop_id + 1][0]?"领取":"已领取";
+            _btn_be_get.active = this.shop_info[_shop_id][0] !== 2;
+            _btn_be_get.getComponent(cc.Button).enabled = !this.shop_info[_shop_id][0];
+            _btn_be_get.getComponent(cc.Sprite).spriteFrame = this.spriteFrame_reward_btn[!this.shop_info[_shop_id][0]?0:1]
+            _btn_be_get.getChildByName("Label").getComponent(cc.Label).string = !this.shop_info[_shop_id][0]?"领取":"已领取";
         }
     },
 
@@ -89,10 +100,13 @@ cc.Class({
     },
 
     on_choose_shop:function(_,_shop_id){
-        if(!!this.shop_info[_shop_id + 1]){
-         this.init_shop_info(_shop_id);
+        if (!!this.shop_info[_shop_id]) {
+            this.node_shop_info.scale = 0;
+            this.init_shop_info(_shop_id);
+            this.node_shop_info.active = true;
+            this.node_shop_info.runAction(cc.scaleTo(0.1, 1, 1))
         }
-        !this.shop_info[_shop_id + 1] && tips.show("暂未解锁该商店!请提升锦鲤等级!");
+        !this.shop_info[_shop_id] && tips.show("暂未解锁该商店!请提升锦鲤等级!");
     },
 
     on_close: function () {
@@ -104,7 +118,7 @@ cc.Class({
     },
 
     on_close_reward_bar:function(){
-
+        this.node_shop_info.active = false;
     },
 
     on_choose_answer:function(_,_answer_id){

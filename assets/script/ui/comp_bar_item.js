@@ -43,7 +43,7 @@ cc.Class({
         this.node_light.active = true
         this.scene_id = 0;
         this.node.getComponent(cc.Sprite).spriteFrame = this.spriteFrame_bg[_idx % 2];
-        let lbl_btn = this.btn_get.node.getChildByName("Label");
+        let lbl_btn = this.btn_get.node._$Label;
         this.lbl_item_title.string = _msg.info[0];
         this.lbl_item_info.string = _msg.info[1];
         if (this.state) {//未领取奖励

@@ -13,8 +13,9 @@ cc.Class({
     },
 
     onLoad:function () {
-
-
+        this.node.runAction(cc.sequence(cc.scaleTo(0.1, 1, 1),cc.callFunc(()=>{
+        this.init_comp(this.args[0]);
+    })))
     },
 
     onEnable:function () {
@@ -30,7 +31,7 @@ cc.Class({
 
     },
 
-    init_comp:function(_food){
+    init_comp:function(_food,_integral){
         this.node_reward_light.getComponent("comp_reward_light").init_comp(_food);
         this.node_reward_light.scale = 0;
         this.scheduleOnce(()=>{

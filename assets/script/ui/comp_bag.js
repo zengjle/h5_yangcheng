@@ -23,8 +23,8 @@ cc.Class({
       
     },
 
-    _register_handler:function () {
-      
+    _register_handler: function () {
+        
     },
 
     _unregister_handler:function () {

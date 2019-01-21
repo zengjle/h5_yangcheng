@@ -15,6 +15,7 @@ module.exports = {
         ui_main_prefab: "prefab/ui_main",
         ui_mission_prefab: "prefab/ui_mission",
         ui_old_town_prefab: 'prefab/ui_old_town',
+        popup_reward_layer_prefab: "prefab/popup_reward_layer",
     },
 
 };

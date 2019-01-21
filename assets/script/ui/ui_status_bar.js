@@ -26,7 +26,7 @@ cc.Class({
         node_friend: cc.Node,
         node_mission: cc.Node,
         node_bag: cc.Node,
-
+        node_map:cc.Node,
     },
 
     // use this for initialization
@@ -54,7 +54,7 @@ cc.Class({
             this.lbl_feed_tips.string = "喂食";
             this.img_food.spriteFrame = this.spriteatlas_food.getSpriteFrame("bag_food_" + _msg.prop_id);
             this.on_chick_active_bar(null, false);
-        }, this.node)
+        }, this.node),
         net.on("create_fish_data_ret", this.init_bar.bind(this));
         net.on("feed_fish_ret", (_msg) => {
             var pos = Global.getNodeAToNodeBPoint(cc.vv.fish, this.img_food.node.parent);
@@ -67,6 +67,7 @@ cc.Class({
             }
             ]
             ], 0, false, function () {
+                tips.show("福缘 + " + _msg.integral);
                 this.init_bar(_msg);
                 Global.ActionMgr.create('tremble', cc.vv.fish, [], 0, false);
                 _msg = null;
@@ -88,6 +89,10 @@ cc.Class({
             this.node_mission.getComponent("comp_mission").init_mission(_msg.mission_info);
             this.show_bar();
 
+        }, this.node);
+        net.on("use_props_ret", (_msg) => {
+            ui.open("popup_reward_layer",_msg.info);
+            this.on_chick_active_bar(null, false);
         }, this.node);
     },
 
@@ -120,16 +125,8 @@ cc.Class({
 
     },
 
-    init_friend_bar: function () {
-
-    },
-
-    init_mission_bar: function () {
-
-    },
-
-    init_bag_bar: function () {
-
+    on_open_shop:function(){
+        tips.show("商店暂未开启敬请期待!");
     },
 
     show_bar: function () {
@@ -142,7 +139,9 @@ cc.Class({
     },
 
     on_choose_sys: function (_, _uiName) {
-        ui.open(_uiName);
+        this.on_chick_active_bar(null, false,()=>{
+            ui.open(_uiName);
+        });
     },
 
     on_feed_fish: function () {
@@ -151,7 +150,7 @@ cc.Class({
         !!this.food && net.emit("feed_fish", {food: this.food});
     },
 
-    on_chick_active_bar(_, state) {
+    on_chick_active_bar(_, state,_cb) {
         let _bar_move_to;
         let _state = parseInt(state);
         ui.emit("touch_enable", true);
@@ -160,6 +159,11 @@ cc.Class({
                 tips.show("好友功能暂未开启!");
                 ui.emit("touch_enable", false);
                 return;
+            }else if(_state === 5){
+                this.lbl_bar_title.string = "地图";
+                this.title_icon.spriteFrame = _.target.getComponent(cc.Sprite).spriteFrame;
+                this.node_map.active = true;
+                this.show_bar();
             }
             net.emit("enter_" + constant.BAR_ID[_state]);
             this.title_icon.spriteFrame = this.atlas_title_icon.getSpriteFrame("icon_" + constant.BAR_ID[_state]);
@@ -174,5 +178,6 @@ cc.Class({
                 ui.emit("touch_enable", false);
             }, this)));
         }
+        !!_cb && _cb();
     },
 });

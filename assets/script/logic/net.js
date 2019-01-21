@@ -1,6 +1,11 @@
 'use strict';
+let data = null;
 let net = cc.Class({
     extends: require("logic"),
+
+    ctor: function () {
+        data = require("data");
+    },
 
     init: function () {
         this.read_query = [];
@@ -29,6 +34,8 @@ let net = cc.Class({
         this.on("feed_fish", this.feed_fish.bind(this));
         this.on("create_fish_data", this.create_fish_data.bind(this));
         this.on("add_props", this.add_props.bind(this));
+        this.on("use_props", this.use_props.bind(this));
+
 
         this.on("get_dayly_reward", this.get_dayly_reward.bind(this));
         this.on("dayly_question_answer", this.dayly_question_answer.bind(this));
@@ -135,7 +142,7 @@ let net = cc.Class({
             this.emit(_event_name.type + "_ret", {fish: fish, integral: Global.DataMgr.integration_num});
         }.bind(this);
 
-        if (Global.DataMgr.fish[1]/* && Object.keys(Global.DataMgr.fish)*/) {
+        if (Global.DataMgr.fish/* && Object.keys(Global.DataMgr.fish)*/) {
             fn.call(this);
         } else {
             Global.Observer.once('DataMgr_init_data_ok', fn, this);
@@ -188,6 +195,7 @@ let net = cc.Class({
             info.splice(2, 0, prop_info.addition);
         }
         Global.DataMgr.use_prop(prop[0], 1);
+        Global.DataMgr.add_prop(info[0],info[3]);
         this.emit(_event_name.type + "_ret", {info: info});
     },
 
@@ -203,7 +211,7 @@ let net = cc.Class({
         Global.DataMgr.is_sign_in = true;
 
         Global.DataMgr.mission[1].num++;
-
+        Global.DataMgr.add_prop(6, 1);
         this.emit(_event_name.type + "_ret", {prop: prop})
     },
 

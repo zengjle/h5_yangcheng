@@ -454,7 +454,7 @@
       "__id__": 24
     },
     "_id": "",
-    "_opacity": 255,
+    "_opacity": 225,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -475,8 +475,8 @@
     },
     "_rotationX": 0,
     "_rotationY": 0,
-    "_scaleX": 1,
-    "_scaleY": 1,
+    "_scaleX": 0,
+    "_scaleY": 0,
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
@@ -551,9 +551,7 @@
       "__id__": 14
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "c55c9bed-e660-43d0-8f85-e44526acc7ca"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_sizeMode": 2,
     "_fillType": 0,
@@ -572,10 +570,10 @@
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 13
+      "__id__": 1
     },
     "asset": {
-      "__uuid__": "a72d4acf-aaa2-42c7-8b01-5ba4bd0c8b31"
+      "__uuid__": "4594a986-0f1e-4384-bb0b-5af13abf3f93"
     },
     "fileId": "25dwZXXPNKF4py0RxHM4sM",
     "sync": false
@@ -659,10 +657,10 @@
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 13
+      "__id__": 1
     },
     "asset": {
-      "__uuid__": "a72d4acf-aaa2-42c7-8b01-5ba4bd0c8b31"
+      "__uuid__": "4594a986-0f1e-4384-bb0b-5af13abf3f93"
     },
     "fileId": "d0qEsU/JxHcZczIfvxz4g1",
     "sync": false
@@ -720,10 +718,10 @@
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 13
+      "__id__": 1
     },
     "asset": {
-      "__uuid__": "a72d4acf-aaa2-42c7-8b01-5ba4bd0c8b31"
+      "__uuid__": "4594a986-0f1e-4384-bb0b-5af13abf3f93"
     },
     "fileId": "f7LwyjffVDwqdSmqfmzKGp",
     "sync": false
@@ -775,15 +773,17 @@
     "atlas_food": {
       "__uuid__": "026034c5-0497-4f56-8d0e-c43131262879"
     },
-    "lbl_name_sum": null
+    "lbl_name_sum": {
+      "__id__": 18
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
     "root": {
-      "__id__": 13
+      "__id__": 1
     },
     "asset": {
-      "__uuid__": "a72d4acf-aaa2-42c7-8b01-5ba4bd0c8b31"
+      "__uuid__": "4594a986-0f1e-4384-bb0b-5af13abf3f93"
     },
     "fileId": "b5oU+mORlJjLcgxckmA7rR",
     "sync": false
