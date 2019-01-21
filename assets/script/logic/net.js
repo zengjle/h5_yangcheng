@@ -95,7 +95,7 @@ let net = cc.Class({
 
     //领取古镇福利
     get_old_town_food: function (msg, _event_name) {
-        var prop_data = config.prop[msg.shop_id],
+        var prop_data = data.prop[msg.shop_id],
             receive_data = Global.DataMgr.get_cur_receive_data(),
             num = receive_data[msg.shop_id];
 
@@ -190,7 +190,7 @@ let net = cc.Class({
         var prop = _msg.prop;
         if (prop[0] == 6 || prop[0] == 7) {
             info = Global.DataMgr.opne_prop(prop[0]);
-            var prop_info = config.data.prop[info[0]];
+            var prop_info = data.prop[info[0]];
             info.splice(1, 0, prop_info.type);
             info.splice(2, 0, prop_info.addition);
         }

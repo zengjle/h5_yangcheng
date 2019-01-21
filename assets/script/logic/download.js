@@ -148,15 +148,15 @@ module.exports = new(cc.Class({
                 if (err) {
                     cc.log("load " + res + " failed");
                 } else {
-                    //根据类型存储资源
-                    let config = require("config");
-                    cc.log("------------", data);
-                    if (res.indexOf("static_") !== -1) {
-                        ret_obj[data[0]] = data;
-                    } else {
-                        let key = res.substring(5, res.length - 5);
-                        config[key] = data;
-                    }
+                    // //根据类型存储资源
+                    // let config = require("config");
+                    // cc.log("------------", data);
+                    // if (res.indexOf("static_") !== -1) {
+                    //     ret_obj[data[0]] = data;
+                    // } else {
+                    //     let key = res.substring(5, res.length - 5);
+                    //     config[key] = data;
+                    // }
                     switch (type) {
                         case cc.SpriteAtlas:
                             let frames = data.getSpriteFrames();
