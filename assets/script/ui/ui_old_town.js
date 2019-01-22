@@ -10,7 +10,7 @@ cc.Class({
         window_type :constant.WINDOW_TYPE.UI,
 
         node_shop_info:cc.Node,
-        node_dayly_question_answer:cc.Node,
+        node_daily_question_answer:cc.Node,
         node_food_info:cc.Node,
 
         btn_question_answer:cc.Button,
@@ -43,21 +43,21 @@ cc.Class({
     _register_handler:function () {
         net.on("enter_old_town_ret",this.init_ui.bind(this));
 
-       net.on("dayly_question_answer_ret",(_msg)=>{
+       net.on("daily_question_answer_ret",(_msg)=>{
         this.question_id = _msg.question_answer_id;
         let _question_info = data.question.info[_msg.question_answer_id];
-        let node_question_ing = this.node_dayly_question_answer.getChildByName("node_answer_ing");
+        let node_question_ing = this.node_daily_question_answer.getChildByName("node_answer_ing");
         node_question_ing.getChildByName("btn_anwser_1").getChildByName("Label").getComponent(cc.Label).string = _question_info.option[0];
         node_question_ing.getChildByName("btn_anwser_2").getChildByName("Label").getComponent(cc.Label).string = _question_info.option[1];
-        this.node_dayly_question_answer.getChildByName("lbl_food_detials").getComponent(cc.Label).string = _question_info.subject;
-        this.node_dayly_question_answer.active = true;
+        this.node_daily_question_answer.getChildByName("lbl_food_detials").getComponent(cc.Label).string = _question_info.subject;
+        this.node_daily_question_answer.active = true;
         node_question_ing.active = true;
         this.node_results.active = false;
        },this.node);
 
-       net.on("get_dayly_question_answer_reward_ret",(_msg)=>{
+       net.on("get_daily_question_answer_reward_ret",(_msg)=>{
         net.emit("enter_old_town");
-        this.node_dayly_question_answer.getChildByName("node_answer_ing").active = false;
+        this.node_daily_question_answer.getChildByName("node_answer_ing").active = false;
         this.node_results.active = true;
         let _img_answer = this.node_results.getChildByName("img_answer");
         let _reward_light = this.node_results.getChildByName("comp_reward_light");
@@ -78,7 +78,7 @@ cc.Class({
     
     init_ui:function(_msg){
         this.shop_info = _msg.shop_info;
-        //this.btn_question_answer.node.active = !_msg.question;
+        this.btn_question_answer.node.active = !_msg.question;
     },
 
     init_shop_info:function(_shop_id){
@@ -111,11 +111,11 @@ cc.Class({
     },
 
     on_close: function () {
-
+        ui.close();
     },
 
     on_close_answer: function () {
-        this.node_dayly_question_answer.active = false;
+        this.node_daily_question_answer.active = false;
     },
 
     on_close_reward_bar:function(){
@@ -125,11 +125,11 @@ cc.Class({
     on_choose_answer:function(_,_answer_id){
         let answer = data.question.answer[this.question_id];
         answer === parseInt(_answer_id);
-        net.emit("get_dayly_question_answer_reward",{answer : answer === parseInt(_answer_id)?1:0});
+        net.emit("get_daily_question_answer_reward",{answer : answer === parseInt(_answer_id)?1:0});
     },
 
-    on_dayly_question_answer:function(){
-        net.emit("dayly_question_answer");
+    on_daily_question_answer:function(){
+        net.emit("daily_question_answer");
 
     },
 

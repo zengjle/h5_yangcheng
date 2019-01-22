@@ -37,9 +37,9 @@ let net = cc.Class({
         this.on("use_props", this.use_props.bind(this));
 
 
-        this.on("get_dayly_reward", this.get_dayly_reward.bind(this));
-        this.on("dayly_question_answer", this.dayly_question_answer.bind(this));
-        this.on("get_dayly_question_answer_reward", this.get_dayly_question_answer_reward.bind(this));
+        this.on("get_daily_reward", this.get_daily_reward.bind(this));
+        this.on("daily_question_answer", this.daily_question_answer.bind(this));
+        this.on("get_daily_question_answer_reward", this.get_daily_question_answer_reward.bind(this));
 
         this.on("change_score", this.change_score.bind(this));
 
@@ -202,11 +202,12 @@ let net = cc.Class({
     //添加道具
     add_props: function (_msg, _event_name) {
         Global.DataMgr.add_prop(id, num);
+        ui.open("popup_reward_layer",[id,0,,0,num]);
         this.emit(_event_name.type + "_ret")
     },
 
     //每日领取食袋
-    get_dayly_reward: function (_msg, _event_name) {
+    get_daily_reward: function (_msg, _event_name) {
         var prop = Global.DataMgr.is_sign_in ? [] : [6, 2, 0, 1];
         Global.DataMgr.is_sign_in = true;
 
@@ -216,7 +217,7 @@ let net = cc.Class({
     },
 
     //每日问答
-    dayly_question_answer: function (_msg, _event_name) {
+    daily_question_answer: function (_msg, _event_name) {
         var _question_id = Math.floor(Math.random() * data.question.answer.length);
         Global.DataMgr.is_question = true;
 
@@ -226,7 +227,7 @@ let net = cc.Class({
     },
 
     //领取每日问答奖励
-    get_dayly_question_answer_reward: function (_msg, _event_name) {
+    get_daily_question_answer_reward: function (_msg, _event_name) {
         var prop = _msg.answer ? [7, 2, 0, 1] : [6, 2, 0, 1];
         Global.DataMgr.add_prop(prop[0], prop[3]);
         this.emit(_event_name.type + "_ret", {prop: prop})

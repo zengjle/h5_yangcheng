@@ -1393,7 +1393,7 @@
       "__id__": 1
     },
     "component": "ui_old_town",
-    "handler": "on_dayly_question_answer",
+    "handler": "on_daily_question_answer",
     "customEventData": ""
   },
   {
@@ -4484,7 +4484,7 @@
     "node_shop_info": {
       "__id__": 42
     },
-    "node_dayly_question_answer": {
+    "node_daily_question_answer": {
       "__id__": 81
     },
     "node_food_info": {
@@ -4504,10 +4504,10 @@
     },
     "spriteFrame_answer": [
       {
-        "__uuid__": "659b1ffb-af00-43fa-9ad8-a54ba45284ae"
+        "__uuid__": "d30ce173-2ad5-4162-8642-396c0445fe80"
       },
       {
-        "__uuid__": "d30ce173-2ad5-4162-8642-396c0445fe80"
+        "__uuid__": "659b1ffb-af00-43fa-9ad8-a54ba45284ae"
       }
     ],
     "spriteFrame_reward_btn": [

@@ -31,6 +31,12 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        this.node_mission_bar.active = false;
+        this.node_mission_mask.active = false;
+        this.node_bag.active = false;
+        this.node_friend.active = false;
+        this.node_mission.active = false;
+        this.node_map.active = false;
     },
 
     start: function () {
@@ -56,7 +62,11 @@ cc.Class({
             this.on_chick_active_bar(null, false);
         }, this.node),
         net.on("create_fish_data_ret", this.init_bar.bind(this));
+        net.on("get_daily_mission_reward_ret",(_msg)=>{
+            ui.open("popup_reward_layer",_msg.prop);
+        },this.node);
         net.on("feed_fish_ret", (_msg) => {
+            ui.emit("touch_enable", true);
             var pos = Global.getNodeAToNodeBPoint(cc.vv.fish, this.img_food.node.parent);
             Global.ActionMgr.create('sequence', this.img_food.node, [[{
                 name: 'jumpTo',
@@ -67,7 +77,8 @@ cc.Class({
             }
             ]
             ], 0, false, function () {
-                tips.show("福缘 + " + _msg.integral);
+                tips.show("福缘 + " + (_msg.integral - this.integral));
+                ui.emit("touch_enable", false);
                 this.init_bar(_msg);
                 Global.ActionMgr.create('tremble', cc.vv.fish, [], 0, false);
                 _msg = null;
@@ -94,10 +105,15 @@ cc.Class({
             ui.open("popup_reward_layer",_msg.info);
             this.on_chick_active_bar(null, false);
         }, this.node);
+
+        ui.on("close_bar",()=>{
+            this.on_chick_active_bar(null, false);
+        },this.node);
     },
 
     _unregister_handler: function () {
-
+        ui.off(this.node);
+        net.off(this.node);
     },
     status_bar_active: function (_visiable) {
         this.node.active = _visiable;
@@ -105,6 +121,7 @@ cc.Class({
 
     init_bar: function (_msg) {
         var _fish = _msg.fish;
+        this.integral = _msg.integral;
         this.lbl_integral.string = _msg.integral;
         this.lbl_fish_lv.string = "lv." + _fish.lv;
         this.lbl_user_lv.string = _fish.lv;
@@ -115,7 +132,7 @@ cc.Class({
 
         if (_msg.level_up) {
             var psbar_fish_exp = this.progressbar_fish_exp;
-            Global.ActionMgr.create('progress', psbar_fish_exp.node, [psbar_fish_exp, _fish.exp / _fish.max_exp, _msg.level_up || 0], 0, false);
+            Global.ActionMgr.create('progress', psbar_fish_exp.node, [psbar_fish_exp, _fish.exp / _fish.max_exp, _msg.level_up-1 || 0], 0, false);
         }
 
         this.food = null;
@@ -150,7 +167,7 @@ cc.Class({
         !!this.food && net.emit("feed_fish", {food: this.food});
     },
 
-    on_chick_active_bar(_, state,_cb) {
+    on_chick_active_bar(_event, state,_cb) {
         let _bar_move_to;
         let _state = parseInt(state);
         ui.emit("touch_enable", true);
@@ -161,9 +178,10 @@ cc.Class({
                 return;
             }else if(_state === 5){
                 this.lbl_bar_title.string = "地图";
-                this.title_icon.spriteFrame = _.target.getComponent(cc.Sprite).spriteFrame;
+                this.title_icon.spriteFrame = _event.target.getComponent(cc.Sprite).spriteFrame;
                 this.node_map.active = true;
                 this.show_bar();
+                return;
             }
             net.emit("enter_" + constant.BAR_ID[_state]);
             this.title_icon.spriteFrame = this.atlas_title_icon.getSpriteFrame("icon_" + constant.BAR_ID[_state]);
@@ -175,6 +193,7 @@ cc.Class({
                 this.node_bag.active = false;
                 this.node_friend.active = false;
                 this.node_mission.active = false;
+                this.node_map.active = false;
                 ui.emit("touch_enable", false);
             }, this)));
         }

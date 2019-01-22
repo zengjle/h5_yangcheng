@@ -9,7 +9,7 @@ cc.Class({
     properties: {
         window_type: constant.WINDOW_TYPE.BASE,
 
-        node_dayly_reward:cc.Node,
+        node_daily_reward:cc.Node,
     },
 
     onLoad: function () {
@@ -26,14 +26,13 @@ cc.Class({
 
     _register_handler: function () {
         net.on("create_fish_data_ret",(_msg)=>{
-            _msg.dayly_reward_state = 0;
-            this.node_dayly_reward.parent.active =  !_msg.dayly_reward_state;
-            !_msg.dayly_reward_state && this.node_dayly_reward.runAction(cc.repeatForever(cc.sequence(cc.rotateBy(0.1, 15),cc.rotateBy(0.2, -30),cc.rotateBy(0.1, 15))))
+            this.node_daily_reward.parent.active =  !_msg.daily_reward_state;
+            !_msg.daily_reward_state && this.node_daily_reward.runAction(cc.repeatForever(cc.sequence(cc.rotateBy(0.1, 15),cc.rotateBy(0.2, -30),cc.rotateBy(0.1, 15))))
         },this.node);
 
-        net.on("get_dayly_reward_ret",(_msg)=>{
+        net.on("get_daily_reward_ret",(_msg)=>{
             ui.open("popup_reward_layer",_msg.prop);
-            this.node_dayly_reward.parent.active =  false;
+            this.node_daily_reward.parent.active =  false;
         },this.node);
     },
 
@@ -49,8 +48,8 @@ cc.Class({
 
     },
 
-    on_get_dayly_reward_: function () {
-        net.emit("get_dayly_reward");
+    on_get_daily_reward_: function () {
+        net.emit("get_daily_reward");
     },
 
     on_open_sys: function (_, _uiName) {

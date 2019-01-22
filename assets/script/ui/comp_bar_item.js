@@ -38,6 +38,7 @@ cc.Class({
         //0."任务名",1. "任务内容",2.当前任务次数 ,3.'任务最多次数',
         //4.是否已领取奖励(0已领取,1未领取),5.场景ID(0为没有场景ID),6.该任务奖励
         this.state = _msg.info[3];
+        this.mission_id = _idx;
         this.get_rewrad_stare = false;
         this.btn_get.node.active = true;
         this.node_light.active = true
@@ -65,24 +66,19 @@ cc.Class({
         } else {
             this.lbl_progress.string = "已完成";
             this.btn_get.node.active = false;
+            this.node_light.active = false;
         }
 
 
     },
 
     on_click: function () {
+        ui.emit("close_bar");
         if (this.scene_id) {
             ui.open(constant.SCENE_ID[this.scene_id]);
         } else {
-            net.emit("add_props", {
-                id: this.mission_reward[0],
-                mun: this.mission_reward[3],
-            })
+            net.on("get_daily_mission_reward",{mission_id:this.mission_id});
         }
-    },
-
-    on_be_get: function () {
-
     },
 
     on_open_sys: function (_, _uiName) {

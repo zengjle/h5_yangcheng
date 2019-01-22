@@ -78,7 +78,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "node_get_dayly_reward",
+    "_name": "node_get_daily_reward",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -135,7 +135,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "btn_get_dayly_reward",
+    "_name": "btn_get_daily_reward",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -290,7 +290,7 @@
       "__id__": 1
     },
     "component": "ui_main",
-    "handler": "on_get_dayly_reward_",
+    "handler": "on_get_daily_reward_",
     "customEventData": ""
   },
   {
@@ -2871,7 +2871,7 @@
     "_enabled": true,
     "args": [],
     "window_type": 0,
-    "node_dayly_reward": {
+    "node_daily_reward": {
       "__id__": 3
     }
   },
