@@ -185,12 +185,11 @@ if (!CC_EDITOR) {
             !target.uuid && (target.uuid = target._id);
         },
 
-        /**初始化getset事件
-         *
+        /**初始化getset事件         *
          */
         initgetset: function () {
             cc.js.get(Global, 'time', function () {                 //获取1970年到现在的秒数
-                return Global._time || cc.sys.now();
+                return Global._time || Math.floor(cc.sys.now()/1000);
             });
         },
 
@@ -242,6 +241,7 @@ if (!CC_EDITOR) {
         onPopstate: function () {
             $(function () {
                 pushHistory();
+                cc.game.on(cc.game.EVENT_HIDE, pushHistory);
                 window.addEventListener("popstate", function (e) {
                     DataMgr.set_game_info();
                 }, false);
@@ -260,9 +260,15 @@ if (!CC_EDITOR) {
          */
         online: function () {
             window.ononline = function () {
+                DataMgr.set_game_info();
+                ui.emit("touch_enable",false);
                 Global.log("链接上网络了");
             };
             window.onoffline = function () {
+                DataMgr.set_game_info();
+                // Global.setData('!$#@$@^%#@!',JSON.stringify(DataMgr.data));
+                ui.emit("touch_enable",true);
+                tips.show("网络链接已断开,请检查网络,否则会导致游戏数据丢失");
                 Global.log("网络链接已断开");
             };
         },

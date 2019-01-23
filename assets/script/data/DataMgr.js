@@ -14,8 +14,9 @@ const DataMgr = (function () {
      */
     _p.init = function () {
         this.initGetSet();
-        Global.Observer.once('login', this.get_game_info, this);                      //监听登入消息        
-    };
+        Global.Observer.once('login', this.get_game_info, this);                      //监听登入消息   
+        cc.game.on(cc.game.EVENT_HIDE, this.set_game_info.bind(this));
+    },     
 
     /**初始化玩家数据
      *
@@ -152,8 +153,8 @@ const DataMgr = (function () {
     _p.get_mission_data = function () {
         var mission = config.data.mission;
         for (let i in mission) {
-            mission[i].info[2] = this.mission[i].is_receive;
-            mission[i].info[3] = this.mission[i].num;
+            mission[i].info[2] = this.mission[i].num;
+            mission[i].info[4] = this.mission[i].is_receive;
         }
         return mission;
     };
@@ -288,7 +289,7 @@ const DataMgr = (function () {
             last_day = last_date.getDate(),
             last_hour = last_date.getHours(),
 
-            cur_date = new Date(),                      //现在的时间
+            cur_date = new Date(Global.time),           //现在的时间
             cur_year = cur_date.getFullYear(),
             cur_month = cur_date.getMonth() + 1,
             cur_day = cur_date.getDate(),
@@ -306,7 +307,7 @@ const DataMgr = (function () {
      *
      */
     _p.update_receive_time = function (id) {
-        this.last_receive[id] = new Date();
+        this.last_receive[id] = Global.time;
     };
 
     /**古镇福利是否领取
@@ -361,10 +362,17 @@ const DataMgr = (function () {
         for (let i = 10; i > 0; i--) {
             if (score >= wen_chang_men_reward[i].score) {
                 data = wen_chang_men_reward[i].reward[0];
+                break;
             }
         }
         var info = config.data.prop[data.id];
         return [[data.id, info.type, info.addition, data.num]];
+    };
+
+    //领取任务奖励    
+    _p.get_daily_mission_reward = function(id){
+        this.mission[id].is_receive = 0;
+        return config.data.mission[id].info[6];
     };
 
     /**开启道具
@@ -392,15 +400,15 @@ const DataMgr = (function () {
     _p.get_game_info = function () {
         if (Global.DEBUG) {
             this.init_data(Global.getData('game_data', null));
-            Global.schedule(this.set_game_info, this, 1);
+            // Global.schedule(this.set_game_info, this, 1);
             return;
         }
 
-        Global.HTTP.send('GET', '', {
+        Global.HTTP.send('POST', '', {
             module: 'StorageService.getGameUser',
             userid: Global.UserMgr.id
         }, function (res) {
-            this.init_data(res.data);
+            this.init_data(res.data.infojson);
             Global.schedule(this.set_game_info, this, 60);
         }.bind(this), function () {
             tips.show('获取数据失败');
@@ -417,13 +425,14 @@ const DataMgr = (function () {
         this.time = Global.time;
         if (Global.DEBUG) {
             Global.setData('game_data', JSON.stringify(this.data));
+            Global.log('保存数据成功');
             return;
         }
 
-        Global.HTTP.send("GET", '', {
+        Global.HTTP.send("POST", '', {
             module: 'StorageService.updateGameUser',
             userid: Global.UserMgr.id,
-            Infojson: JSON.stringify(this.data)
+            infojson: JSON.stringify(this.data)
         }, function (res) {
             Global.log('保存数据成功');
         });

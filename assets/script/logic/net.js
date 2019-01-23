@@ -42,6 +42,7 @@ let net = cc.Class({
         this.on("get_daily_question_answer_reward", this.get_daily_question_answer_reward.bind(this));
 
         this.on("change_score", this.change_score.bind(this));
+        this.on("get_daily_mission_reward", this.get_daily_mission_reward.bind(this));
 
     },
 
@@ -139,7 +140,11 @@ let net = cc.Class({
     create_fish_data: function (_msg, _event_name) {
         var fn = function () {
             var fish = Global.FishMgr.create_fish_data(Global.DataMgr.fish[1]);
-            this.emit(_event_name.type + "_ret", {fish: fish, integral: Global.DataMgr.integration_num});
+            this.emit(_event_name.type + "_ret", {
+                fish: fish,
+                integral: Global.DataMgr.integration_num,
+                daily_reward_state:!!Global.DataMgr.is_sign_in
+            });
         }.bind(this);
 
         if (Global.DataMgr.fish/* && Object.keys(Global.DataMgr.fish)*/) {
@@ -232,6 +237,12 @@ let net = cc.Class({
         Global.DataMgr.add_prop(prop[0], prop[3]);
         this.emit(_event_name.type + "_ret", {prop: prop})
     },
+
+    //领取任务奖励
+    get_daily_mission_reward:function(_msg, _event_name){
+        var prop = Global.get_daily_mission_reward(_msg.mission_id);
+        this.emit(_event_name.type + "_ret", {prop: prop})
+    }
 });
 
 module.exports = new net();

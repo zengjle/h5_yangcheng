@@ -15,6 +15,7 @@ const UserMgr = (function () {
      */
     _p.login = function (tel, code) {
         if (Global.DEBUG) {
+            // Global.DEBUG = false;
             cc.js.get(this, 'id', function () { return '1'; });
             Global.Observer.emit('login', '1');
             return;

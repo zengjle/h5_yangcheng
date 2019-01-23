@@ -128,11 +128,11 @@ cc.Class({
         this.img_food.spriteFrame = null;
         this.lbl_feed_tips.string = "选择食物";
 
-        this.progressbar_fish_exp.progress = _fish.exp / _fish.max_exp;
-
-        if (_msg.level_up) {
+        if (_msg.level_up || _msg.level_up === 0) {
             var psbar_fish_exp = this.progressbar_fish_exp;
             Global.ActionMgr.create('progress', psbar_fish_exp.node, [psbar_fish_exp, _fish.exp / _fish.max_exp, _msg.level_up-1 || 0], 0, false);
+        } else{
+            this.progressbar_fish_exp.progress = _fish.exp / _fish.max_exp;
         }
 
         this.food = null;
