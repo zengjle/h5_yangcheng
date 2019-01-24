@@ -117,7 +117,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 130,
+      "width": 131,
       "height": 30
     },
     "_rotationX": 0,
@@ -883,6 +883,14 @@
     "btn_get": {
       "__id__": 21
     },
+    "node_light_spriteFrame": [
+      {
+        "__uuid__": "3ba7e059-a6e8-4b0d-b583-04571d2269c2"
+      },
+      {
+        "__uuid__": "52b59dd6-2f32-4e47-bec0-8050933441a0"
+      }
+    ],
     "spriteFrame_bg": [
       {
         "__uuid__": "005af281-16ef-41f9-83bd-a31ea81e65d2"

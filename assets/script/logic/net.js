@@ -44,6 +44,8 @@ let net = cc.Class({
         this.on("change_score", this.change_score.bind(this));
         this.on("get_daily_mission_reward", this.get_daily_mission_reward.bind(this));
 
+        this.on("enter_shop", this.enter_shop.bind(this));
+        this.on("buy_commodity", this.buy_commodity.bind(this));
     },
 
     //进入任务界面
@@ -129,7 +131,8 @@ let net = cc.Class({
 
         Global.DataMgr.mission[2].num++;
 
-        this.emit(_event_name.type + "_ret", data);
+        Global.DataMgr.add_prop(reward_prop[0][0],reward_prop[0][3]);
+        this.emit(_event_name.type + "_ret", data.reward_prop);
     },
 
     enter_game: function (_, _event_name) {
@@ -240,8 +243,27 @@ let net = cc.Class({
 
     //领取任务奖励
     get_daily_mission_reward:function(_msg, _event_name){
-        var prop = Global.get_daily_mission_reward(_msg.mission_id);
+        var prop = Global.DataMgr.get_daily_mission_reward(_msg.mission_id);
+        Global.DataMgr.add_prop(prop[0], prop[3]);
         this.emit(_event_name.type + "_ret", {prop: prop})
+    },
+
+    //进入商店
+    enter_shop:function(_msg,_event_name){
+        this.emit(_event_name.type + "_ret", {
+            integral: Global.DataMgr.integration_num,
+            commodity:Global.DataMgr.get_shop_all_info()
+        })
+    },
+
+    //购买物品
+    buy_commodity:function(_msg,_event_name){
+        Global.DataMgr.buy_commodity(_msg.prop_id);
+        Global.DataMgr.add_prop(_msg.prop_id,1);
+        this.emit(_event_name.type + "_ret", {
+            integral: Global.DataMgr.integration_num,
+            commodity:Global.DataMgr.get_info_by_id(_msg.prop_id)
+        })
     }
 });
 

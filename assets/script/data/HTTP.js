@@ -1,7 +1,9 @@
 /**网络请求
  *
  */
-const URL = "http://cccx.ltd/open/get";
+const URL = "http://cccx.ltd";
+const GET_URL = '/open/get';
+const POST_URL = '/open/post';
 const HTTP = (function () {
     'use strict';
     function HTTP() {
@@ -28,9 +30,9 @@ const HTTP = (function () {
             }
         };
         if (mode === 'GET') {
-            $.get(extraUrl + path, data, fn);
+            $.get(extraUrl + GET_URL, data, fn);
         } else {
-            $.post(extraUrl + path, data, fn);
+            $.post(extraUrl + POST_URL, data, fn);
         }
     };
 

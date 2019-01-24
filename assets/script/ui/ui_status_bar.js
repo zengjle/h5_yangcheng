@@ -27,6 +27,7 @@ cc.Class({
         node_mission: cc.Node,
         node_bag: cc.Node,
         node_map:cc.Node,
+        node_shop:cc.Node,
     },
 
     // use this for initialization
@@ -37,6 +38,7 @@ cc.Class({
         this.node_friend.active = false;
         this.node_mission.active = false;
         this.node_map.active = false;
+        this.node_shop.active = false;
     },
 
     start: function () {
@@ -63,6 +65,7 @@ cc.Class({
         }, this.node),
         net.on("create_fish_data_ret", this.init_bar.bind(this));
         net.on("get_daily_mission_reward_ret",(_msg)=>{
+            this.on_chick_active_bar(null, false);
             ui.open("popup_reward_layer",_msg.prop);
         },this.node);
         net.on("feed_fish_ret", (_msg) => {
@@ -143,7 +146,12 @@ cc.Class({
     },
 
     on_open_shop:function(){
-        tips.show("商店暂未开启敬请期待!");
+        this.node_shop.active = true;
+        net.emit("enter_shop");
+    },
+    
+    on_close_shop:function(){
+        this.node_shop.active = false;
     },
 
     show_bar: function () {

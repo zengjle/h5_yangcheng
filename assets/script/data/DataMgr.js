@@ -16,110 +16,110 @@ const DataMgr = (function () {
         this.initGetSet();
         Global.Observer.once('login', this.get_game_info, this);                      //监听登入消息   
         cc.game.on(cc.game.EVENT_HIDE, this.set_game_info.bind(this));
-    },     
+    },
 
-    /**初始化玩家数据
-     *
-     * @param data  游戏数据
-     */
-    _p.init_data = function (data) {
-        var _t = this;
+        /**初始化玩家数据
+         *
+         * @param data  游戏数据
+         */
+        _p.init_data = function (data) {
+            var _t = this;
 
-        if (typeof data === 'string' && data !== '') {
-            try {
-                data = JSON.parse(data);
-            } catch (e) {
-                data = null;
-                console.log('用户信息是字符串，尝试转换成对象失败：', e);
+            if (typeof data === 'string' && data !== '') {
+                try {
+                    data = JSON.parse(data);
+                } catch (e) {
+                    data = null;
+                    console.log('用户信息是字符串，尝试转换成对象失败：', e);
+                }
             }
-        }
-        if (!data) {
-            var time = Global.time;
-            _t.data = null;
-            data = _t.data = {
-                fish: {},                               //鱼信息
-                time: time,                             //离线时间
-                mission: {                              //任务
-                    1: {
-                        id: 1,
-                        num: 0,
-                        is_receive: 1
+            if (!data) {
+                var time = Global.time;
+                _t.data = null;
+                data = _t.data = {
+                    fish: {},                               //鱼信息
+                    time: time,                             //离线时间
+                    mission: {                              //任务
+                        1: {
+                            id: 1,
+                            num: 0,
+                            is_receive: 1
+                        },
+                        2: {
+                            id: 2,
+                            num: 0,
+                            is_receive: 1
+                        },
+                        3: {
+                            id: 3,
+                            num: 0,
+                            is_receive: 1
+                        },
+                        4: {
+                            id: 4,
+                            num: 0,
+                            is_receive: 1
+                        },
+                        5: {
+                            id: 5,
+                            num: 0,
+                            is_receive: 1
+                        },
+                        6: {
+                            id: 6,
+                            num: 0,
+                            is_receive: 1
+                        },
+                        7: {
+                            id: 7,
+                            num: 0,
+                            is_receive: 1
+                        }
                     },
-                    2: {
-                        id: 2,
-                        num: 0,
-                        is_receive: 1
+                    prop: {                                 //道具
+                        1: {
+                            id: 1,
+                            num: 1
+                        },
+                        2: {
+                            id: 2,
+                            num: 0
+                        },
+                        3: {
+                            id: 3,
+                            num: 0
+                        },
+                        4: {
+                            id: 4,
+                            num: 0
+                        },
+                        5: {
+                            id: 5,
+                            num: 0
+                        },
+                        6: {
+                            id: 6,
+                            num: 0
+                        },
+                        7: {
+                            id: 7,
+                            num: 0
+                        }
                     },
-                    3: {
-                        id: 3,
-                        num: 0,
-                        is_receive: 1
-                    },
-                    4: {
-                        id: 4,
-                        num: 0,
-                        is_receive: 1
-                    },
-                    5: {
-                        id: 5,
-                        num: 0,
-                        is_receive: 1
-                    },
-                    6: {
-                        id: 6,
-                        num: 0,
-                        is_receive: 1
-                    },
-                    7: {
-                        id: 7,
-                        num: 0,
-                        is_receive: 1
-                    }
-                },
-                prop: {                                 //道具
-                    1: {
-                        id: 1,
-                        num: 1
-                    },
-                    2: {
-                        id: 2,
-                        num: 0
-                    },
-                    3: {
-                        id: 3,
-                        num: 0
-                    },
-                    4: {
-                        id: 4,
-                        num: 0
-                    },
-                    5: {
-                        id: 5,
-                        num: 0
-                    },
-                    6: {
-                        id: 6,
-                        num: 0
-                    },
-                    7: {
-                        id: 7,
-                        num: 0
-                    }
-                },
-                wen_chang_men_max_source: 0,            //文昌门最高分
-                integration_num: 0,                     //福缘积分
-                mission_score_max: 0,                   //任务分数
-                wen_chang_men_action_num: 3,            //还可以进行的文昌阁游戏次数
-                last_receive: {},                       //上一次领取奖励的时间
-                is_sign_in: false,                      //是否签到
-                is_question: false,                     //今日是否已经答题
-            };
-        } else {
-            _t.data = data;
-            _t._timing_day_update_data();
-        }
-        Global.Observer.emit('DataMgr_init_data_ok', data);
-    };
+                    wen_chang_men_max_source: 0,            //文昌门最高分
+                    integration_num: 0,                     //福缘积分
+                    mission_score_max: 0,                   //任务分数
+                    wen_chang_men_action_num: 3,            //还可以进行的文昌阁游戏次数
+                    last_receive: {},                       //上一次领取奖励的时间
+                    is_sign_in: false,                      //是否签到
+                    is_question: false,                     //今日是否已经答题
+                };
+            } else {
+                _t.data = data;
+                _t._timing_day_update_data();
+            }
+            Global.Observer.emit('DataMgr_init_data_ok', data);
+        };
 
     //是否是第二天
     _p._is_tomorrow = function () {
@@ -365,12 +365,39 @@ const DataMgr = (function () {
                 break;
             }
         }
-        var info = config.data.prop[data.id];
-        return [[data.id, info.type, info.addition, data.num]];
+        return [this.get_info_by_id(data.id,data.num)];
+    };
+
+    //根据id获取食物通用格式
+    _p.get_info_by_id = function (id,num = 1) {
+        var info = config.data.prop[id];
+        return [id, info.type, info.addition,num];
+    },
+
+        //获取商店信息
+        _p.get_shop_all_info = function () {
+            var info = [],
+                prop = this.prop,
+                config_prop = config.data.prop;
+            var data = null;
+            for (let i in prop) {
+                data = this.get_info_by_id(i);
+                data.push(config_prop[i].need_integral);
+                info.push(data);
+                data = null;
+            }
+            data = null;
+            return info;
+        };
+
+    //购买商品
+    _p.buy_commodity = function (id) {
+        this.integration_num -= config.data.prop[id].need_integral;
+        this.add_prop(id, 1);
     };
 
     //领取任务奖励    
-    _p.get_daily_mission_reward = function(id){
+    _p.get_daily_mission_reward = function (id) {
         this.mission[id].is_receive = 0;
         return config.data.mission[id].info[6];
     };
@@ -400,7 +427,7 @@ const DataMgr = (function () {
     _p.get_game_info = function () {
         if (Global.DEBUG) {
             this.init_data(Global.getData('game_data', null));
-            // Global.schedule(this.set_game_info, this, 1);
+            Global.schedule(this.set_game_info, this, 1);
             return;
         }
 

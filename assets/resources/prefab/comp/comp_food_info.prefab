@@ -24,18 +24,21 @@
         "__id__": 8
       },
       {
-        "__id__": 14
+        "__id__": 15
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 17
+        "__id__": 18
+      },
+      {
+        "__id__": 19
       }
     ],
     "_prefab": {
-      "__id__": 18
+      "__id__": 20
     },
     "_id": "",
     "_opacity": 255,
@@ -271,7 +274,7 @@
       }
     ],
     "_prefab": {
-      "__id__": 13
+      "__id__": 14
     },
     "_id": "",
     "_opacity": 255,
@@ -421,7 +424,11 @@
     },
     "duration": 0.1,
     "zoomScale": 1.2,
-    "clickEvents": [],
+    "clickEvents": [
+      {
+        "__id__": 13
+      }
+    ],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
     "_N$normalColor": {
@@ -461,6 +468,15 @@
     }
   },
   {
+    "__type__": "cc.ClickEvent",
+    "target": {
+      "__id__": 1
+    },
+    "component": "comp_food_info",
+    "handler": "on_click",
+    "customEventData": ""
+  },
+  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
@@ -473,7 +489,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "lbl_food_info",
+    "_name": "lbl_exchange_integral",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -483,11 +499,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 15
+        "__id__": 16
       }
     ],
     "_prefab": {
-      "__id__": 16
+      "__id__": 17
     },
     "_id": "",
     "_opacity": 255,
@@ -530,7 +546,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 14
+      "__id__": 15
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -583,6 +599,29 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_atlas": null
+  },
+  {
+    "__type__": "5e4d9Uo2qNPDqr5RRnhB0MK",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "_isCellInit_": false,
+    "_longClicked_": false,
+    "node_icon": {
+      "__id__": 6
+    },
+    "lbl_exchange_intrgral": {
+      "__id__": 16
+    },
+    "lbl_name": {
+      "__id__": 3
+    },
+    "atlas_icon": {
+      "__uuid__": "026034c5-0497-4f56-8d0e-c43131262879"
+    }
   },
   {
     "__type__": "cc.PrefabInfo",

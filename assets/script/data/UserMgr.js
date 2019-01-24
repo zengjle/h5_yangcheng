@@ -20,10 +20,10 @@ const UserMgr = (function () {
             Global.Observer.emit('login', '1');
             return;
         }
-        if (!this.isParamExistence(tel, code))                  //验证参数是否有正确
+        if (!this.verification_param(tel, code))                  //验证参数是否有正确
             return;
         Global.HTTP.send("GET", '', {
-            module: 'UserService.sendCode',
+            module: 'UserService.webLogin',
             tel: tel,
             code: code
         }, function (res) {

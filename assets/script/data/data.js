@@ -24,35 +24,40 @@ module.exports = {
             "type": 1,
             "addition": 100,
             "introduce": "增加微量成长值",
-            "protect_time": 15
+            "protect_time": 15,
+            "need_integral": 100
         },
         "2": {
             "name": "五香",
             "type": 1,
             "addition": 200,
             "introduce": "增加少量成长值",
-            "protect_time": 30
+            "protect_time": 30,
+            "need_integral": 200
         },
         "3": {
             "name": "四果汤",
             "type": 1,
             "addition": 400,
             "introduce": "增加中量成长值",
-            "protect_time": 45
+            "protect_time": 45,
+            "need_integral": 400
         },
         "4": {
             "name": "豆花粉丝",
             "type": 1,
             "addition": 800,
             "introduce": "增加大量成长值",
-            "protect_time": 60
+            "protect_time": 60,
+            "need_integral": 800
         },
         "5": {
             "name": "漳州卤面",
             "type": 1,
             "addition": 1600,
             "introduce": "增加巨量成长值",
-            "protect_time": 90
+            "protect_time": 90,
+            "need_integral": 1600
         },
         "6": {
             "name": "小食盒",                               //名字
@@ -65,7 +70,8 @@ module.exports = {
                 {"id": 1, "probability": 50},             //id 道具ID   ;;  probability 开出的概率
                 {"id": 2, "probability": 30},
                 {"id": 3, "probability": 20}
-            ]
+            ],
+            "need_integral": 400
         },
         "7": {
             "name": "大食盒",
@@ -77,7 +83,8 @@ module.exports = {
             "open": [
                 {"id": 4, "probability": 80},
                 {"id": 5, "probability": 20}
-            ]
+            ],
+            "need_integral": 1200
         }
     },
     "mission": {        //任务信息
