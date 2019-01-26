@@ -39,7 +39,7 @@ cc.Class({
         this.info = _info
         this.node_icon.spriteFrame = this.atlas_icon.getSpriteFrame("bag_food_" + _info[0][0]);
         this.lbl_name.string = data.prop[_info[0][0]].name;
-        this.lbl_exchange_intrgral.string = _info[4];
+        this.lbl_exchange_intrgral.string = "价格:" + _info[4];
     },
 
     on_click: function () {

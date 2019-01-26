@@ -98,9 +98,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 69,
+      "g": 219,
+      "b": 105,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -385,7 +385,7 @@
     "_N$string": "购买",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
+    "_N$fontFamily": "",
     "_N$overflow": 1
   },
   {
@@ -509,9 +509,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 134,
+      "g": 134,
+      "b": 134,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
