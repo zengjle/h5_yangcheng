@@ -37,14 +37,17 @@ cc.Class({
 
     init_item: function (_info) {
         this.info = _info
-        this.node_icon.spriteFrame = this.atlas_icon.getSpriteFrame("bag_food_" + _info[0][0]);
-        this.lbl_name.string = data.prop[_info[0][0]].name;
-        this.lbl_exchange_intrgral.string = "价格:" + _info[4];
+        this.lbl_name.string = _info.name;
+        this.lbl_exchange_intrgral.string = "价格:" + _info.need_integral;
+        this.node_icon.spriteFrame = this.atlas_icon.getSpriteFrame(_info.sample);
+        if(!this.node_icon.spriteFrame){
+            Global.Loader.changeSpriteFrame('food/'+_info.sample,this.node_icon);
+        }
     },
 
     on_click: function () {
-        if(this.info[4]< Global.DataMgr.integration_num){
-            net.emit("buy_commodity",{prop_id : this.info[0][0],exchange_integral :this.info[1]});
+        if(this.info.need_integral< Global.DataMgr.integration_num){
+            net.emit("buy_commodity",{info:this.info});
         }else{
             tips.show("您的福缘不足以兑换该商品!");
         }

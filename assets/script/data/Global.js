@@ -21,11 +21,14 @@ if (!CC_EDITOR) {
     var f = require('FishMgr');
     var FishMgr = new f();
 
-    var a = require('ActionMgr');
-    var ActionMgr = new a();
-
     var l = require('Loader');
     var Loader = new l();
+
+    var a1 = require('ActionMgr');
+    var ActionMgr = new a1();
+
+    var a2 = require('AudioMgr');
+    var AudioMgr = new a2();
 
     cc.vv = {};
     window.config = {data: $data};
@@ -39,16 +42,39 @@ if (!CC_EDITOR) {
         FishMgr: FishMgr,
         ActionMgr: ActionMgr,
         Loader: Loader,
+        AudioMgr : AudioMgr,
+
+        /**初始化游戏相关功能
+         * 
+         */
+        init_game:function (){
+            Global.AudioMgr.play('main_bg', 1, false, 'BGM');                   //背景音乐
+
+            cc.Button.prototype._click = function () {                          //让每次点击都触发声音
+                Global.AudioMgr.play('click', 1, false, 'Effects');
+            }
+            cc.Button.prototype.onLoad = function () {                          //开启声音
+                Global.addClickEvent(this.node,this.node,cc.Button,'_click');
+            }
+        },
 
         /**初始化
          *
          */
-        init() {
+        init: function () {
+            var i = 1;
+            if(Global.getData('!@#$%', i-1)!==i){
+                Global.setData('!@#$%', i);
+                Global.setData('game_data', null);
+            }
+
+
             Global.init_time();
             Global.initgetset();
             Global.initMgr();
             Global.online();
             Global.onPopstate();
+            Global.init_game();
             UserMgr.login();
         },
 
@@ -75,6 +101,7 @@ if (!CC_EDITOR) {
         initMgr: function () {
             DataMgr.init();
             FishMgr.init();
+            AudioMgr.init();
             ActionMgr.init();
         },
 
@@ -373,6 +400,25 @@ if (!CC_EDITOR) {
             node.setPosition(pos);
         },
 
+        /**添加按钮的点击事件
+         *
+         * @param node              按钮节点
+         * @param target            目标节点
+         * @param component         目标组件名
+         * @param handler           目标函数名
+         * @param customEventData   携带的参数
+         */
+        addClickEvent: function (node, target, component, handler, customEventData) {
+            var eventHandler = new cc.Component.EventHandler();                                     //创建一个回调事件
+            eventHandler.target = target;                                                           //目标节点
+            eventHandler.component = component;                                                     //目标组件名
+            eventHandler.handler = handler;                                                         //目标函数名
+            eventHandler.customEventData = customEventData;                                         //携带的参数
+
+            var clickEvents = node.$Button.clickEvents;                                             //获取节点上的按钮事件
+            clickEvents.push(eventHandler);                                                         //把新建事件添加到回调
+        },
+
         /**打印消息
          *
          */
@@ -380,5 +426,5 @@ if (!CC_EDITOR) {
             console.log.apply(console, arguments);
         }
     };
-    Global.init();
 }
+module.exports = window.Global ? Global.init : function(){};
