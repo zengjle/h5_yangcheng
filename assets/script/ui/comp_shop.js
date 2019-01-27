@@ -1,7 +1,7 @@
 let ui_window = require("ui_window");
 let constant = require("constant");
 let ui = require("ui");
-
+let net = require("net");
 
 cc.Class({
     extends: require("view_cell"),
