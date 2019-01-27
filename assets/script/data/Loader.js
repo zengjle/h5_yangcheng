@@ -240,7 +240,7 @@ const Loader = (function () {
     _p.loadSpriteFrame = function (path, callback, param) {
         if (!path)
             throw `加载图片没有传入路径`;
-        this.load('texture/' + path, cc.Texture2D, function (texture) {
+        this.load(path, cc.Texture2D, function (texture) {
             callback && callback(texture, new cc.SpriteFrame(texture), param);
         }.bind(this));
     };

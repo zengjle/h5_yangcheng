@@ -46,6 +46,8 @@ let net = cc.Class({
 
         this.on("enter_shop", this.enter_shop.bind(this));
         this.on("buy_commodity", this.buy_commodity.bind(this));
+
+        this.on("save_user_info", this.save_user_info.bind(this));
     },
 
     //进入任务界面
@@ -146,7 +148,8 @@ let net = cc.Class({
             this.emit(_event_name.type + "_ret", {
                 fish: fish,
                 integral: Global.DataMgr.integration_num,
-                daily_reward_state:!!Global.DataMgr.is_sign_in
+                daily_reward_state:!!Global.DataMgr.is_sign_in,
+                user_info:Global.DataMgr.user_info
             });
         }.bind(this);
 
@@ -258,12 +261,17 @@ let net = cc.Class({
 
     //购买物品
     buy_commodity:function(_msg,_event_name){
-        Global.DataMgr.buy_commodity(_msg.prop_id);
-        Global.DataMgr.add_prop(_msg.prop_id,1);
+        Global.DataMgr.buy_commodity(_msg);
         this.emit(_event_name.type + "_ret", {
             integral: Global.DataMgr.integration_num,
             commodity:Global.DataMgr.get_info_by_id(_msg.prop_id)
         })
+    },
+
+    //保存用户信息
+    save_user_info:function(_msg,_event_name){
+        Global.DataMgr.user_info = _msg.user_info;
+        this.emit(_event_name.type + "_ret", Global.DataMgr.user_info);
     }
 });
 

@@ -34,11 +34,18 @@ const DataMgr = (function () {
                 }
             }
             if (!data) {
-                var time = Global.time;
+                var time = Global.time,
+                    id   = Global.UserMgr.id;
                 _t.data = null;
                 data = _t.data = {
                     fish: {},                               //鱼信息
                     time: time,                             //离线时间
+                    user_info:{                             //用户信息
+                        user_id:id,                         //用户id
+                        nickname:id,                        //名字
+                        head_id:1,                          //头像id
+                        manifesto:''                        //玩家宣言
+                    },
                     mission: {                              //任务
                         1: {
                             id: 1,
@@ -103,6 +110,10 @@ const DataMgr = (function () {
                         },
                         7: {
                             id: 7,
+                            num: 0
+                        },
+                        8: {
+                            id: 8,
                             num: 0
                         }
                     },
@@ -236,6 +247,14 @@ const DataMgr = (function () {
             return this.data.wen_chang_men_action_num
         }, function (val) {
             this.data.wen_chang_men_action_num = val;
+        });
+
+        cc.js.get(this, 'user_info', function () {  //用户信息
+            return this.data.user_info;
+        },function (val) {  
+            this.data.user_info.nickname = val.nickname;
+            this.data.user_info.head_id = val.head_id;
+            this.data.user_info.manifesto = val.manifesto;
         });
     };
 
@@ -377,23 +396,17 @@ const DataMgr = (function () {
         //获取商店信息
         _p.get_shop_all_info = function () {
             var info = [],
-                prop = this.prop,
-                config_prop = config.data.prop;
-            var data = null;
-            for (let i in prop) {
-                data = this.get_info_by_id(i);
-                data.push(config_prop[i].need_integral);
-                info.push(data);
-                data = null;
+                exchange = config.data.exchange;
+            for (let i in exchange) {
+                info.push(exchange[i]);
             }
-            data = null;
             return info;
         };
 
     //购买商品
-    _p.buy_commodity = function (id) {
-        this.integration_num -= config.data.prop[id].need_integral;
-        this.add_prop(id, 1);
+    _p.buy_commodity = function (_msg) {
+        this.integration_num -= _msg.need_integral;
+        Global.DataMgr.add_prop(_msg.prop_id,_msg.add_num);
     };
 
     //领取任务奖励    

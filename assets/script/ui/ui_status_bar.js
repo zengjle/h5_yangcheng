@@ -141,7 +141,7 @@ cc.Class({
 
         if (_msg.level_up || _msg.level_up === 0) {
             var psbar_fish_exp = this.progressbar_fish_exp;
-            Global.ActionMgr.create('progress', psbar_fish_exp.node, [psbar_fish_exp, _fish.exp / _fish.max_exp, _msg.level_up || 0], 0, false);
+            Global.ActionMgr.create('progress', psbar_fish_exp.node, [psbar_fish_exp, _fish.exp / _fish.max_exp, _msg.level_up], 0, false);
         } else{
             this.progressbar_fish_exp.progress = _fish.exp / _fish.max_exp;
         }

@@ -85,7 +85,48 @@ module.exports = {
                 {"id": 5, "probability": 20}
             ],
             "need_integral": 1200
-        }
+        },
+        "8": {
+            "name": "橙车积分",
+            "type": 3,
+            "addition": 10,
+            "introduce": "橙车积分,可在橙车app兑换福利哦！",
+            "need_integral": 10
+        },
+    },
+    "exchange":{
+        "1":{ 
+            "id":1,
+            "sample":'bag_food_6',
+            "name": "小食盒",
+            "need_integral": 400,
+            "prop_id":6,
+            "add_num":1
+        },
+        "2":{ 
+            "id":2,
+            "sample":'bag_food_7',
+            "name": "大食盒",
+            "need_integral": 1200,
+            "prop_id":7,
+            "add_num":1
+        },
+        "3":{ 
+            "id":3,
+            "sample":'icon_integral',
+            "name": "10橙车积分",
+            "need_integral": 100,
+            "prop_id":8,
+            "add_num":10
+        },
+        "4":{ 
+            "id":4,
+            "sample":'icon_integral',
+            "name": "110橙车积分",
+            "need_integral": 1000,
+            "prop_id":8,
+            "add_num":110
+        },
     },
     "mission": {        //任务信息
         "1": {
