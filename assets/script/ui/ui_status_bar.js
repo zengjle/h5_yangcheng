@@ -13,7 +13,9 @@ cc.Class({
 
         title_icon: cc.Sprite,
         lbl_bar_title: cc.Label,
+        icon_head: cc.Sprite,
         atlas_title_icon: cc.SpriteAtlas,
+        atlas_head:cc.SpriteFrame,
         progressbar_fish_exp: cc.ProgressBar,
         img_food: cc.Sprite,
         lbl_fish_lv: cc.Label,
@@ -28,6 +30,7 @@ cc.Class({
         node_bag: cc.Node,
         node_map:cc.Node,
         node_shop:cc.Node,
+        node_head_info:cc.Node,
     },
 
     // use this for initialization
@@ -39,6 +42,7 @@ cc.Class({
         this.node_mission.active = false;
         this.node_map.active = false;
         this.node_shop.active = false;
+        this.node_head_info.active = false;
     },
 
     start: function () {
@@ -48,13 +52,15 @@ cc.Class({
     _init_data: function (_info) {
         this.title_icon.SpriteFram = this.atlas_title_icon.getSpriteFrame(info[0]);
     },
+
     onDisable: function () {
         this._super();
-
     },
+
     onEnable: function () {
         this._super();
     },
+
     _register_handler: function () {
         ui.on("choose_food", (_msg) => {
             this.img_food.node.scale = 1;
@@ -82,6 +88,9 @@ cc.Class({
             ], 0, false, function () {
                 tips.show("福缘 + " + (_msg.integral - this.integral));
                 ui.emit("touch_enable", false);
+                if(+_msg.fish.lv > this.cur_lv && this.cur_lv === 29 || this.cur_lv === 59 || this.cur_lv === 89){
+                    ui.emit("change_fish_image",{lv:_msg.fish.lv});
+                }
                 this.init_bar(_msg);
                 Global.ActionMgr.create('tremble', cc.vv.fish, [], 0, false);
                 _msg = null;
@@ -117,6 +126,10 @@ cc.Class({
             this.on_chick_active_bar(null, false);
         }, this.node);
 
+        net.on("save_user_info_ret",(_msg)=>{
+            this.icon_head.spriteFrame = this.atlas_head.getSpriteFrame("head_" + _msg.head_id);
+        },this.node);
+
         ui.on("close_bar",()=>{
             this.on_chick_active_bar(null, false);
         },this.node);
@@ -131,10 +144,12 @@ cc.Class({
     },
 
     init_bar: function (_msg) {
+
         var _fish = _msg.fish;
         this.integral = _msg.integral;
         this.lbl_integral.string = _msg.integral;
         this.lbl_fish_lv.string = "lv." + _fish.lv;
+        this.cur_lv = +_fish.lv;
         this.lbl_user_lv.string = _fish.lv;
         this.img_food.spriteFrame = null;
         this.lbl_feed_tips.string = "选择食物";
@@ -151,6 +166,10 @@ cc.Class({
 
     init_plate: function (_id) {
 
+    },
+
+    on_open_sys: function (_, _uiName) {
+        ui.open(_uiName,0);
     },
 
     on_open_shop:function(){
@@ -181,6 +200,15 @@ cc.Class({
         this.img_food.node.setPosition(cc.v2());
         !this.food && this.on_chick_active_bar(null, 3)
         !!this.food && net.emit("feed_fish", {food: this.food});
+    },
+
+    on_chick_user_head: function () {
+        this.node_head_info.getComponent("comp_user_info").init_comp(Global.DataMgr.user_info);
+        this.node_head_info.active = true;
+    },
+
+    on_close_user_head:function(){
+        this.node_head_info.active = false;
     },
 
     on_chick_active_bar(_event, state,_cb) {

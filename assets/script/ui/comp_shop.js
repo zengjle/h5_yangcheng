@@ -21,7 +21,6 @@ cc.Class({
 
     onDisable: function () {
         this._super();
-
     },
     _register_handler: function () {
         net.on("enter_shop_ret", this.init_comp.bind(this));

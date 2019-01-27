@@ -17,6 +17,7 @@ cc.Class({
         label_topScore: cc.Label,
         node_ui_again: cc.Node,
         node_comp_reward_light:cc.Node,
+        btn_introduction:cc.Node,
     },
 
     // use this for initialization
@@ -53,6 +54,7 @@ cc.Class({
         this.schedule(this.add_food, 0.5);
         this.schedule(this.mission_gameTime, 1);
         this.ui_gameStart.active = false;
+        this.btn_introduction.active = false;
     },
     //游戏倒计时
     mission_gameTime: function () {
@@ -73,7 +75,7 @@ cc.Class({
             this.foodPool.put(this.layer_food.children[i]);
             
         }
-        
+        this.btn_introduction.active = true;
         this.node_gameOver.active = true;
         this.node_gameOver.runAction(cc.scaleTo(0.2, 1));
         this.node_get_man.active = false;
@@ -183,6 +185,6 @@ cc.Class({
     },
 
     on_open_sys: function (_, _uiName) {
-        ui.open(_uiName);
+        ui.open(_uiName,1);
     },
 });
