@@ -91,6 +91,9 @@ cc.Class({
             //
             // }.bind(this));
         });
+        net.on("enter_shop_ret", (_msg)=>{
+            this.lbl_integral.string = _msg.integral;
+        },this.node);
         net.on("enter_bag_ret", (_msg) => {
             this.lbl_bar_title.string = "库存";
             this.node_bag.active = true;
@@ -104,6 +107,11 @@ cc.Class({
             this.show_bar();
 
         }, this.node);
+        net.on("enter_friend_ret",(_msg)=>{
+            this.lbl_bar_title.string = "好友";
+            this.node_friend.active = true;
+            this.show_bar();
+        })
         net.on("use_props_ret", (_msg) => {
             ui.open("popup_reward_layer",_msg.info);
             this.on_chick_active_bar(null, false);
@@ -133,7 +141,7 @@ cc.Class({
 
         if (_msg.level_up || _msg.level_up === 0) {
             var psbar_fish_exp = this.progressbar_fish_exp;
-            Global.ActionMgr.create('progress', psbar_fish_exp.node, [psbar_fish_exp, _fish.exp / _fish.max_exp, _msg.level_up-1 || 0], 0, false);
+            Global.ActionMgr.create('progress', psbar_fish_exp.node, [psbar_fish_exp, _fish.exp / _fish.max_exp, _msg.level_up || 0], 0, false);
         } else{
             this.progressbar_fish_exp.progress = _fish.exp / _fish.max_exp;
         }
@@ -180,11 +188,7 @@ cc.Class({
         let _state = parseInt(state);
         ui.emit("touch_enable", true);
         if (_state) {
-            if (_state === 1) {
-                tips.show("好友功能暂未开启!");
-                ui.emit("touch_enable", false);
-                return;
-            }else if(_state === 5){
+            if(_state === 5){
                 this.lbl_bar_title.string = "地图";
                 this.title_icon.spriteFrame = _event.target.getComponent(cc.Sprite).spriteFrame;
                 this.node_map.active = true;

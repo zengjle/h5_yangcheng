@@ -52,7 +52,7 @@ cc.Class({
         if (+this.state) {//未领取奖励
             let btn_color = _idx % 2 ? cc.hexToColor("#d2b182") : cc.hexToColor("#82a0d2");
             lbl_btn.setColor(btn_color);
-            if (_msg.info[2] < _msg.info[4]) {
+            if (_msg.info[2] < _msg.info[3]) {
                 if(_msg.info[5]) {
                     this.scene_id = _msg.info[5];
                 }else{

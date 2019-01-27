@@ -317,7 +317,7 @@ const DataMgr = (function () {
         if (!receive_info) {
             receive_info = this.get_cur_receive_data();
         }
-        var is_reward = receive_info[shop_id] ? this.is_receive() : 1,
+        var is_reward = receive_info[shop_id] ? this.is_receive(shop_id) : 1,
             is_unlock = is_reward === 1 ? 0 : 1;
         return [is_reward, is_unlock, shop_id];
     };
