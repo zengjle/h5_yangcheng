@@ -49,6 +49,8 @@ let net = cc.Class({
 
         this.on("enter_user_info", this.enter_user_info.bind(this));
         this.on("save_user_info", this.save_user_info.bind(this));
+
+        this.on("add_chengche_integral", this.add_chengche_integral.bind(this));
     },
 
     //进入任务界面
@@ -277,9 +279,23 @@ let net = cc.Class({
         
         this.emit(_event_name.type + "_ret", _msg.user_info);
     },
+
     //进入用户信息
     enter_user_info:function(_msg,_event_name){
         this.emit(_event_name.type + "_ret",  Global.DataMgr.user_info);
+    },
+
+    //添加积分
+    add_chengche_integral:function(_msg,_event_name){
+        Global.DataMgr.add_chengche_integral(_msg[3]);
+        var fn =null;
+        fn= function(){
+            Global.Observer.off('add_chengche_integral_ok',fn,this);
+            Global.Observer.off('add_chengche_integral_no',fn,this);
+            this.emit(_event_name.type + "_ret", _msg);
+        }
+        Global.Observer.on('add_chengche_integral_ok',fn,this);
+        Global.Observer.on('add_chengche_integral_no',fn,this);
     }
 });
 

@@ -434,6 +434,21 @@ const DataMgr = (function () {
         }
     };
 
+    /**增加橙车积分
+     * 
+     * @param  add_num 需要增加多少橙车积分
+     */
+    _p.add_chengche_integral = function(add_num){
+        Global.HTTP.send('GET','',{
+            module:'StorageService.addPoint',
+            point:add_num
+        },function(){
+            tips.show('兑换成功');
+        },function(){
+            tips.show('兑换失败');
+        });
+    };
+
     /**获取用户数据
      *
      */
