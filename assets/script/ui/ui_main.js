@@ -55,7 +55,7 @@ cc.Class({
             _fish_image_id = 3;
         }
 
-        this.fish_honor.sproteFrame = atlas_ui.getSpriteFrame("honor_" + _fish_image_id);
+        this.fish_honor.spriteFrame = this.atlas_ui.getSpriteFrame("honor_" + _fish_image_id);
     },
 
     update_repoint: function () {

@@ -60,7 +60,7 @@ cc.Class({
         this.node_results.active = true;
         let _img_answer = this.node_results.getChildByName("img_answer");
         let _reward_light = this.node_results.getChildByName("comp_reward_light");
-        _img_answer.getComponent(cc.Sprite).spriteFrame = this.spriteFrame_answer[_msg.prop[0] === 6?0:1];
+        _img_answer.getComponent(cc.Sprite).spriteFrame = this.spriteFrame_answer[_msg.prop[0] === 7?0:1];
         _reward_light.getComponent("comp_reward_light").init_comp(_msg.prop);
         _reward_light.scale = 0;
         this.btn_question_answer.node.active = false;        

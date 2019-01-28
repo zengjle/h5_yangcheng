@@ -1,7 +1,7 @@
 let ui_window       = require("ui_window");
 let constant        = require("constant");
 let ui              = require("ui");
-
+let data            = require("data");
 
 cc.Class({
     extends: require("view_cell"),
@@ -13,7 +13,7 @@ cc.Class({
     },
 
     onLoad:function () {
-       
+       this.init_comp(this.args[0]);
     },
 
     onEnable:function () {
@@ -30,7 +30,7 @@ cc.Class({
     },
 
     init_comp:function(_scene_id){
-       this.lbl_introduced.string = data.introduced[this.args[0]];
+       this.lbl_introduced.string = data.introduced[_scene_id].label;
     },
 
     on_close: function () {

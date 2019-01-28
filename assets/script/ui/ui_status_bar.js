@@ -15,7 +15,7 @@ cc.Class({
         lbl_bar_title: cc.Label,
         icon_head: cc.Sprite,
         atlas_title_icon: cc.SpriteAtlas,
-        atlas_head:cc.SpriteFrame,
+        atlas_head:cc.SpriteAtlas,
         progressbar_fish_exp: cc.ProgressBar,
         img_food: cc.Sprite,
         lbl_fish_lv: cc.Label,
@@ -203,8 +203,8 @@ cc.Class({
     },
 
     on_chick_user_head: function () {
-        this.node_head_info.getComponent("comp_user_info").init_comp(Global.DataMgr.user_info);
         this.node_head_info.active = true;
+        this.node_head_info.getComponent("comp_user_info").init_comp(Global.DataMgr.user_info);
     },
 
     on_close_user_head:function(){
