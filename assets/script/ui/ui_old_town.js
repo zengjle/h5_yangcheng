@@ -138,6 +138,6 @@ cc.Class({
     },
 
     on_open_sys:function (_,_uiName) {
-        ui.open(_uiName);
+        ui.open(_uiName,2);
     },
 });

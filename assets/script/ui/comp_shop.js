@@ -1,7 +1,7 @@
 let ui_window = require("ui_window");
 let constant = require("constant");
 let ui = require("ui");
-
+let net = require("net");
 
 cc.Class({
     extends: require("view_cell"),
@@ -21,7 +21,6 @@ cc.Class({
 
     onDisable: function () {
         this._super();
-
     },
     _register_handler: function () {
         net.on("enter_shop_ret", this.init_comp.bind(this));

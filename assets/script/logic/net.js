@@ -47,6 +47,7 @@ let net = cc.Class({
         this.on("enter_shop", this.enter_shop.bind(this));
         this.on("buy_commodity", this.buy_commodity.bind(this));
 
+        this.on("enter_user_info", this.enter_user_info.bind(this));
         this.on("save_user_info", this.save_user_info.bind(this));
     },
 
@@ -270,8 +271,15 @@ let net = cc.Class({
 
     //保存用户信息
     save_user_info:function(_msg,_event_name){
-        Global.DataMgr.user_info = _msg.user_info;
-        this.emit(_event_name.type + "_ret", Global.DataMgr.user_info);
+        Global.DataMgr.user_info[1] = _msg.user_info.nickname;
+        Global.DataMgr.user_info[2] = _msg.user_info.manifesto;
+        Global.DataMgr.user_info[3] = _msg.user_info.head_id;
+        
+        this.emit(_event_name.type + "_ret", _msg.user_info);
+    },
+    //进入用户信息
+    enter_user_info:function(_msg,_event_name){
+        this.emit(_event_name.type + "_ret",  Global.DataMgr.user_info);
     }
 });
 

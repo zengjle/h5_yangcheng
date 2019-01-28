@@ -2655,7 +2655,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "honor_1",
+    "_name": "node_honor",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -2873,6 +2873,12 @@
     "window_type": 0,
     "node_daily_reward": {
       "__id__": 3
+    },
+    "atlas_ui": {
+      "__uuid__": "5e325354-aa81-4a3b-a3e0-325351660c5f"
+    },
+    "fish_honor": {
+      "__id__": 90
     }
   },
   {
