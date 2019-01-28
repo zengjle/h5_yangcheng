@@ -48,8 +48,6 @@ if (!CC_EDITOR) {
          * 
          */
         init_game:function (){
-            Global.AudioMgr.play('main_bg', 1, false, 'BGM');                   //背景音乐
-
             cc.Button.prototype._click = function () {                          //让每次点击都触发声音
                 Global.AudioMgr.play('click', 1, false, 'Effects');
             }
@@ -63,7 +61,7 @@ if (!CC_EDITOR) {
          */
         init: function () {
             var i = 1;
-            if(Global.getData('!@#$%', i-1)!==i){
+            if( parseInt(Global.getData('!@#$%', i-1)) !== i ){
                 Global.setData('!@#$%', i);
                 Global.setData('game_data', null);
             }

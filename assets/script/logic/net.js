@@ -134,7 +134,7 @@ let net = cc.Class({
         Global.DataMgr.mission[2].num++;
 
         Global.DataMgr.add_prop(reward_prop[0][0],reward_prop[0][3]);
-        this.emit(_event_name.type + "_ret", data.reward_prop);
+        this.emit(_event_name.type + "_ret", data);
     },
 
     enter_game: function (_, _event_name) {

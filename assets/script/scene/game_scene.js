@@ -29,7 +29,6 @@ cc.Class({
 
     // use this for initialization
     start: function () {
-        require('Global')();
         window.bindUI.init(this.node);
 
         //  把ui_prefabs数组中的所有prefab和它的名字组成map
