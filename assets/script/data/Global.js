@@ -31,7 +31,7 @@ if (!CC_EDITOR) {
     var AudioMgr = new a2();
 
     cc.vv = {};
-    window.config = {data: $data};
+    window.config = { data: $data };
     // document.cookie = "agent=Web";
     window.Global = {
         DEBUG: false,
@@ -42,17 +42,17 @@ if (!CC_EDITOR) {
         FishMgr: FishMgr,
         ActionMgr: ActionMgr,
         Loader: Loader,
-        AudioMgr : AudioMgr,
+        AudioMgr: AudioMgr,
 
         /**初始化游戏相关功能
          * 
          */
-        init_game:function (){
+        init_game: function () {
             cc.Button.prototype._click = function () {                          //让每次点击都触发声音
                 Global.AudioMgr.play('click', 1, false, 'Effects');
             }
             cc.Button.prototype.onLoad = function () {                          //开启声音
-                Global.addClickEvent(this.node,this.node,cc.Button,'_click');
+                Global.addClickEvent(this.node, this.node, cc.Button, '_click');
             }
         },
 
@@ -60,8 +60,8 @@ if (!CC_EDITOR) {
          *
          */
         init: function () {
-            var i = 1;
-            if( parseInt(Global.getData('!@#$%', i-1)) !== i ){
+            var i = 2;
+            if (parseInt(Global.getData('!@#$%', i - 1)) !== i) {
                 Global.setData('!@#$%', i);
                 Global.setData('game_data', null);
             }
@@ -213,7 +213,7 @@ if (!CC_EDITOR) {
          */
         initgetset: function () {
             cc.js.get(Global, 'time', function () {                 //获取1970年到现在的秒数
-                return Global._time || Math.floor(cc.sys.now()/1000);
+                return Global._time || Math.floor(cc.sys.now() / 1000);
             });
         },
 
@@ -236,6 +236,32 @@ if (!CC_EDITOR) {
          */
         setData: function (key, value) {
             cc.sys.localStorage.setItem(key, value);
+        },
+
+        /**检测对象类型
+         * 
+         * @param: obj      需要检测的对象
+         * @param: type     以大写开头的 JS 类型名
+         */
+        typeof: function (obj, type) {
+            return Object.prototype.toString.call(obj).slice(8, -1) === type;
+        },
+
+        /**复制对象
+         * 
+         * @param: obj      原始对象
+         * @param: isDeep   是否为深拷贝
+         */
+        clone: function (obj, is_deep) {
+            let ret = obj.slice ? [] : {}, p, prop;
+            if (!is_deep && Global.typeof(obj, 'Array')) return obj.slice();
+            for (p in obj) {
+                if (!obj.hasOwnProperty(p)) continue;
+                prop = obj[p];
+                ret[p] = (Global.typeof(prop, 'Object') || Global.typeof(prop, 'Array')) ?
+                    Global.clone(prop, is_deep) : prop;
+            }
+            return ret;
         },
 
         /**定时器
@@ -285,13 +311,13 @@ if (!CC_EDITOR) {
         online: function () {
             window.ononline = function () {
                 DataMgr.set_game_info();
-                ui.emit("touch_enable",false);
+                ui.emit("touch_enable", false);
                 Global.log("链接上网络了");
             };
             window.onoffline = function () {
                 DataMgr.set_game_info();
                 // Global.setData('!$#@$@^%#@!',JSON.stringify(DataMgr.data));
-                ui.emit("touch_enable",true);
+                ui.emit("touch_enable", true);
                 tips.show("网络链接已断开,请检查网络,否则会导致游戏数据丢失");
                 Global.log("网络链接已断开");
             };
@@ -424,4 +450,4 @@ if (!CC_EDITOR) {
         }
     };
 }
-module.exports = window.Global ? Global.init : function(){};
+module.exports = window.Global ? Global.init : function () { };

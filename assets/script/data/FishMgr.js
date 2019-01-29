@@ -17,7 +17,7 @@ const Fish = (function () {
             this.data = data;
             return;
         }
-        this.data = config.data['fish_init_data'];
+        this.data = Global.clone(config.data['fish_init_data']);
         this.data.uid = uid;
     };
 
