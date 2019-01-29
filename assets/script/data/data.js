@@ -113,7 +113,7 @@ module.exports = {
         },
         "3":{ 
             "id":3,
-            "sample":'icon_integral',
+            "sample":'bag_food_8',
             "name": "10橙车积分",
             "need_integral": 100,
             "prop_id":8,
@@ -121,7 +121,7 @@ module.exports = {
         },
         "4":{ 
             "id":4,
-            "sample":'icon_integral',
+            "sample":'bag_food_8',
             "name": "110橙车积分",
             "need_integral": 1000,
             "prop_id":8,

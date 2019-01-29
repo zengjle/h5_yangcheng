@@ -273,9 +273,9 @@ let net = cc.Class({
 
     //保存用户信息
     save_user_info:function(_msg,_event_name){
-        Global.DataMgr.user_info[1] = _msg.user_info.nickname;
-        Global.DataMgr.user_info[2] = _msg.user_info.manifesto;
-        Global.DataMgr.user_info[3] = _msg.user_info.head_id;
+        Global.DataMgr.user_info.nickname= _msg.user_info.nickname;
+        Global.DataMgr.user_info.manifesto = _msg.user_info.manifesto;
+        Global.DataMgr.user_info.head_id = _msg.user_info.head_id;
         
         this.emit(_event_name.type + "_ret", _msg.user_info);
     },

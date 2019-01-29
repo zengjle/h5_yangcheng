@@ -44,7 +44,7 @@ const DataMgr = (function () {
                         user_id:id,                         //用户id
                         nickname:id,                        //名字
                         head_id:1,                          //头像id
-                        manifesto:''                        //玩家宣言
+                        manifesto:'今天天气真好~'                        //玩家宣言
                     },
                     mission: {                              //任务
                         1: {
