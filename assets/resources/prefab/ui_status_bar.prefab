@@ -3,10 +3,12 @@
     "__type__": "cc.Prefab",
     "_name": "",
     "_objFlags": 0,
-    "_rawFiles": null,
+    "_native": "",
     "data": {
       "__id__": 1
-    }
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
@@ -2477,7 +2479,7 @@
     "node": {
       "__id__": 73
     },
-    "_enabled": true,
+    "_enabled": false,
     "transition": 0,
     "pressedColor": {
       "__type__": "cc.Color",
@@ -5295,7 +5297,9 @@
       "__id__": 100
     },
     "_enabled": true,
-    "isAlignOnce": true,
+    "alignMode": 1,
+    "_wasAlignOnce": {},
+    "isAlignOnce": {},
     "_target": null,
     "_alignFlags": 45,
     "_left": 0,
@@ -14921,7 +14925,7 @@
       }
     ],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 571
