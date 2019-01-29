@@ -32,9 +32,9 @@ if (!CC_EDITOR) {
 
     cc.vv = {};
     window.config = {data: $data};
-    document.cookie = "agent=Web";
+    // document.cookie = "agent=Web";
     window.Global = {
-        DEBUG: true,
+        DEBUG: false,
         DataMgr: DataMgr,
         HTTP: HTTP,
         Observer: Observer,
@@ -73,7 +73,6 @@ if (!CC_EDITOR) {
             Global.online();
             Global.onPopstate();
             Global.init_game();
-            UserMgr.login();
         },
 
         /**初始化时间
