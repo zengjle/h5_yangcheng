@@ -17168,9 +17168,11 @@
   },
   {
     "__type__": "cc.ClickEvent",
-    "target": null,
-    "component": "",
-    "handler": "",
+    "target": {
+      "__id__": 473
+    },
+    "component": "comp_user_info",
+    "handler": "on_close_head_bar",
     "customEventData": ""
   },
   {
@@ -17234,7 +17236,7 @@
       }
     ],
     "_tag": -1,
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 562
