@@ -16,121 +16,38 @@ const DataMgr = (function () {
         this.initGetSet();
         Global.Observer.once('login', this.get_game_info, this);                      //监听登入消息   
         cc.game.on(cc.game.EVENT_HIDE, this.set_game_info.bind(this));
-    },
+    };
 
-        /**初始化玩家数据
-         *
-         * @param data  游戏数据
-         */
-        _p.init_data = function (data) {
-            var _t = this;
-
-            if (typeof data === 'string' && data !== '') {
-                try {
-                    data = JSON.parse(data);
-                } catch (e) {
-                    data = null;
-                    console.log('用户信息是字符串，尝试转换成对象失败：', e);
-                }
-            }
+    /**初始化玩家数据
+     *
+     * @param data  游戏数据
+     */
+    _p.init_data = function (data) {
+        var _t = this;
+        do {
+            var $data = Global.clone(config.data.user_init_data);
             if (!data) {
                 var time = Global.time,
-                    id   = Global.UserMgr.id;
+                    id = Global.UserMgr.id;
                 _t.data = null;
-                data = _t.data = {
-                    fish: {},                               //鱼信息
-                    time: time,                             //离线时间
-                    user_info:{                             //用户信息
-                        user_id:id,                         //用户id
-                        nickname:id,                        //名字
-                        head_id:1,                          //头像id
-                        manifesto:'今天天气真好~'                        //玩家宣言
-                    },
-                    mission: {                              //任务
-                        1: {
-                            id: 1,
-                            num: 0,
-                            is_receive: 1
-                        },
-                        2: {
-                            id: 2,
-                            num: 0,
-                            is_receive: 1
-                        },
-                        3: {
-                            id: 3,
-                            num: 0,
-                            is_receive: 1
-                        },
-                        4: {
-                            id: 4,
-                            num: 0,
-                            is_receive: 1
-                        },
-                        5: {
-                            id: 5,
-                            num: 0,
-                            is_receive: 1
-                        },
-                        6: {
-                            id: 6,
-                            num: 0,
-                            is_receive: 1
-                        },
-                        7: {
-                            id: 7,
-                            num: 0,
-                            is_receive: 1
-                        }
-                    },
-                    prop: {                                 //道具
-                        1: {
-                            id: 1,
-                            num: 1
-                        },
-                        2: {
-                            id: 2,
-                            num: 0
-                        },
-                        3: {
-                            id: 3,
-                            num: 0
-                        },
-                        4: {
-                            id: 4,
-                            num: 0
-                        },
-                        5: {
-                            id: 5,
-                            num: 0
-                        },
-                        6: {
-                            id: 6,
-                            num: 0
-                        },
-                        7: {
-                            id: 7,
-                            num: 0
-                        },
-                        8: {
-                            id: 8,
-                            num: 0
-                        }
-                    },
-                    wen_chang_men_max_source: 0,            //文昌门最高分
-                    integration_num: 0,                     //福缘积分
-                    mission_score_max: 0,                   //任务分数
-                    wen_chang_men_action_num: 3,            //还可以进行的文昌阁游戏次数
-                    last_receive: {},                       //上一次领取奖励的时间
-                    is_sign_in: false,                      //是否签到
-                    is_question: false,                     //今日是否已经答题
-                };
-            } else {
-                _t.data = data;
-                _t._timing_day_update_data();
+                data = _t.data = $data;
+                data.id = id;
+                data.user_info.user_id = id;
+                data.user_info.nickname = id;
+                break;
             }
-            Global.Observer.emit('DataMgr_init_data_ok', data);
-        };
+            _t.data = data;
+
+            for (let i in $data) {
+                if (typeof _t.data[i] === 'undefined' || _t.data[i] === null) {
+                    _t.data[i] = $data[i];
+                }
+            }
+
+            _t._timing_day_update_data();
+        } while (false) { }
+        Global.Observer.emit('DataMgr_init_data_ok', data);
+    };
 
     //是否是第二天
     _p._is_tomorrow = function () {
@@ -150,6 +67,7 @@ const DataMgr = (function () {
             this.is_sign_in = false;
             this.is_question = false;
             this.wen_chang_men_action_num = 3;
+            this.prop_state = {};
             var mission = this.mission;
             for (let i in mission) {
                 mission[i].num = 0;
@@ -185,6 +103,10 @@ const DataMgr = (function () {
 
         cc.js.get(this, 'prop', function () {       //道具
             return this.data.prop;
+        });
+
+        cc.js.get(this, 'prop_state', function () {     //偷取过的好友
+            return this.data.prop_state;
         });
 
         cc.js.get(this, 'lv', this.get_lv);         //鱼的最高等级
@@ -249,9 +171,9 @@ const DataMgr = (function () {
             this.data.wen_chang_men_action_num = val;
         });
 
-        cc.js.get(this, 'user_info', function () {  //用户信息
+        cc.js.getset(this, 'user_info', function () {  //用户信息
             return this.data.user_info;
-        },function (val) {  
+        }, function (val) {
             this.data.user_info.nickname = val.nickname;
             this.data.user_info.head_id = val.head_id;
             this.data.user_info.manifesto = val.manifesto;
@@ -384,13 +306,13 @@ const DataMgr = (function () {
                 break;
             }
         }
-        return [this.get_info_by_id(data.id,data.num)];
+        return [this.get_info_by_id(data.id, data.num)];
     };
 
     //根据id获取食物通用格式
-    _p.get_info_by_id = function (id,num = 1) {
+    _p.get_info_by_id = function (id, num = 1) {
         var info = config.data.prop[id];
-        return [id, info.type, info.addition,num];
+        return [id, info.type, info.addition, num];
     },
 
         //获取商店信息
@@ -406,7 +328,7 @@ const DataMgr = (function () {
     //购买商品
     _p.buy_commodity = function (_msg) {
         this.integration_num -= _msg.need_integral;
-        Global.DataMgr.add_prop(_msg.prop_id,_msg.add_num);
+        Global.DataMgr.add_prop(_msg.prop_id, _msg.add_num);
     };
 
     //领取任务奖励    
@@ -438,15 +360,45 @@ const DataMgr = (function () {
      * 
      * @param  add_num 需要增加多少橙车积分
      */
-    _p.add_chengche_integral = function(add_num){
-        Global.HTTP.send('GET','',{
-            module:'StorageService.addPoint',
-            point:add_num
-        },function(){
+    _p.add_chengche_integral = function (add_num) {
+        Global.HTTP.send('GET', '', {
+            module: 'StorageService.addPoint',
+            point: add_num
+        }, function () {
             tips.show('兑换成功');
-        },function(){
+        }, function () {
             tips.show('兑换失败');
         });
+    };
+
+    /**是否还能偷取过某个好友
+     * 
+     */
+    _p.get_prop_state = function (id, data) {
+        var prop = data.prop;
+        for (let i in prop) {
+            if (i != 8 && prop[i].num) {
+                return this.get_prop_state_num(id) < config.data.prop_state_num_max ? 1 : 0;
+            }
+        }
+        return 0;
+    };
+
+    /**否偷取某个好友的次数
+     * 
+     */
+    _p.get_prop_state_num = function (id) {
+        return this.prop_state[id] || 0;
+    };
+
+    /**添加偷取过的好友
+     * 
+     */
+    _p.add_prop_state = function (id) {
+        if (!this.prop_state[id]) {
+            this.prop_state[id] = 0;
+        }
+        this.prop_state[id]++;
     };
 
     /**获取用户数据
@@ -454,20 +406,21 @@ const DataMgr = (function () {
      */
     _p.get_game_info = function () {
         if (Global.DEBUG) {
-            this.init_data(Global.getData('game_data', null));
+            var info = Global.getData('game_data', null);
+            try {
+                info = JSON.parse(info);
+            } catch (e) {
+                info = null;
+            }
+            this.init_data(info);
             Global.schedule(this.set_game_info, this, 1);
             return;
         }
 
-        Global.HTTP.send('POST', '', {
-            module: 'StorageService.getGameUser',
-            userid: Global.UserMgr.id
-        }, function (res) {
-            this.init_data(res.data.infojson);
+        this.get_user_info(Global.UserMgr.id, function (data) {
+            this.init_data(data);
             Global.schedule(this.set_game_info, this, 60);
-        }.bind(this), function () {
-            tips.show('获取数据失败');
-        });
+        }.bind(this));
     };
 
     /**存储用户数据
@@ -480,7 +433,6 @@ const DataMgr = (function () {
         this.time = Global.time;
         if (Global.DEBUG) {
             Global.setData('game_data', JSON.stringify(this.data));
-            Global.log('保存数据成功');
             return;
         }
 
@@ -488,8 +440,38 @@ const DataMgr = (function () {
             module: 'StorageService.updateGameUser',
             userid: Global.UserMgr.id,
             infojson: JSON.stringify(this.data)
+        });
+    };
+
+    /**获取用户信息
+     *
+     * @param id        用户id
+     * @param cb        回调
+     */
+    _p.get_user_info = function (id, cb) {
+        Global.HTTP.send('POST', '', {
+            module: 'StorageService.getGameUser',
+            userid: id
         }, function (res) {
-            Global.log('保存数据成功');
+            if (cb) {
+                var data = res.data.infojson;
+                if (typeof data === 'string') {
+                    try {
+                        data = JSON.parse(data);
+                    } catch (e) {
+                        data = null;
+                        console.log('用户信息是字符串，尝试转换成对象失败：', e);
+                    }
+                }
+                if (data) {
+                    if (!Object.keys(data.fish).length) {
+                        data.fish[1] = Global.clone(config.data.fish_init_data);
+                    }
+                }
+                cb(data);
+            }
+        }.bind(this), function () {
+            tips.show('获取数据失败');
         });
     };
 

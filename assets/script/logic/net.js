@@ -20,7 +20,6 @@ let net = cc.Class({
         this.on("enter_game", this.enter_game.bind(this));
         this.on("enter_mission_page", this.enter_mission_page.bind(this));
         this.on("enter_mission", this.enter_mission.bind(this));
-        this.on("enter_friend", this.enter_friend.bind(this));
         this.on("enter_bag", this.enter_bag.bind(this));
         this.on("get_mission_reward", this.get_mission_reward.bind(this));
         // this.on("start_mission_game", this.start_mission_game.bind(this));
@@ -51,21 +50,18 @@ let net = cc.Class({
         this.on("save_user_info", this.save_user_info.bind(this));
 
         this.on("add_chengche_integral", this.add_chengche_integral.bind(this));
+
+        this.on("enter_friend", this.enter_friend.bind(this));
+        this.on("add_friend", this.add_friend.bind(this));
+        this.on("search_friend", this.search_friend.bind(this));
+        this.on("get_friend_food", this.get_friend_food.bind(this));
+        this.on("enter_friend_home", this.enter_friend_home.bind(this));
     },
 
     //进入任务界面
     enter_mission: function (_msg, _event_name) {
         var emit_msg = _event_name.type + "_ret";
-        this.emit(emit_msg, {mission_info: Global.DataMgr.get_mission_data()});
-    },
-
-    //进入好友界面
-    enter_friend: function (_msg, _event_name) {
-        var emit_msg = _event_name.type + "_ret";
-
-        Global.UserMgr.get_friend_info(function (info) {
-            this.emit(emit_msg, info);
-        }.bind(this));
+        this.emit(emit_msg, { mission_info: Global.DataMgr.get_mission_data() });
     },
 
     //背包数据
@@ -98,7 +94,7 @@ let net = cc.Class({
             emit_msg = _event_name.type + "_ret",
             level = Global.DataMgr.get_lv(),
             is_question = Global.DataMgr.is_question ? 1 : 0;
-        this.emit(emit_msg, {shop_info: Global.DataMgr.get_all_is_receive(), level: level, question: is_question});
+        this.emit(emit_msg, { shop_info: Global.DataMgr.get_all_is_receive(), level: level, question: is_question });
     },
 
     //领取古镇福利
@@ -129,14 +125,14 @@ let net = cc.Class({
         Global.DataMgr.wen_chang_men_action_num--;
 
         var reward_prop = Global.DataMgr.get_wen_chang_men_reward(msg.mission_score);
-        var data = {reward_prop: reward_prop, action_num: Global.DataMgr.wen_chang_men_action_num};
+        var data = { reward_prop: reward_prop, action_num: Global.DataMgr.wen_chang_men_action_num };
 
         if (Global.DataMgr.wen_chang_men_max_source === msg.mission_score)
             data.max_mission_score = msg.mission_score;
 
         Global.DataMgr.mission[2].num++;
 
-        Global.DataMgr.add_prop(reward_prop[0][0],reward_prop[0][3]);
+        Global.DataMgr.add_prop(reward_prop[0][0], reward_prop[0][3]);
         this.emit(_event_name.type + "_ret", data);
     },
 
@@ -151,8 +147,8 @@ let net = cc.Class({
             this.emit(_event_name.type + "_ret", {
                 fish: fish,
                 integral: Global.DataMgr.integration_num,
-                daily_reward_state:!!Global.DataMgr.is_sign_in,
-                user_info:Global.DataMgr.user_info
+                daily_reward_state: !!Global.DataMgr.is_sign_in,
+                user_info: Global.DataMgr.user_info
             });
         }.bind(this);
 
@@ -195,7 +191,7 @@ let net = cc.Class({
     //更改福缘
     change_score: function (msg, _event_name) {
         Global.DataMgr.integration_num += msg.score;
-        this.emit(_event_name.type + "_ret", {integral: Global.DataMgr.integration_num});
+        this.emit(_event_name.type + "_ret", { integral: Global.DataMgr.integration_num });
     },
 
     //使用道具
@@ -209,14 +205,14 @@ let net = cc.Class({
             info.splice(2, 0, prop_info.addition);
         }
         Global.DataMgr.use_prop(prop[0], 1);
-        Global.DataMgr.add_prop(info[0],info[3]);
-        this.emit(_event_name.type + "_ret", {info: info});
+        Global.DataMgr.add_prop(info[0], info[3]);
+        this.emit(_event_name.type + "_ret", { info: info });
     },
 
     //添加道具
     add_props: function (_msg, _event_name) {
         Global.DataMgr.add_prop(id, num);
-        ui.open("popup_reward_layer",[id,0,,0,num]);
+        ui.open("popup_reward_layer", [id, 0, , 0, num]);
         this.emit(_event_name.type + "_ret")
     },
 
@@ -227,7 +223,7 @@ let net = cc.Class({
 
         Global.DataMgr.mission[1].num++;
         Global.DataMgr.add_prop(6, 1);
-        this.emit(_event_name.type + "_ret", {prop: prop})
+        this.emit(_event_name.type + "_ret", { prop: prop })
     },
 
     //每日问答
@@ -237,65 +233,113 @@ let net = cc.Class({
 
         Global.DataMgr.mission[5].num++;
 
-        this.emit(_event_name.type + "_ret", {question_answer_id: _question_id})
+        this.emit(_event_name.type + "_ret", { question_answer_id: _question_id })
     },
 
     //领取每日问答奖励
     get_daily_question_answer_reward: function (_msg, _event_name) {
         var prop = _msg.answer ? [7, 2, 0, 1] : [6, 2, 0, 1];
         Global.DataMgr.add_prop(prop[0], prop[3]);
-        this.emit(_event_name.type + "_ret", {prop: prop})
+        this.emit(_event_name.type + "_ret", { prop: prop })
     },
 
     //领取任务奖励
-    get_daily_mission_reward:function(_msg, _event_name){
+    get_daily_mission_reward: function (_msg, _event_name) {
         var prop = Global.DataMgr.get_daily_mission_reward(_msg.mission_id);
         Global.DataMgr.add_prop(prop[0], prop[3]);
-        this.emit(_event_name.type + "_ret", {prop: prop})
+        this.emit(_event_name.type + "_ret", { prop: prop })
     },
 
     //进入商店
-    enter_shop:function(_msg,_event_name){
+    enter_shop: function (_msg, _event_name) {
         this.emit(_event_name.type + "_ret", {
             integral: Global.DataMgr.integration_num,
-            commodity:Global.DataMgr.get_shop_all_info()
+            commodity: Global.DataMgr.get_shop_all_info()
         })
     },
 
     //购买物品
-    buy_commodity:function(_msg,_event_name){
+    buy_commodity: function (_msg, _event_name) {
         Global.DataMgr.buy_commodity(_msg);
         this.emit(_event_name.type + "_ret", {
             integral: Global.DataMgr.integration_num,
-            commodity:Global.DataMgr.get_info_by_id(_msg.prop_id)
+            commodity: Global.DataMgr.get_info_by_id(_msg.prop_id)
         })
     },
 
     //保存用户信息
-    save_user_info:function(_msg,_event_name){
-        Global.DataMgr.user_info.nickname= _msg.user_info.nickname;
-        Global.DataMgr.user_info.manifesto = _msg.user_info.manifesto;
-        Global.DataMgr.user_info.head_id = _msg.user_info.head_id;
-        
+    save_user_info: function (_msg, _event_name) {
+        Global.DataMgr.user_info = _msg.user_info;
+
         this.emit(_event_name.type + "_ret", _msg.user_info);
     },
 
     //进入用户信息
-    enter_user_info:function(_msg,_event_name){
-        this.emit(_event_name.type + "_ret",  Global.DataMgr.user_info);
+    enter_user_info: function (_msg, _event_name) {
+        this.emit(_event_name.type + "_ret", Global.DataMgr.user_info);
     },
 
     //添加积分
-    add_chengche_integral:function(_msg,_event_name){
+    add_chengche_integral: function (_msg, _event_name) {
         Global.DataMgr.add_chengche_integral(_msg[3]);
-        var fn =null;
-        fn= function(){
-            Global.Observer.off('add_chengche_integral_ok',fn,this);
-            Global.Observer.off('add_chengche_integral_no',fn,this);
+        var fn = null;
+        fn = function () {
+            Global.Observer.off('add_chengche_integral_ok', fn, this);
+            Global.Observer.off('add_chengche_integral_no', fn, this);
             this.emit(_event_name.type + "_ret", _msg);
         }
-        Global.Observer.on('add_chengche_integral_ok',fn,this);
-        Global.Observer.on('add_chengche_integral_no',fn,this);
+        Global.Observer.on('add_chengche_integral_ok', fn, this);
+        Global.Observer.on('add_chengche_integral_no', fn, this);
+    },
+
+    //进入好友
+    enter_friend: function (_msg, _event_name) {
+        Global.UserMgr.get_all_friend_info(function (info) {
+            info.forEach(data => {
+                data.fish = data.fish[1];
+            });
+            this.emit(_event_name.type + "_ret", {
+                title: '好友',
+                friend_info: info
+            });
+        }.bind(this));
+    },
+
+    //添加好友
+    add_friend: function (_msg, _event_name) {
+        Global.UserMgr.add_friend(_msg.friend_id);
+        this.emit(_event_name.type + "_ret", _msg);
+    },
+
+    //搜索好友
+    search_friend: function (_msg, _event_name) {
+        Global.get_user_info(_msg.friend_id, function (info) {
+            info.fish = info.fish[1];
+            this.emit(_event_name.type + "_ret", {
+                friend_id: _msg.friend_id,
+                friend_info: info
+            });
+        }.bind(this));
+    },
+
+    //获取好友食物
+    get_friend_food: function (_msg, _event_name) {
+        // this.emit(_event_name.type + "_ret", _msg);
+    },
+
+    //进入好友家
+    enter_friend_home: function (_msg, _event_name) {
+        Global.DataMgr.get_user_info(_msg.friend_id, function (data) {
+            data.fish = data.fish[1];
+            var get_prop_state = Global.DataMgr.get_prop_state(_msg.friend_id, data);
+            var get_num = get_prop_state ? Global.DataMgr.get_prop_state_num(_msg.friend_id) : 0;
+            this.emit(_event_name.type + "_ret", {
+                friend_id: friend_id,
+                friend_info: data,
+                get_num: config.data.prop_state_num_max - get_num,
+                get_prop_state: get_prop_state
+            });
+        }.bind(this));
     }
 });
 

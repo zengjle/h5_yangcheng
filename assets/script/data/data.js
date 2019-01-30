@@ -18,6 +18,96 @@ module.exports = {
         "exp": 0,
         "max_exp": Math.floor(200 * Math.pow(1, 1.5))
     },
+    "prop_state_num_max": 1,
+    "user_init_data": {                     //用户第一次玩的信息
+        "fish": {},                         //鱼信息
+        "time": null,                       //离线时间
+        "prop_state": {},                   //偷取过的好友id
+        "user_info": {                      //用户信息
+            "user_id": null,                //用户id
+            "nickname": null,               //名字
+            "head_id": 1,                   //头像id
+            "manifesto": '今天天气真好~'    //玩家宣言
+        },
+        "mission": {                        //任务
+            "1": {
+                "id": 1,
+                "num": 0,
+                "is_receive": 1
+            },
+            "2": {
+                "id": 2,
+                "num": 0,
+                "is_receive": 1
+            },
+            "3": {
+                "id": 3,
+                "num": 0,
+                "is_receive": 1
+            },
+            "4": {
+                "id": 4,
+                "num": 0,
+                "is_receive": 1
+            },
+            "5": {
+                "id": 5,
+                "num": 0,
+                "is_receive": 1
+            },
+            "6": {
+                "id": 6,
+                "num": 0,
+                "is_receive": 1
+            },
+            "7": {
+                "id": 7,
+                "num": 0,
+                "is_receive": 1
+            }
+        },
+        "prop": {                                 //道具
+            "1": {
+                "id": 1,
+                "num": 1
+            },
+            "2": {
+                "id": 2,
+                "num": 0
+            },
+            "3": {
+                "id": 3,
+                "num": 0
+            },
+            "4": {
+                "id": 4,
+                "num": 0
+            },
+            "5": {
+                "id": 5,
+                "num": 0
+            },
+            "6": {
+                "id": 6,
+                "num": 0
+            },
+            "7": {
+                "id": 7,
+                "num": 0
+            },
+            "8": {
+                "id": 8,
+                "num": 0
+            }
+        },
+        "wen_chang_men_max_source": 0,            //文昌门最高分
+        "integration_num": 0,                     //福缘积分
+        "mission_score_max": 0,                   //任务分数
+        "wen_chang_men_action_num": 3,            //还可以进行的文昌阁游戏次数
+        "last_receive": {},                       //上一次领取奖励的时间
+        "is_sign_in": false,                      //是否签到
+        "is_question": false,                     //今日是否已经答题
+    },
     "prop": {       //道具信息
         "1": {
             "name": "麻糍",
@@ -67,9 +157,9 @@ module.exports = {
             "openNumMin": 1,                                //一次最低开出几个
             "openNumMax": 3,                                //一次最多开出几个
             "open": [                                       //打开后可以获得的道具信息
-                {"id": 1, "probability": 50},             //id 道具ID   ;;  probability 开出的概率
-                {"id": 2, "probability": 30},
-                {"id": 3, "probability": 20}
+                { "id": 1, "probability": 50 },             //id 道具ID   ;;  probability 开出的概率
+                { "id": 2, "probability": 30 },
+                { "id": 3, "probability": 20 }
             ],
             "need_integral": 400
         },
@@ -81,8 +171,8 @@ module.exports = {
             "openNumMin": 1,
             "openNumMax": 3,
             "open": [
-                {"id": 4, "probability": 80},
-                {"id": 5, "probability": 20}
+                { "id": 4, "probability": 80 },
+                { "id": 5, "probability": 20 }
             ],
             "need_integral": 1200
         },
@@ -94,38 +184,38 @@ module.exports = {
             "need_integral": 10
         },
     },
-    "exchange":{
-        "1":{ 
-            "id":1,
-            "sample":'bag_food_6',
+    "exchange": {
+        "1": {
+            "id": 1,
+            "sample": 'bag_food_6',
             "name": "小食盒",
             "need_integral": 400,
-            "prop_id":6,
-            "add_num":1
+            "prop_id": 6,
+            "add_num": 1
         },
-        "2":{ 
-            "id":2,
-            "sample":'bag_food_7',
+        "2": {
+            "id": 2,
+            "sample": 'bag_food_7',
             "name": "大食盒",
             "need_integral": 1200,
-            "prop_id":7,
-            "add_num":1
+            "prop_id": 7,
+            "add_num": 1
         },
-        "3":{ 
-            "id":3,
-            "sample":'bag_food_8',
+        "3": {
+            "id": 3,
+            "sample": 'bag_food_8',
             "name": "10橙车积分",
-            "need_integral": 100,
-            "prop_id":8,
-            "add_num":10
+            "need_integral": 500,
+            "prop_id": 8,
+            "add_num": 10
         },
-        "4":{ 
-            "id":4,
-            "sample":'bag_food_8',
-            "name": "110橙车积分",
+        "4": {
+            "id": 4,
+            "sample": 'bag_food_8',
+            "name": "15橙车积分",
             "need_integral": 1000,
-            "prop_id":8,
-            "add_num":110
+            "prop_id": 8,
+            "add_num": 15
         },
     },
     "mission": {        //任务信息
@@ -147,7 +237,7 @@ module.exports = {
         },
         "5": {
             "id": 5,
-            "info": ["古镇问答", " 在古镇回答问题可以获得丰厚奖励。", null, 1, null,2, [2, 1, 200, 2]]
+            "info": ["古镇问答", " 在古镇回答问题可以获得丰厚奖励。", null, 1, null, 2, [2, 1, 200, 2]]
         },
         "6": {
             "id": 6,
@@ -347,43 +437,43 @@ module.exports = {
     "wen_chang_men_reward": {
         "1": {
             "score": 0,
-            "reward": [{"id": 1, "num": 1}]
+            "reward": [{ "id": 1, "num": 1 }]
         },
         "2": {
             "score": 100,
-            "reward": [{"id": 1, "num": 2}]
+            "reward": [{ "id": 1, "num": 2 }]
         },
         "3": {
             "score": 150,
-            "reward": [{"id": 2, "num": 2}]
+            "reward": [{ "id": 2, "num": 2 }]
         },
         "4": {
             "score": 200,
-            "reward": [{"id": 2, "num": 3}]
+            "reward": [{ "id": 2, "num": 3 }]
         },
         "5": {
             "score": 250,
-            "reward": [{"id": 3, "num": 2}]
+            "reward": [{ "id": 3, "num": 2 }]
         },
         "6": {
             "score": 300,
-            "reward": [{"id": 3, "num": 3}]
+            "reward": [{ "id": 3, "num": 3 }]
         },
         "7": {
             "score": 350,
-            "reward": [{"id": 4, "num": 2}]
+            "reward": [{ "id": 4, "num": 2 }]
         },
         "8": {
             "score": 400,
-            "reward": [{"id": 4, "num": 3}]
+            "reward": [{ "id": 4, "num": 3 }]
         },
         "9": {
             "score": 450,
-            "reward": [{"id": 5, "num": 2}]
+            "reward": [{ "id": 5, "num": 2 }]
         },
         "10": {
             "score": 500,
-            "reward": [{"id": 5, "num": 3}]
+            "reward": [{ "id": 5, "num": 3 }]
         },
     },
 
@@ -425,15 +515,15 @@ module.exports = {
         },
     },
 
-    "introduced":{
-        "0":{
-            "label":"通过完成每日任务，领取每日奖励，饭点前往古城领取食物，偷取好友食物，等方法来喂养你的锦鲤获取福缘获得丰厚奖励。锦鲤总共有三个阶段，每到达一个阶段就能获得丰厚的奖励噢，当锦鲤到达99级的时候如果越过了龙门，将会获得巨大的奖励，快来喂养你的锦鲤吧！",
+    "introduced": {
+        "0": {
+            "label": "通过完成每日任务，领取每日奖励，饭点前往古城领取食物，偷取好友食物，等方法来喂养你的锦鲤获取福缘获得丰厚奖励。锦鲤总共有三个阶段，每到达一个阶段就能获得丰厚的奖励噢，当锦鲤到达99级的时候如果越过了龙门，将会获得巨大的奖励，快来喂养你的锦鲤吧！",
         },
-        "1":{
-            "label":"通过接到美味的食物来增加你的游戏得分，如果不小心接到垃圾（烂菜叶、鱼骨头）会导致你游戏直接结束哦。得分越高获得的奖励越丰厚噢，一天可以有三次机会，好好珍惜你的游戏机会吧！",
+        "1": {
+            "label": "通过接到美味的食物来增加你的游戏得分，如果不小心接到垃圾（烂菜叶、鱼骨头）会导致你游戏直接结束哦。得分越高获得的奖励越丰厚噢，一天可以有三次机会，好好珍惜你的游戏机会吧！",
         },
-        "2":{
-            "label":"每天早上9点，中午12点，晚上18点，古镇小吃店老板会给你送上美味的食物，快来领取吧！当你的锦鲤30级将解锁四果汤点，60级的时候将解锁豆花粉丝店，90级将解锁漳州卤面店，每个店面可领取的时间只有30分钟哦，不要忘记饭点！",
+        "2": {
+            "label": "每天早上9点，中午12点，晚上18点，古镇小吃店老板会给你送上美味的食物，快来领取吧！当你的锦鲤30级将解锁四果汤点，60级的时候将解锁豆花粉丝店，90级将解锁漳州卤面店，每个店面可领取的时间只有30分钟哦，不要忘记饭点！",
         }
     }
 };

@@ -89,42 +89,63 @@ const UserMgr = (function () {
 
     /**获取好友信息
      * 
+     * @param cb 回调
      */
-    _p.get_all_friend = function () {
+    _p.get_all_friend = function (cb) {
         Global.HTTP.send('GET', '', {
             module: 'StorageService.getFriend',
             from: this.id
         }, function (res) {
-            var data = res.data;
+            cb && cb(res.data);
         }, function () {
             tips.show('获取好友信息失败');
         });
     };
 
+    /**获取好友信息
+     * 
+     * @param cb 回调
+     */
+    _p.get_all_friend_info = function (cb) {
+        this.get_all_friend(function (data) {
+            var len = data.length;
+            var friend_info = [];
+            var fn = function (info) {
+                if (info) {
+                    friend_info.push(info);
+                } else {
+                    len--;
+                }
+                if (friend_info.length === len) {
+                    cb && cb(friend_info);
+                    fn = null;
+                    len = null;
+                    data = null;
+                    friend_info = null;
+                }
+            }
+            data.forEach(info => {
+                Global.DataMgr.get_user_info(info.to, fn);
+            });
+        });
+    };
+
     /**添加好友
      * 
+     * @param to 要添加的好友id
      */
-    _p.add_friend = function (to, to_info) {
-        /**
-         {
-             id:'',
-             name:'',
-             avatar:''
-         }
-         */
+    _p.add_friend = function (to) {
         Global.HTTP.send('GET', '', {
             module: 'StorageService.updateFriend',
             from: this.id,
             to: to,
             frominfo: '',
-            toinf: to_info
-        }, function (res) {
-            var data = res.data;
-        }, function () {
-            tips.show('添加好友信息失败');
+            toinfo: ''
+        }, null, function () {
+            tips.show('添加好友失败');
         });
     };
 
     return UserMgr;
-} ());
+}());
 module.exports = UserMgr;
