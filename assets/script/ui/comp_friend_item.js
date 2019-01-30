@@ -8,7 +8,7 @@ cc.Class({
     properties: {
         lbl_nickname: cc.Label,
         lbl_manifesto: cc.Label,
-        img_tag: cc.img_tag,
+        img_tag: cc.Sprite,
         btn_goto: cc.Button,
 
         friend_tag:[cc.SpriteFrame],
