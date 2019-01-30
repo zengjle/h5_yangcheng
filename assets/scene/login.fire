@@ -621,7 +621,7 @@
     },
     "_children": [],
     "_tag": -1,
-    "_active": false,
+    "_active": true,
     "_components": [
       {
         "__id__": 17
@@ -648,7 +648,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 176,
+      "width": 180,
       "height": 40
     },
     "_rotationX": 0,
@@ -729,6 +729,12 @@
     "node": {
       "__id__": 2
     },
-    "_enabled": true
+    "_enabled": true,
+    "loading_node": {
+      "__id__": 16
+    },
+    "start_game_node": {
+      "__id__": 8
+    }
   }
 ]
