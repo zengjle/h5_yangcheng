@@ -67,7 +67,7 @@ const DataMgr = (function () {
             this.is_sign_in = false;
             this.is_question = false;
             this.wen_chang_men_action_num = 3;
-            this.prop_state = {};
+            this.data.prop_state = {};
             var mission = this.mission;
             for (let i in mission) {
                 mission[i].num = 0;
@@ -401,6 +401,20 @@ const DataMgr = (function () {
         this.prop_state[id]++;
     };
 
+    /**获取好友道具
+     * 
+     * @param prop_info     道具信息
+     */
+    _p.get_friend_food = function (prop_info) {
+        var id_array = [];
+        for (let i in prop_info) {
+            if (prop_info[i].num && i != 8) {
+                id_array.push(i);
+            }
+        }
+        return this.get_info_by_id(Global.getRandomNum_Round(0, id_array.length, -1), 1);
+    };
+
     /**获取用户数据
      *
      */
@@ -467,6 +481,7 @@ const DataMgr = (function () {
                     if (!Object.keys(data.fish).length) {
                         data.fish[1] = Global.clone(config.data.fish_init_data);
                     }
+                    Global.all_user_game_data[id] = data;
                 }
                 cb(data);
             }

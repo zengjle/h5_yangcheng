@@ -44,6 +44,8 @@ if (!CC_EDITOR) {
         Loader: Loader,
         AudioMgr: AudioMgr,
 
+        all_user_game_data: {},      //用户游戏数据
+
         /**初始化游戏相关功能
          * 
          */
@@ -60,7 +62,7 @@ if (!CC_EDITOR) {
          *
          */
         init: function () {
-            var i = 2;
+            var i = 5;
             if (parseInt(Global.getData('!@#$%', i - 1)) !== i) {
                 Global.setData('!@#$%', i);
                 Global.setData('game_data', null);

@@ -294,11 +294,12 @@ let net = cc.Class({
 
     //进入好友
     enter_friend: function (_msg, _event_name) {
+        var event_name = _event_name.type + "_ret";
         Global.UserMgr.get_all_friend_info(function (info) {
             info.forEach(data => {
                 data.fish = data.fish[1];
             });
-            this.emit(_event_name.type + "_ret", {
+            this.emit(event_name, {
                 title: '好友',
                 friend_info: info
             });
@@ -324,7 +325,8 @@ let net = cc.Class({
 
     //获取好友食物
     get_friend_food: function (_msg, _event_name) {
-        // this.emit(_event_name.type + "_ret", _msg);
+        var info = Global.DataMgr.get_friend_food(Global.all_user_game_data[_msg.friend_id].prop);
+        this.emit(_event_name.type + "_ret", { info: info });
     },
 
     //进入好友家

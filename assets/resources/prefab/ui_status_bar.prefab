@@ -3,10 +3,12 @@
     "__type__": "cc.Prefab",
     "_name": "",
     "_objFlags": 0,
-    "_rawFiles": null,
+    "_native": "",
     "data": {
       "__id__": 1
-    }
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
@@ -5295,6 +5297,8 @@
       "__id__": 100
     },
     "_enabled": true,
+    "alignMode": 1,
+    "_wasAlignOnce": {},
     "isAlignOnce": {},
     "_target": null,
     "_alignFlags": 45,

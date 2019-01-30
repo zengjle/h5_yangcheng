@@ -106,8 +106,8 @@ const ActionMgr = (function () {
     _p.progress = function (progress, percentage, num) {
         if (percentage > 1)
             percentage /= 100;
-        if (progress.ProgressBar)
-            progress = progress.ProgressBar;
+        if (progress.$ProgressBar)
+            progress = progress.$ProgressBar;
         var fn = (function () {
             progress.progress += 0.01;
             if (progress.progress >= 1) {

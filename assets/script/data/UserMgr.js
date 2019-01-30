@@ -23,7 +23,7 @@ const UserMgr = (function () {
         if (!this.verification_param(tel, code))                  //验证参数是否有正确
             return;
         Global.HTTP.send("GET", '', {
-            module: 'UserService.webLogin',
+            module: 'UserService.loginBytel',
             tel: tel,
             code: code
         }, function (res) {
