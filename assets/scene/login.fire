@@ -293,7 +293,7 @@
     "editingDidEnded": [],
     "editingReturn": [],
     "_N$backgroundImage": {
-      "__uuid__": "f0cd7175-096c-4674-ada1-e16def34e72e"
+      "__uuid__": "75b1e6c8-9ef2-4474-8567-d9cc5dd2218e"
     },
     "_N$returnType": 0,
     "_N$inputFlag": 5,
@@ -302,18 +302,18 @@
     "_N$lineHeight": 40,
     "_N$fontColor": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_N$placeholder": "请输入手机号码",
     "_N$placeholderFontSize": 20,
     "_N$placeholderFontColor": {
       "__type__": "cc.Color",
-      "r": 127,
-      "g": 127,
-      "b": 127,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_N$maxLength": 9999,
@@ -387,7 +387,7 @@
     "editingDidEnded": [],
     "editingReturn": [],
     "_N$backgroundImage": {
-      "__uuid__": "f0cd7175-096c-4674-ada1-e16def34e72e"
+      "__uuid__": "75b1e6c8-9ef2-4474-8567-d9cc5dd2218e"
     },
     "_N$returnType": 0,
     "_N$inputFlag": 5,
@@ -396,18 +396,18 @@
     "_N$lineHeight": 40,
     "_N$fontColor": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_N$placeholder": "请输入验证码",
     "_N$placeholderFontSize": 20,
     "_N$placeholderFontColor": {
       "__type__": "cc.Color",
-      "r": 127,
-      "g": 127,
-      "b": 127,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_N$maxLength": 9999,
@@ -495,9 +495,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -584,7 +584,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "f0cd7175-096c-4674-ada1-e16def34e72e"
+      "__uuid__": "12036b37-8a1c-49c1-8d73-4cf2e74ae33f"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -745,9 +745,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -808,7 +808,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "f0cd7175-096c-4674-ada1-e16def34e72e"
+      "__uuid__": "12036b37-8a1c-49c1-8d73-4cf2e74ae33f"
     },
     "_type": 1,
     "_sizeMode": 0,
