@@ -217,7 +217,7 @@ const DataMgr = (function () {
      */
     _p.is_receive = function (id) {
         if (!Global.is_food_collection_time())          //时间点不到
-            return 1;
+            return 2;
 
         var last_time = this.last_receive[id];
 
@@ -433,7 +433,7 @@ const DataMgr = (function () {
 
         this.get_user_info(Global.UserMgr.id, function (data) {
             this.init_data(data);
-            Global.schedule(this.set_game_info, this, 60);
+            Global.schedule(this.set_game_info, this, 30);
         }.bind(this));
     };
 

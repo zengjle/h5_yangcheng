@@ -32,7 +32,7 @@ if (!CC_EDITOR) {
 
     cc.vv = {};
     window.config = { data: $data };
-    // document.cookie = "agent=Web";
+    document.cookie = "agent=Web";
     window.Global = {
         DEBUG: false,
         DataMgr: DataMgr,

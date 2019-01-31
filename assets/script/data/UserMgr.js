@@ -22,16 +22,26 @@ const UserMgr = (function () {
         }
         if (!this.verification_param(tel, code))                  //验证参数是否有正确
             return;
+
+        var fail_fn = function (res) {
+            tips.show(res.msg || '登入失败');
+            Global.Observer.emit('login_fail');
+            fail_fn = null;
+        };
+
         Global.HTTP.send("GET", '', {
             module: 'UserService.loginBytel',
             tel: tel,
             code: code
         }, function (res) {
+            if (!res.data) {
+                fail_fn(res);
+                return;
+            }
             cc.js.get(this, 'id', function () { return tel; });
+            document.cookie = "token=" + res.data.token;
             Global.Observer.emit('login', tel);
-        }.bind(this), function (res) {
-            tips.show(res.msg || '登入失败');
-        });
+        }.bind(this), fail_fn);
     };
 
     /**获取好友信息
@@ -55,14 +65,23 @@ const UserMgr = (function () {
     _p.send_code = function (tel) {
         if (!this.verification_param(tel, true))                                    //验证参数是否有正确
             return;
+
+        var fail_fn = function (res) {
+            tips.show(res.msg || '发送失败');
+            Global.Observer.emit('send_code_fail');
+            fail_fn = null;
+        };
         Global.HTTP.send("GET", '', {
             module: 'CodeService.sendCode',
             tel: tel
-        }, function () {
-            tips.show('发送成功');
-        }, function () {
-            tips.show('发送失败');
-        });
+        }, function (res) {
+            if (!res.msg || res.msg === '验证码发送成功') {
+                tips.show('发送成功');
+                Global.Observer.emit('send_code_success');
+            } else {
+                fail_fn(res);
+            }
+        }, fail_fn);
         return true;
     };
 
@@ -80,8 +99,12 @@ const UserMgr = (function () {
             tips.show('账号是乱码');
             return
         }
+        if (String(tel).length !== 11) {
+            tips.show('请输入正确账号');
+            return
+        }
         if (!code) {
-            tips.show('没有输入密码');
+            tips.show('没有输入验证码');
             return
         }
         return true;

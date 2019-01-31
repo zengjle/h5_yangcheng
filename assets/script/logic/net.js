@@ -223,7 +223,7 @@ let net = cc.Class({
 
     //每日问答
     daily_question_answer: function (_msg, _event_name) {
-        var _question_id = Math.floor(Math.random() * data.question.answer.length);
+        var _question_id = 6//Math.floor(Math.random() * data.question.answer.length);
         Global.DataMgr.is_question = true;
 
         Global.DataMgr.mission[5].num++;

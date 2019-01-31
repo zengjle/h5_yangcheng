@@ -2,52 +2,55 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        loading_node: cc.Node,
-        start_game_node: cc.Node
+        tel_editbox: cc.EditBox,
+        code_editbox: cc.EditBox,
+        send_code_btn_label: cc.Label
     },
 
     start() {
         require('Global')();
-        this.start_game_node.active = false;
-        tips.show(document.cookie);
-        this.scheduleOnce(this.init_user_info, 1);
-        cc.director.preloadScene('game');
+
+        if (Global.DEBUG) {
+            Global.UserMgr.login();
+            cc.director.loadScene('game');
+        } else {
+            window.bindUI.init(this.node);
+            cc.director.preloadScene('game');
+
+            Global.Observer.on('DataMgr_init_data_ok', function () {
+                cc.director.loadScene('game');
+            }, this);
+
+            Global.Observer.on('send_code_success', function () {
+                this.count_down(this.send_code_btn_label);
+            }, this);
+        }
     },
 
-    init_user_info() {
-        $.post('http://api.cccx.ltd/post', {
-            module: 'UserService.userstate'
-        }, function (data, status, xhr) {
-            this.start_game_node.active = true;
-            this.loading_node.active = false;
-            if (status === 'success') {
-                var ret = data;
-                try {
-                    if (typeof data === 'string')
-                        ret = JSON.parse(data);
-                } catch (e) {
-                    tips.show('获取信息失败，请退出重新登入');
-                }
-                var data = ret.data;
-                if (!data) {
-                    tips.show(ret.msg);
-                    Global.DEBUG = true;
-                    Global.UserMgr.login();
-                    return;
-                }
-                var tel = String(data.tel);
-                cc.js.get(Global.UserMgr, 'id', function () { return tel; });
-                Global.Observer.emit('login', tel);
-            } else {
-                tips.show('获取信息失败，请退出重新登入');
+    /**验证码倒计时60秒
+     *
+     * @param label
+     */
+    count_down(label) {
+        var count = 61;
+        label.node.parent.$Button.interactable = false;
+        var fn = (function () {
+            count--;
+            label.string = count + '秒后可重新发送验证码';
+            if (count <= 0) {
+                label.node.parent.$Button.interactable = true;
+                label.string = '发送验证码';
             }
-        }.bind(this));
+        });
+        fn();
+        this.schedule(fn, 1, 60);
     },
 
-    start_game() {
-        this.start_game_node.destroy();
-        this.loading_node.active = true;
-        Global.AudioMgr.play('main_bg', 1, true, 'BGM');                   //背景音乐
-        cc.director.loadScene('game');
+    send_code() {
+        Global.UserMgr.send_code(this.tel_editbox.string);
+    },
+
+    login() {
+        Global.UserMgr.login(this.tel_editbox.string, this.code_editbox.string);
     }
 });
