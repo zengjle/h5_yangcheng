@@ -114,11 +114,6 @@ let net = cc.Class({
         });
     },
 
-    //获取好友食物
-    get_friend_food: function (_msg, _event_name) {
-
-    },
-
     //文昌阁活动结束领取奖励
     get_mission_reward: function (msg, _event_name) {
         Global.DataMgr.wen_chang_men_max_source = msg.mission_score;

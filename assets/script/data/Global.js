@@ -199,7 +199,7 @@ if (!CC_EDITOR) {
             if (hour === 9 || hour === 12 || hour === 18) {
                 return true;
             }
-            return true;
+            return false;
         },
 
         /**给对象添加一个_id或uuid属性
