@@ -340,4 +340,4 @@ let net = cc.Class({
     }
 });
 
-module.exports =window.net= new net();
+module.exports = window.net = new net();
