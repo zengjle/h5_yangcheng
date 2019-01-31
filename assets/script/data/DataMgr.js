@@ -224,13 +224,13 @@ const DataMgr = (function () {
         if (!last_time)                                 //第一次领取
             return 0;
 
-        var last_date = new Date(last_time),            //上一次的时间
+        var last_date = new Date(last_time * 1000),            //上一次的时间
             last_year = last_date.getFullYear(),
             last_month = last_date.getMonth() + 1,
             last_day = last_date.getDate(),
             last_hour = last_date.getHours(),
 
-            cur_date = new Date(Global.time),           //现在的时间
+            cur_date = new Date(Global.time * 1000),           //现在的时间
             cur_year = cur_date.getFullYear(),
             cur_month = cur_date.getMonth() + 1,
             cur_day = cur_date.getDate(),
@@ -313,17 +313,17 @@ const DataMgr = (function () {
     _p.get_info_by_id = function (id, num = 1) {
         var info = config.data.prop[id];
         return [id, info.type, info.addition, num];
-    },
+    };
 
-        //获取商店信息
-        _p.get_shop_all_info = function () {
-            var info = [],
-                exchange = config.data.exchange;
-            for (let i in exchange) {
-                info.push(exchange[i]);
-            }
-            return info;
-        };
+    //获取商店信息
+    _p.get_shop_all_info = function () {
+        var info = [],
+            exchange = config.data.exchange;
+        for (let i in exchange) {
+            info.push(exchange[i]);
+        }
+        return info;
+    };
 
     //购买商品
     _p.buy_commodity = function (_msg) {
