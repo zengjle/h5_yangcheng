@@ -8,7 +8,10 @@ cc.Class({
         lv: cc.Label,
         steal: cc.Node
     },
-
+    onLoad: function () {},
+    start:function(){
+        this.init(this.args[0]);
+    },
     init(info) {
         var fish = info.friend_info.fish;
         progressbar_fish_exp.progress = fish.exp / fish.max_exp;
