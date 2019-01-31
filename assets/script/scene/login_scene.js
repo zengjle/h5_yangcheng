@@ -14,12 +14,19 @@ cc.Class({
             Global.UserMgr.login();
             cc.director.loadScene('game');
         } else {
-            window.bindUI.init(this.node);
-            cc.director.preloadScene('game');
-
             Global.Observer.on('DataMgr_init_data_ok', function () {
                 cc.director.loadScene('game');
             }, this);
+
+            var id = Global.getData('14325', null);
+            var token = Global.getData('136533', null);
+            if (id && token) {
+                Global.UserMgr.init_storage_data(id, token);
+                return;
+            }
+
+            window.bindUI.init(this.node);
+            cc.director.preloadScene('game');
 
             Global.Observer.on('send_code_success', function () {
                 this.count_down(this.send_code_btn_label);

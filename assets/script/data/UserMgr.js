@@ -23,25 +23,43 @@ const UserMgr = (function () {
         if (!this.verification_param(tel, code))                  //验证参数是否有正确
             return;
 
-        var fail_fn = function (res) {
-            tips.show(res.msg || '登入失败');
-            Global.Observer.emit('login_fail');
-            fail_fn = null;
-        };
-
         Global.HTTP.send("GET", '', {
             module: 'UserService.loginBytel',
             tel: tel,
             code: code
-        }, function (res) {
-            if (!res.data) {
-                fail_fn(res);
-                return;
-            }
-            cc.js.get(this, 'id', function () { return tel; });
-            document.cookie = "token=" + res.data.token;
-            Global.Observer.emit('login', tel);
-        }.bind(this), fail_fn);
+        }, function (res, xhr) {
+            var id = res.data.id;
+            var token = this.get_token_by_string(xhr.responseText);
+            this.init_storage_data(id, token);
+        }.bind(this), function (res) {
+            tips.show(res.msg || '登入失败');
+            Global.Observer.emit('login_fail');
+        });
+    };
+
+    _p.init_storage_data = function (id, token) {
+        Global.setData('14325', id);
+        Global.setData('136533', token);
+        cc.js.get(this, 'id', function () { return id; });
+        document.cookie = "token=" + token;
+        Global.Observer.emit('login', id);
+    };
+
+    /**从json字符串中获取token
+     * 
+     */
+    _p.get_token_by_string = function (string) {
+        var index = "\"token\":";
+        var token_index = string.indexOf(index);
+        token_index += index.length;
+        var str = string.substring(token_index, string.length);
+        var i = str.indexOf('}');
+        var token = str.substring(0, i);
+        i = token.indexOf(',');
+        if (i !== -1) {
+            token = token.substring(0, i);
+        }
+        return token;
     };
 
     /**获取好友信息
@@ -66,22 +84,16 @@ const UserMgr = (function () {
         if (!this.verification_param(tel, true))                                    //验证参数是否有正确
             return;
 
-        var fail_fn = function (res) {
-            tips.show(res.msg || '发送失败');
-            Global.Observer.emit('send_code_fail');
-            fail_fn = null;
-        };
         Global.HTTP.send("GET", '', {
             module: 'CodeService.sendCode',
             tel: tel
         }, function (res) {
-            if (!res.msg || res.msg === '验证码发送成功') {
-                tips.show('发送成功');
-                Global.Observer.emit('send_code_success');
-            } else {
-                fail_fn(res);
-            }
-        }, fail_fn);
+            tips.show('发送成功');
+            Global.Observer.emit('send_code_success');
+        }, function (res) {
+            tips.show(res.msg || '发送失败');
+            Global.Observer.emit('send_code_fail');
+        });
         return true;
     };
 
@@ -92,15 +104,15 @@ const UserMgr = (function () {
      */
     _p.verification_param = function (tel, code) {
         if (!tel) {
-            tips.show('没有输入账号');
+            tips.show('没有输入手机号码');
             return
         }
         if (isNaN(parseInt(tel))) {
-            tips.show('账号是乱码');
+            tips.show('账号是需要是正整数');
             return
         }
         if (String(tel).length !== 11) {
-            tips.show('请输入正确账号');
+            tips.show('请输入正确手机号码');
             return
         }
         if (!code) {

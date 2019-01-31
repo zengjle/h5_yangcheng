@@ -18,15 +18,15 @@ const HTTP = (function () {
                     if (typeof data === 'string')
                         ret = JSON.parse(data);
                 } catch (e) {
-                    remedyCallback && remedyCallback(ret);
+                    remedyCallback && remedyCallback(ret, xhr);
                 }
-                if (ret.state == '500') {
-                    remedyCallback && remedyCallback(ret);
+                if (ret.state == '000') {
+                    callback && callback(ret, xhr);
                     return;
                 }
-                callback && callback(ret);
+                remedyCallback && remedyCallback(ret, xhr);
             } else {
-                remedyCallback && remedyCallback(data);
+                remedyCallback && remedyCallback(data, xhr);
             }
         };
         if (mode === 'GET') {

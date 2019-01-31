@@ -431,10 +431,12 @@ const DataMgr = (function () {
             return;
         }
 
-        this.get_user_info(Global.UserMgr.id, function (data) {
-            this.init_data(data);
+        var fn = function (data) {
+            this.init_data(data || null);
             Global.schedule(this.set_game_info, this, 30);
-        }.bind(this));
+        }.bind(this);
+
+        this.get_user_info(Global.UserMgr.id, fn, fn);
     };
 
     /**存储用户数据
@@ -462,7 +464,7 @@ const DataMgr = (function () {
      * @param id        用户id
      * @param cb        回调
      */
-    _p.get_user_info = function (id, cb) {
+    _p.get_user_info = function (id, cb, fail_cb) {
         Global.HTTP.send('POST', '', {
             module: 'StorageService.getGameUser',
             userid: id
@@ -486,6 +488,7 @@ const DataMgr = (function () {
                 cb(data);
             }
         }.bind(this), function () {
+            fail_cb && fail_cb();
             tips.show('获取数据失败');
         });
     };
