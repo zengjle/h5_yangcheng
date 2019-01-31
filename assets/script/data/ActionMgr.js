@@ -112,9 +112,10 @@ const ActionMgr = (function () {
             progress.progress += 0.01;
             if (progress.progress >= 1) {
                 progress.progress = 0;
-                num--
+                num--;
             }
-            if (num < 1 && progress.progress >= percentage) {
+            if ((num < 1 && progress.progress >= percentage) || num <= -1) {
+                progress.progress = percentage;
                 this.updateCallBack.splice(this.updateCallBack.indexOf(fn), 1);
                 fn = null;
                 progress = null;
