@@ -16,11 +16,11 @@ cc.Class({
         food_atlas: cc.SpriteAtlas,
         icon_hand: cc.Node,
         fish_honor: cc.Sprite,
-        img_fish:cc.Sprite,
-        fish_body:[cc.SpriteFrame],
+        img_fish: cc.Sprite,
+        fish_body: [cc.SpriteFrame],
         fish_honor_frame: [cc.SpriteFrame],
-        spriteatlas_head:cc.SpriteAtlas,
-        img_head:cc.Sprite,
+        spriteatlas_head: cc.SpriteAtlas,
+        img_head: cc.Sprite,
     },
     onLoad: function () {
 
@@ -44,19 +44,19 @@ cc.Class({
 
         if (info.get_prop_state) {
             this.steal.active = true;
-            net.emit('get_friend_food',{friend_id : info.friend_id});
+            net.emit('get_friend_food', { friend_id: info.friend_id });
         } else {
             tips.show('他的仓库空空如也,换个人看看吧~');
         }
 
-        var user_info = info.user_info;
+        var user_info = info.friend_info.user_info;
         this.nickname_label.string = user_info.nickname;
         this.user_lv_label.string = fish.lv;
     },
 
     get_friend_food: function () {
         ui.emit("touch_enable", true);
-        this.icon_hand.runAction(cc.sequence(cc.moveTo(0.3, this.icon_hand.node.getPosition()), cc.callFunc(() => {
+        this.icon_hand.runAction(cc.sequence(cc.moveTo(0.3, this.food_sprite.node.getPosition()), cc.callFunc(() => {
             net.emit('add_props', { id: this.food_info[0], num: 1 });
             this.steal.active = false;
             ui.emit("touch_enable", false);
@@ -65,7 +65,7 @@ cc.Class({
 
     _register_handler: function () {
         net.on("get_friend_food_ret", (_msg) => {
-            this.this.food_info = _msg;
+            this.food_info = _msg.info;
             this.food_sprite.spriteFrame = this.food_atlas.getSpriteFrame('bag_food_' + _msg.info[0]);
         }, this.node);
     },

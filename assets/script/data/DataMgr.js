@@ -413,7 +413,7 @@ const DataMgr = (function () {
                 id_array.push(i);
             }
         }
-        return this.get_info_by_id(Global.getRandomNum_Round(0, id_array.length, -1), 1);
+        return this.get_info_by_id(id_array[Global.getRandomNum_Round(1, id_array.length - 1, -1)], 1);
     };
 
     /**获取用户数据
