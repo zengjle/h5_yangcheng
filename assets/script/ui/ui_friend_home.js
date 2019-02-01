@@ -1,9 +1,12 @@
 let ui_window = require("ui_window");
 let net = require("net");
+let constant = require("constant");
+
 cc.Class({
     extends: ui_window,
 
     properties: {
+        window_type: constant.WINDOW_TYPE.UI,
         progressbar_fish_exp: cc.ProgressBar,
         lv: cc.Label,
         steal: cc.Node,
@@ -29,7 +32,7 @@ cc.Class({
         var fish = info.friend_info.fish;
         this.progressbar_fish_exp.progress = fish.exp / fish.max_exp;
         this.lv.string = 'lv.' + fish.lv;
-
+        let _lv = fish.lv;
         let _fish_image_id = 1;
         if (_lv >= 30 && _lv < 60) {
             _fish_image_id = 2;
@@ -41,7 +44,7 @@ cc.Class({
 
         if (info.get_prop_state) {
             this.steal.active = true;
-            net.emit('get_friend_food');
+            net.emit('get_friend_food',{friend_id : info.friend_id});
         } else {
             tips.show('他的仓库空空如也,换个人看看吧~');
         }
