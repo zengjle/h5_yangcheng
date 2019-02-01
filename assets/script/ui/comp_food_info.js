@@ -8,19 +8,19 @@ let tips = require("tips");
 cc.Class({
     extends: require("view_cell"),
     properties: {
-        node_icon:cc.Sprite,
-        lbl_exchange_intrgral:cc.Label,
-        lbl_name:cc.Label,
-        atlas_icon:cc.SpriteAtlas
-},
+        node_icon: cc.Sprite,
+        lbl_exchange_intrgral: cc.Label,
+        lbl_name: cc.Label,
+        atlas_icon: cc.SpriteAtlas
+    },
 
     onLoad: function () {
-       
+
 
     },
 
-    start:function(){
-      
+    start: function () {
+
     },
 
     onEnable: function () {
@@ -40,16 +40,19 @@ cc.Class({
         this.lbl_name.string = _info.name;
         this.lbl_exchange_intrgral.string = "价格:" + _info.need_integral;
         this.node_icon.spriteFrame = this.atlas_icon.getSpriteFrame(_info.sample);
-        if(!this.node_icon.spriteFrame){
-            Global.Loader.changeSpriteFrame('food/'+_info.sample,this.node_icon);
+        if (!this.node_icon.spriteFrame) {
+            Global.Loader.changeSpriteFrame('food/' + _info.sample, this.node_icon);
         }
     },
 
     on_click: function () {
-        if(this.info.need_integral< Global.DataMgr.integration_num){
-            net.emit("add_chengche_integral",{info:this.info});
-            net.emit("buy_commodity",{info:this.info});
-        }else{
+        if (this.info.need_integral < Global.DataMgr.integration_num) {
+            if (this.info.prop_id === 8) {
+                net.emit("add_chengche_integral", { info: this.info });
+                return;
+            }
+            net.emit("buy_commodity", { info: this.info });
+        } else {
             tips.show("您的福缘不足以兑换该商品!");
         }
     },
