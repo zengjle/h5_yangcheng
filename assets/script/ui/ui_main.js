@@ -18,7 +18,6 @@ cc.Class({
     },
 
     onLoad: function () {
-        this.food = [1, 1, 100, 1];
         cc.vv.fish = this.node._$node_fish;
 
         Global.ActionMgr.create('flutter', this.node._$node_fish, null, 0, true);

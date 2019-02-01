@@ -23,7 +23,8 @@ cc.Class({
         img_head: cc.Sprite,
     },
     onLoad: function () {
-
+        cc.vv.fish = this.node._$node_fish;
+        Global.ActionMgr.create('flutter', this.node._$node_fish, null, 0, true);
     },
     start: function () {
         this.init(this.args[0]);
@@ -50,14 +51,14 @@ cc.Class({
         }
 
         var user_info = info.friend_info.user_info;
-        this.nickname_label.string = user_info.nickname;
+        this.nickname_label.string = user_info.nickname + "的家";
         this.user_lv_label.string = fish.lv;
     },
 
     get_friend_food: function () {
         ui.emit("touch_enable", true);
         this.icon_hand.runAction(cc.sequence(cc.moveTo(0.3, this.food_sprite.node.getPosition()), cc.callFunc(() => {
-            net.emit('add_props', { id: this.food_info[0], num: 1 });
+            net.emit(' wang', { id: this.food_info[0], num: 1 });
             this.steal.active = false;
             ui.emit("touch_enable", false);
         })));
@@ -68,5 +69,9 @@ cc.Class({
             this.food_info = _msg.info;
             this.food_sprite.spriteFrame = this.food_atlas.getSpriteFrame('bag_food_' + _msg.info[0]);
         }, this.node);
+    },
+
+    on_close() {
+        ui.close();
     },
 });
