@@ -24,11 +24,8 @@ let net = cc.Class({
         this.on("get_mission_reward", this.get_mission_reward.bind(this));
         // this.on("start_mission_game", this.start_mission_game.bind(this));
 
-
         this.on("enter_old_town", this.enter_old_town.bind(this));
         this.on("get_old_town_food", this.get_old_town_food.bind(this));
-        this.on("get_friend_food", this.get_friend_food.bind(this));
-
 
         this.on("feed_fish", this.feed_fish.bind(this));
         this.on("create_fish_data", this.create_fish_data.bind(this));
@@ -294,6 +291,7 @@ let net = cc.Class({
         var event_name = _event_name.type + "_ret";
         Global.UserMgr.get_all_friend_info(function (info) {
             info.forEach(data => {
+                data.tag = 0;
                 data.fish = data.fish[1];
             });
             this.emit(event_name, {
@@ -306,14 +304,24 @@ let net = cc.Class({
     //添加好友
     add_friend: function (_msg, _event_name) {
         Global.UserMgr.add_friend(_msg.friend_id);
+<<<<<<< HEAD
         _msg.tag = 0;
+=======
+        Global.DataMgr.all_friend_id.push(_msg.friend_id);
+>>>>>>> 6f62aa6c9d172bdee683d595e4ed982f5dff62c0
         this.emit(_event_name.type + "_ret", _msg);
     },
 
     //搜索好友
     search_friend: function (_msg, _event_name) {
+<<<<<<< HEAD
         Global.DataMgr.get_user_info(_msg.friend_id, function (info) {
+=======
+        var id = _msg.friend_id;
+        Global.get_user_info(id, function (info) {
+>>>>>>> 6f62aa6c9d172bdee683d595e4ed982f5dff62c0
             info.fish = info.fish[1];
+            info.tag = Global.DataMgr.all_friend_id.indexOf(id) === -1 ? 0 : 1;
             this.emit(_event_name.type + "_ret", {
                 friend_id: _msg.friend_id,
                 friend_info: info
