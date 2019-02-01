@@ -1029,14 +1029,16 @@
     "img_tag": {
       "__id__": 7
     },
-    "btn_goto": {
-      "__id__": 28
+    "lbl_click_btn": {
+      "__id__": 25
     },
     "friend_tag": [
       {
         "__uuid__": "3c21a854-371d-494a-8b11-c04a6543bf13"
       },
-      null
+      {
+        "__uuid__": "69646857-0fac-46fb-988b-6347888999ad"
+      }
     ],
     "head_atals": {
       "__uuid__": "c697fff1-857f-45e4-8dc4-eabb2b98a4cc"

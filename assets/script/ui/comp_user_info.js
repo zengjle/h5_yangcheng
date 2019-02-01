@@ -47,7 +47,7 @@ cc.Class({
         // 0.玩家id,1.玩家昵称,2.玩家宣言,3.玩家头像id,4.玩家生涯信息[["进入游戏,2019-2-1"]...]
         this.editbox_nickname.string = user_info.nickname;
         this.editbox_manifesto.string = user_info.manifesto;
-        this.lbl_user_id.string = "id:" + user_info.user_id; 
+        this.lbl_user_id.string = "id:" + Global.UserMgr.id; 
         this.head_id = user_info.head_id;
         this.btn_head.node.getComponent(cc.Sprite).spriteFrame = this.atlas_head.getSpriteFrame("head_"+user_info.head_id);
         // this.list_career.getComponent("comp_tableview").init(user_info.career.length,(_idx,_item)=>{

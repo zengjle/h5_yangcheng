@@ -9,7 +9,7 @@ cc.Class({
         lbl_nickname: cc.Label,
         lbl_manifesto: cc.Label,
         img_tag: cc.Sprite,
-        btn_goto: cc.Button,
+        lbl_click_btn: cc.Label,
 
         friend_tag:[cc.SpriteFrame],
         head_atals: cc.SpriteAtlas,
@@ -35,17 +35,23 @@ cc.Class({
 
     },
 
-    init_item: function (_msg, _tab) {
+    init_item: function (_msg, _tag) {
         this.user_id = _msg.user_id;
         this.lbl_nickname.string = _msg.nickname,
         this.lbl_manifesto.string = _msg.manifesto,
-        this.img_tag.spriteFrame = this.friend_tag[_tab];
+        this.img_tag.spriteFrame = this.friend_tag[_tag];
+        this._tag = _tag;
 
 
     },
 
     on_click: function () {
-        net.emit("enter_friend_home",{friend_id:this.user_id});
+        if(!this._tab){
+            net.emit("enter_friend_home",{friend_id:this.user_id});
+        }else{
+            this.btn_goto.getChildByName()
+            net.emit("add_friend",{friend_id : this.user_id})
+        }
     },
 
     on_open_sys: function (_, _uiName) {

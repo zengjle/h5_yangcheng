@@ -206,8 +206,8 @@ let net = cc.Class({
 
     //添加道具
     add_props: function (_msg, _event_name) {
-        Global.DataMgr.add_prop(id, num);
-        ui.open("popup_reward_layer", [id, 0, , 0, num]);
+        Global.DataMgr.add_prop(_msg[0], _msg[3]);
+        ui.open("popup_reward_layer", _msg);
         this.emit(_event_name.type + "_ret")
     },
 
@@ -306,12 +306,13 @@ let net = cc.Class({
     //添加好友
     add_friend: function (_msg, _event_name) {
         Global.UserMgr.add_friend(_msg.friend_id);
+        _msg.tag = 0;
         this.emit(_event_name.type + "_ret", _msg);
     },
 
     //搜索好友
     search_friend: function (_msg, _event_name) {
-        Global.get_user_info(_msg.friend_id, function (info) {
+        Global.DataMgr.get_user_info(_msg.friend_id, function (info) {
             info.fish = info.fish[1];
             this.emit(_event_name.type + "_ret", {
                 friend_id: _msg.friend_id,
