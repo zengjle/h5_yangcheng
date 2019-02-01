@@ -16,8 +16,12 @@ cc.Class({
         img_fish:cc.Sprite,
         fish_body:[cc.SpriteFrame],
         fish_honor_frame: [cc.SpriteFrame],
+        spriteatlas_head:cc.SpriteAtlas,
+        img_head:cc.Sprite,
     },
-    onLoad: function () { },
+    onLoad: function () {
+
+    },
     start: function () {
         this.init(this.args[0]);
     },
@@ -32,8 +36,8 @@ cc.Class({
         } else if (_lv >= 60) {
             _fish_image_id = 3;
         }
-        this.img_fish.spriteFrame = this.fish_body[_fish_image_id];
-        this.fish_honor.spriteFrame = this.fish_honor_frame[_fish_image_id];
+        this.img_fish.spriteFrame = this.fish_body[_fish_image_id - 1];
+        this.fish_honor.spriteFrame = this.fish_honor_frame[_fish_image_id - 1];
 
         if (info.get_prop_state) {
             this.steal.active = true;

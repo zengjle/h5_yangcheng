@@ -4236,7 +4236,13 @@
       {
         "__uuid__": "53d7af13-3bca-4adb-9e52-d54c03dc2901"
       }
-    ]
+    ],
+    "spriteatlas_head": {
+      "__uuid__": "c697fff1-857f-45e4-8dc4-eabb2b98a4cc"
+    },
+    "img_head": {
+      "__id__": 11
+    }
   },
   {
     "__type__": "cc.PrefabInfo",
