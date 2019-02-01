@@ -10,11 +10,13 @@ cc.Class({
     properties:{
         item_constont:cc.Node,
         node_list:cc.Node,
-        lbl_no_food_tips:cc.Node,
     },
 
     onLoad:function () {
 
+    },
+    
+    start:function(){
 
     },
 
@@ -25,7 +27,7 @@ cc.Class({
 
     _register_handler: function () {
         net.on("enter_friend_home_ret",(_msg)=>{
-
+            ui.open("ui_friend_home",_msg);
         },this.node);
     },
 
@@ -34,7 +36,9 @@ cc.Class({
     },
 
     init_friend:function(_bag_info){
-        
+        this.node_list.getComponent("comp_tableview").init_item(Object.keys(_msg.friend_info),( _idx,_item)=>{
+            _item.getComponent("comp_user_info").init_item(_msg[_idx+1],0);
+        })
     },
 
     on_choose_food:function(_, _prop_id){

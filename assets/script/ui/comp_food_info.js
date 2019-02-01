@@ -47,6 +47,7 @@ cc.Class({
 
     on_click: function () {
         if(this.info.need_integral< Global.DataMgr.integration_num){
+            net.emit("add_chengche_integral",{info:this.info});
             net.emit("buy_commodity",{info:this.info});
         }else{
             tips.show("您的福缘不足以兑换该商品!");

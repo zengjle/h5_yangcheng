@@ -12,6 +12,7 @@ cc.Class({
         editbox_nickname:cc.EditBox,
         editbox_manifesto:cc.EditBox,
         btn_head:cc.Button,
+        btn_close_head_bar:cc.Node,
         node_head_change_bar:cc.Node,
         list_head_change:cc.Node,
         list_career: cc.Node,
@@ -47,12 +48,15 @@ cc.Class({
         this.editbox_nickname.string = user_info.nickname;
         this.editbox_manifesto.string = user_info.manifesto;
         this.lbl_user_id.string = "id:" + user_info.user_id; 
-        this.btn_head.node.getComponent(cc.Sprite).spriteFrame = this.atlas_head.getSpriteFrame("head_"+user_info[3]);
+        this.head_id = user_info.head_id;
+        this.btn_head.node.getComponent(cc.Sprite).spriteFrame = this.atlas_head.getSpriteFrame("head_"+user_info.head_id);
         // this.list_career.getComponent("comp_tableview").init(user_info.career.length,(_idx,_item)=>{
         //     _item.active = true;
         //     _item.getChildByName("lbl_info").getComponent(cc.Label).string = user_info.career[_idx][0];
         //     _item.getChildByName("lbl_time").getComponent(cc.Label).string = user_info.career[_idx][1];
         // });
+        this.node_head_change_bar.active = false;
+        this.btn_close_head_bar.active = false;
     },
 
     init_head_bar:function(){
@@ -60,9 +64,11 @@ cc.Class({
         this.list_head_change.getComponent("comp_tableview").init(arr_head_frames.length,(_idx,_item)=>{
             _item.active = true;
             _item.position = cc.p(0,0);
-            _item.name = "btn_choose_head_" + arr_head_frames[_idx].name.split("head_")[0];
+            _item.getComponent(cc.Sprite).spriteFrame = arr_head_frames[_idx];
+            _item.name = "btn_choose_head_" + arr_head_frames[_idx]._name.split("head_")[1];
         });
         this.node_head_change_bar.active = true;
+        this.btn_close_head_bar.active = true;
     },
 
     on_close: function () {
@@ -71,22 +77,24 @@ cc.Class({
 
     on_close_head_bar: function () {
         this.node_head_change_bar.active = false;
+        this.btn_close_head_bar.active = false;
     },
 
-on_open_head_bar:function(){
-    this.init_head_bar();
-},
+    on_open_head_bar: function () {
+        this.init_head_bar();
+    },
 
     on_save_user_info:function(){
-        net.enit("save_user_info",{
+        net.emit("save_user_info",{
+            user_info:{
             nickname:this.editbox_nickname.string,
             head_id:this.head_id,
-            manifesto:this.editbox_manifesto.string,
+            manifesto:this.editbox_manifesto.string,}
         })
     },
 
     on_choose_head:function(_event){
-        this.head_id = +(_event.target.name.split("btn_choose_head_")[0]);
+        this.head_id = +(_event.target.name.split("btn_choose_head_")[1]);
         this.btn_head.getComponent(cc.Sprite).spriteFrame = this.atlas_head.getSpriteFrame("head_" + this.head_id);
         this.on_close_head_bar();
     },
