@@ -623,7 +623,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 31,
+      "width": 33,
       "height": 30
     },
     "_rotationX": 0,
@@ -4185,7 +4185,6 @@
     },
     "_enabled": true,
     "args": [],
-    "window_type": 1,
     "progressbar_fish_exp": {
       "__id__": 117
     },

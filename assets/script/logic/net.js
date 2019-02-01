@@ -331,12 +331,11 @@ let net = cc.Class({
 
     //进入好友家
     enter_friend_home: function (_msg, _event_name) {
-        let _emit_name = _event_name.type + "_ret";
         Global.DataMgr.get_user_info(_msg.friend_id, function (data) {
             data.fish = data.fish[1];
             var get_prop_state = Global.DataMgr.get_prop_state(_msg.friend_id, data);
             var get_num = get_prop_state ? Global.DataMgr.get_prop_state_num(_msg.friend_id) : 0;
-            this.emit(_emit_name, {
+            this.emit(_event_name.type + "_ret", {
                 friend_id: _msg.friend_id,
                 friend_info: data,
                 get_num: config.data.prop_state_num_max - get_num,
