@@ -304,7 +304,6 @@ let net = cc.Class({
     //添加好友
     add_friend: function (_msg, _event_name) {
         Global.UserMgr.add_friend(_msg.friend_id);
-        _msg.tag = 0;
         Global.DataMgr.all_friend_id.push(_msg.friend_id);
         this.emit(_event_name.type + "_ret", _msg);
     },
@@ -312,12 +311,16 @@ let net = cc.Class({
     //搜索好友
     search_friend: function (_msg, _event_name) {
         var id = _msg.friend_id;
-        let _emit_name = _event_name.type + "_ret";
+        var event_name = _event_name.type + "_ret";
         Global.DataMgr.get_user_info(id, function (info) {
+            if(!info){
+                tips.show('没有该玩家');
+                return;
+            }
             info.fish = info.fish[1];
-            info.tag = Global.DataMgr.all_friend_id.indexOf(id) === -1 ? 0 : 1;
-            this.emit(_emit_name, {
-                friend_id: _msg.friend_id,
+            info.user_info.tag = Global.DataMgr.all_friend_id.indexOf(id) !== -1 ? 0 : 1;
+            this.emit(event_name, {
+                friend_id: id,
                 friend_info: info
             });
         }.bind(this));
@@ -331,13 +334,14 @@ let net = cc.Class({
 
     //进入好友家
     enter_friend_home: function (_msg, _event_name) {
-        let _emit_name = _event_name.type + "_ret";
-        Global.DataMgr.get_user_info(_msg.friend_id, function (data) {
+        var friend_id = _msg.friend_id;
+        var event_name = _event_name.type + "_ret";
+        Global.DataMgr.get_user_info(friend_id, function (data) {
             data.fish = data.fish[1];
-            var get_prop_state = Global.DataMgr.get_prop_state(_msg.friend_id, data);
-            var get_num = get_prop_state ? Global.DataMgr.get_prop_state_num(_msg.friend_id) : 0;
-            this.emit(_emit_name, {
-                friend_id: _msg.friend_id,
+            var get_prop_state = Global.DataMgr.get_prop_state(friend_id, data);
+            var get_num = get_prop_state ? Global.DataMgr.get_prop_state_num(friend_id) : 0;
+            this.emit(event_name, {
+                friend_id: friend_id,
                 friend_info: data,
                 get_num: config.data.prop_state_num_max - get_num,
                 get_prop_state: get_prop_state

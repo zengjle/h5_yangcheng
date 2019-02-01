@@ -162,11 +162,12 @@ const UserMgr = (function () {
                     friend_info = null;
                 }
             }
+            Global.DataMgr.all_friend_id = [];
             if (!len) {
                 len = 1;
                 fn();
+                return;
             }
-            Global.DataMgr.all_friend_id = [];
             data.forEach(info => {
                 Global.DataMgr.all_friend_id.push(info.to);
                 Global.DataMgr.get_user_info(info.to, fn);
