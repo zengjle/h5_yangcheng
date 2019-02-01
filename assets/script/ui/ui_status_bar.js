@@ -31,6 +31,7 @@ cc.Class({
         node_map:cc.Node,
         node_shop:cc.Node,
         node_head_info:cc.Node,
+
     },
 
     // use this for initialization
@@ -154,6 +155,7 @@ cc.Class({
         this.lbl_user_lv.string = _fish.lv;
         this.img_food.spriteFrame = null;
         this.lbl_feed_tips.string = "选择食物";
+        this.icon_head.spriteFrame = this.atlas_head.getSpriteFrame("head_" + _msg.user_info.head_id);
 
         if (_msg.level_up || _msg.level_up === 0) {
             var psbar_fish_exp = this.progressbar_fish_exp;
