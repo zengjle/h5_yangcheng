@@ -159,6 +159,10 @@ const UserMgr = (function () {
                     friend_info = null;
                 }
             }
+            if(!len){
+                len = 1;
+                fn();
+            }
             data.forEach(info => {
                 Global.DataMgr.get_user_info(info.to, fn);
             });
