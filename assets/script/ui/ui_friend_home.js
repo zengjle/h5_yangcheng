@@ -11,7 +11,11 @@ cc.Class({
         user_lv_label: cc.Label,
         food_sprite: cc.Sprite,
         food_atlas: cc.SpriteAtlas,
-        icon_hand: cc.Node
+        icon_hand: cc.Node,
+        fish_honor: cc.Sprite,
+        img_fish:cc.Sprite,
+        fish_body:[cc.SpriteFrame],
+        fish_honor_frame: [cc.SpriteFrame],
     },
     onLoad: function () { },
     start: function () {
@@ -21,6 +25,15 @@ cc.Class({
         var fish = info.friend_info.fish;
         this.progressbar_fish_exp.progress = fish.exp / fish.max_exp;
         this.lv.string = 'lv.' + fish.lv;
+
+        let _fish_image_id = 1;
+        if (_lv >= 30 && _lv < 60) {
+            _fish_image_id = 2;
+        } else if (_lv >= 60) {
+            _fish_image_id = 3;
+        }
+        this.img_fish.spriteFrame = this.fish_body[_fish_image_id];
+        this.fish_honor.spriteFrame = this.fish_honor_frame[_fish_image_id];
 
         if (info.get_prop_state) {
             this.steal.active = true;

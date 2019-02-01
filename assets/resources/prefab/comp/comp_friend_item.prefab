@@ -967,7 +967,7 @@
     "target": {
       "__id__": 1
     },
-    "component": "comp_bar_item",
+    "component": "comp_friend_item",
     "handler": "on_click",
     "customEventData": ""
   },
@@ -1031,6 +1031,9 @@
     },
     "lbl_click_btn": {
       "__id__": 25
+    },
+    "img_head": {
+      "__id__": 18
     },
     "friend_tag": [
       {

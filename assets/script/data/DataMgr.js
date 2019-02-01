@@ -31,6 +31,7 @@ const DataMgr = (function () {
                     id = Global.UserMgr.id;
                 _t.data = null;
                 data = _t.data = $data;
+                data.time = time;
                 data.id = id;
                 data.user_info.user_id = id;
                 data.user_info.nickname = id;
@@ -479,12 +480,21 @@ const DataMgr = (function () {
                         console.log('用户信息是字符串，尝试转换成对象失败：', e);
                     }
                 }
+                // if (!data) {
+                //     var $data = Global.clone(config.data.user_init_data),
+                //         time = Global.time;
+                //     data = $data;
+                //     data.time = time;
+                //     data.id = id;
+                //     data.user_info.user_id = id;
+                //     data.user_info.nickname = id;
+                // }
                 if (data) {
                     if (!Object.keys(data.fish).length) {
                         data.fish[1] = Global.clone(config.data.fish_init_data);
                     }
-                    Global.all_user_game_data[id] = data;
                 }
+                Global.all_user_game_data[id] = data;
                 cb(data);
             }
         }.bind(this), function () {

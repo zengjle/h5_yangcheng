@@ -4210,7 +4210,11 @@
     },
     "icon_hand": {
       "__id__": 132
-    }
+    },
+    "fish_honor": null,
+    "img_fish": null,
+    "fish_body": [],
+    "fish_honor_frame": []
   },
   {
     "__type__": "cc.PrefabInfo",
