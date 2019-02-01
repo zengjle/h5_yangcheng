@@ -62,11 +62,11 @@ if (!CC_EDITOR) {
          *
          */
         init: function () {
-            var i = 5;
-            if (parseInt(Global.getData('!@#$%', i - 1)) !== i) {
-                Global.setData('!@#$%', i);
-                Global.setData('game_data', null);
-            }
+            // var i = 5;
+            // if (parseInt(Global.getData('!@#$%', i - 1)) !== i) {
+            //     Global.setData('!@#$%', i);
+            //     Global.setData('game_data', null);
+            // }
 
 
             Global.init_time();

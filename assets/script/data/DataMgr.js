@@ -4,7 +4,7 @@
 const DataMgr = (function () {
     'use strict';
     function DataMgr() {
-
+        this.all_friend_id = [];    //所有好友的id
     };
 
     const _p = DataMgr.prototype;

@@ -143,6 +143,9 @@ const UserMgr = (function () {
      */
     _p.get_all_friend_info = function (cb) {
         this.get_all_friend(function (data) {
+            if (!data) {
+                data = [];
+            }
             var len = data.length;
             var friend_info = [];
             var fn = function (info) {
@@ -159,11 +162,13 @@ const UserMgr = (function () {
                     friend_info = null;
                 }
             }
-            if(!len){
+            if (!len) {
                 len = 1;
                 fn();
             }
+            Global.DataMgr.all_friend_id = [];
             data.forEach(info => {
+                Global.DataMgr.all_friend_id.push(info.to);
                 Global.DataMgr.get_user_info(info.to, fn);
             });
         });
