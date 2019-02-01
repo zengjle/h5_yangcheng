@@ -50,12 +50,13 @@ cc.Class({
             _bag_info = [_bag_info];
         }
         if (!_bag_info.length) {
-            this.lbl_no_friend_tips.node.active = false;
+            this.lbl_no_friend_tips.node.active = true;
             return;
         }
+        this.lbl_no_friend_tips.node.active = false;
         this.node_list.getComponent("comp_tableview").init(1, (_idx, _item) => {
             let friend_tag = _bag_info[_idx].tag || 0;
-            _item.getComponent("comp_friend_item").init_item(_bag_info[_idx], friend_tag);
+            _item.getComponent("comp_friend_item").init_item(_bag_info[_idx].user_info, friend_tag);
         })
     },
 

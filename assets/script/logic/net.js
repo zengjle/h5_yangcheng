@@ -204,7 +204,7 @@ let net = cc.Class({
     //添加道具
     add_props: function (_msg, _event_name) {
         Global.DataMgr.add_prop(_msg.id, _msg.num);
-        ui.open("popup_reward_layer", _msg);
+        ui.open("popup_reward_layer", [_msg.id,data.prop[_msg.id].type,data.prop[_msg.id].addition,_msg.num]);
         this.emit(_event_name.type + "_ret")
     },
 
