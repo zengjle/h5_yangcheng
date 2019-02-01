@@ -255,10 +255,10 @@ let net = cc.Class({
 
     //购买物品
     buy_commodity: function (_msg, _event_name) {
-        Global.DataMgr.buy_commodity(_msg);
+        Global.DataMgr.buy_commodity(_msg.info);
         this.emit(_event_name.type + "_ret", {
             integral: Global.DataMgr.integration_num,
-            commodity: Global.DataMgr.get_info_by_id(_msg.prop_id)
+            commodity: Global.DataMgr.get_info_by_id(_msg.info.prop_id)
         })
     },
 

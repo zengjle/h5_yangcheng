@@ -6,18 +6,24 @@ cc.Class({
     properties: {
         progressbar_fish_exp: cc.ProgressBar,
         lv: cc.Label,
-        steal: cc.Node
+        steal: cc.Node,
+        nickname_label: cc.Label,
+        user_lv_label: cc.Label
     },
-    onLoad: function () {},
-    start:function(){
+    onLoad: function () { },
+    start: function () {
         this.init(this.args[0]);
     },
     init(info) {
         var fish = info.friend_info.fish;
-        progressbar_fish_exp.progress = fish.exp / fish.max_exp;
+        this.progressbar_fish_exp.progress = fish.exp / fish.max_exp;
         this.lv.string = 'lv.' + fish.lv;
 
         this.steal.active = !!info.get_num;
+
+        var user_info = info.user_info;
+        this.nickname_label.string = user_info.nickname;
+        this.user_lv_label.string = fish.lv;
     },
 
     get_friend_food: function () {

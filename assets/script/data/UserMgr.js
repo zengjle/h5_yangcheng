@@ -41,7 +41,7 @@ const UserMgr = (function () {
         Global.setData('14325', id);
         Global.setData('136533', token);
         cc.js.get(this, 'id', function () { return id; });
-        document.cookie = "token=" + token;
+        document.cookie = `token=${token}`;
         Global.Observer.emit('login', id);
     };
 

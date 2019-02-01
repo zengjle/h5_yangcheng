@@ -368,7 +368,7 @@ const DataMgr = (function () {
             tips.show('兑换成功');
         }, function () {
             tips.show('兑换失败');
-        });
+        }, 'http://api.cccx.ltd');
     };
 
     /**是否还能偷取过某个好友
