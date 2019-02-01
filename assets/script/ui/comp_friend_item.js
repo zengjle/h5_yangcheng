@@ -31,7 +31,8 @@ cc.Class({
     _register_handler: function () {
         net.on("add_friend_ret", () => {
             tips.show("好友添加成功!");
-            this._tag = _tag;
+            this._tag = 0;
+            this.img_head.spriteFrame = this.head_atals.getSpriteFrame("head_"+ _msg.head_id);
             this.lbl_click_btn.string = !this._tag?"拜访":"添加";
         }, this.node);
     },
