@@ -10,6 +10,7 @@ cc.Class({
         lbl_manifesto: cc.Label,
         img_tag: cc.Sprite,
         lbl_click_btn: cc.Label,
+        img_head :cc.Sprite,
 
         friend_tag:[cc.SpriteFrame],
         head_atals: cc.SpriteAtlas,
@@ -41,7 +42,8 @@ cc.Class({
         this.lbl_manifesto.string = _msg.manifesto,
         this.img_tag.spriteFrame = this.friend_tag[_tag];
         this._tag = _tag;
-
+        this.img_head.spriteFrame = this.head_atals.getSpriteFrame("head_"+ _msg.head_id);
+        this.lbl_click_btn.string = !this._tag?"拜访":"添加";
 
     },
 
@@ -49,7 +51,6 @@ cc.Class({
         if(!this._tab){
             net.emit("enter_friend_home",{friend_id:this.user_id});
         }else{
-            this.btn_goto.getChildByName()
             net.emit("add_friend",{friend_id : this.user_id})
         }
     },

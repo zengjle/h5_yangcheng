@@ -12,6 +12,8 @@ cc.Class({
         node_daily_reward: cc.Node,
         atlas_ui: cc.SpriteAtlas,
         fish_honor: cc.Sprite,
+        img_fish:cc.Sprite,
+        fish_body:[cc.SpriteFrame],
     },
 
     onLoad: function () {
@@ -53,7 +55,7 @@ cc.Class({
         } else if (_lv >= 60) {
             _fish_image_id = 3;
         }
-
+        this.img_fish.spriteFrame = this.fish_body[_fish_image_id];
         this.fish_honor.spriteFrame = this.atlas_ui.getSpriteFrame("honor_" + _fish_image_id);
     },
 

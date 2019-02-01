@@ -36,7 +36,7 @@ cc.Class({
         }, this.node);
 
         net.on("search_friend_ret",(_msg)=>{
-            this.init_friend(_msg.friend_info);
+            this.init_friend([_msg.friend_info.user_info]);
         },this.node);
 
         net.on("add_friend_ret",(_msg)=>{
@@ -53,7 +53,7 @@ cc.Class({
         this.lbl_no_friend_tips.node.active = _bag_info.length <= 0;
         this.node_list.getComponent("comp_tableview").init(_bag_info.length, (_idx, _item) => {
             let friend_tag =  _bag_info[_idx].tag || 0;
-            _item.getComponent("comp_user_info").init_item(_bag_info[_idx],friend_tag);
+            _item.getComponent("comp_friend_item").init_item(_bag_info[_idx],friend_tag);
         })
     },
 

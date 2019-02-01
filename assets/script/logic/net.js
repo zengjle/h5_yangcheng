@@ -304,25 +304,19 @@ let net = cc.Class({
     //添加好友
     add_friend: function (_msg, _event_name) {
         Global.UserMgr.add_friend(_msg.friend_id);
-<<<<<<< HEAD
         _msg.tag = 0;
-=======
         Global.DataMgr.all_friend_id.push(_msg.friend_id);
->>>>>>> 6f62aa6c9d172bdee683d595e4ed982f5dff62c0
         this.emit(_event_name.type + "_ret", _msg);
     },
 
     //搜索好友
     search_friend: function (_msg, _event_name) {
-<<<<<<< HEAD
-        Global.DataMgr.get_user_info(_msg.friend_id, function (info) {
-=======
         var id = _msg.friend_id;
-        Global.get_user_info(id, function (info) {
->>>>>>> 6f62aa6c9d172bdee683d595e4ed982f5dff62c0
+        let _emit_name = _event_name.type + "_ret";
+        Global.DataMgr.get_user_info(id, function (info) {
             info.fish = info.fish[1];
             info.tag = Global.DataMgr.all_friend_id.indexOf(id) === -1 ? 0 : 1;
-            this.emit(_event_name.type + "_ret", {
+            this.emit(_emit_name, {
                 friend_id: _msg.friend_id,
                 friend_info: info
             });
@@ -342,7 +336,7 @@ let net = cc.Class({
             var get_prop_state = Global.DataMgr.get_prop_state(_msg.friend_id, data);
             var get_num = get_prop_state ? Global.DataMgr.get_prop_state_num(_msg.friend_id) : 0;
             this.emit(_event_name.type + "_ret", {
-                friend_id: friend_id,
+                friend_id: _msg.friend_id,
                 friend_info: data,
                 get_num: config.data.prop_state_num_max - get_num,
                 get_prop_state: get_prop_state

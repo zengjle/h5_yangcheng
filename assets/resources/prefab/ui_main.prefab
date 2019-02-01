@@ -2779,8 +2779,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 328,
-      "height": 394
+      "width": 325,
+      "height": 392
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -2879,7 +2879,21 @@
     },
     "fish_honor": {
       "__id__": 90
-    }
+    },
+    "img_fish": {
+      "__id__": 92
+    },
+    "fish_body": [
+      {
+        "__uuid__": "bab66ccc-a74f-4387-9797-d7628915a4ad"
+      },
+      {
+        "__uuid__": "09450bfe-3959-4d10-becd-b66eaeb3d006"
+      },
+      {
+        "__uuid__": "14d8ce01-6ba1-4f86-9d96-acb181b8a751"
+      }
+    ]
   },
   {
     "__type__": "cc.PrefabInfo",
