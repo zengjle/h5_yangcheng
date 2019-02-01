@@ -39,10 +39,6 @@ cc.Class({
             this.init_friend([_msg.friend_info.user_info]);
         }, this.node);
 
-        net.on("add_friend_ret", (_msg) => {
-            this.init_friend(_msg);
-            tips.show("好友添加成功!");
-        }, this.node);
     },
 
     _unregister_handler: function () {

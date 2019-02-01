@@ -29,7 +29,11 @@ cc.Class({
     },
 
     _register_handler: function () {
-
+        net.on("add_friend_ret", () => {
+            tips.show("好友添加成功!");
+            this._tag = _tag;
+            this.lbl_click_btn.string = !this._tag?"拜访":"添加";
+        }, this.node);
     },
 
     _unregister_handler: function () {
@@ -48,7 +52,7 @@ cc.Class({
     },
 
     on_click: function () {
-        if(!this._tab){
+        if(!this._tag){
             net.emit("enter_friend_home",{friend_id:this.user_id});
         }else{
             net.emit("add_friend",{friend_id : this.user_id})
