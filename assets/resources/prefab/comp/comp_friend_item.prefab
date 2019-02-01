@@ -222,7 +222,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c4924c35-0533-42ef-b143-6c769ffe08de"
     },
     "fileId": "17a+E7s2VMPKkitNBJF6vc",
     "sync": false
@@ -311,7 +311,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c4924c35-0533-42ef-b143-6c769ffe08de"
     },
     "fileId": "92xIaLbyVDiLC0xq97E2Ec",
     "sync": false
@@ -353,7 +353,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c4924c35-0533-42ef-b143-6c769ffe08de"
     },
     "fileId": "01/T/aBWdMab9Eixlc4m/5",
     "sync": false
@@ -498,7 +498,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c4924c35-0533-42ef-b143-6c769ffe08de"
     },
     "fileId": "3caPIAjMlEOL/q7nMp8RVr",
     "sync": false
@@ -531,7 +531,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c4924c35-0533-42ef-b143-6c769ffe08de"
     },
     "fileId": "96HL/XhlxNwJX/N52zVNKk",
     "sync": false
@@ -624,7 +624,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c4924c35-0533-42ef-b143-6c769ffe08de"
     },
     "fileId": "3cmOUup5tKyYHZhwieo2lD",
     "sync": false
@@ -715,7 +715,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c4924c35-0533-42ef-b143-6c769ffe08de"
     },
     "fileId": "153gbqvFZBdYxqNmOr9dE9",
     "sync": false
@@ -863,7 +863,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c4924c35-0533-42ef-b143-6c769ffe08de"
     },
     "fileId": "72+VXO+gpG76xbnYrlFwp1",
     "sync": false
@@ -977,7 +977,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c4924c35-0533-42ef-b143-6c769ffe08de"
     },
     "fileId": "93o/rqM6VNPIJdgkbGdClV",
     "sync": false
@@ -1048,7 +1048,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "c4924c35-0533-42ef-b143-6c769ffe08de"
     },
     "fileId": "f4YR++9R5NUq/pmx791c5k",
     "sync": false

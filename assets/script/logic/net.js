@@ -276,6 +276,8 @@ let net = cc.Class({
 
     //添加积分
     add_chengche_integral: function (_msg, _event_name) {
+        tips.show("兑换接口错误,暂时无法兑换积分!");
+        return;
         Global.DataMgr.add_chengche_integral(_msg[3]);
         var fn = null;
         fn = function () {

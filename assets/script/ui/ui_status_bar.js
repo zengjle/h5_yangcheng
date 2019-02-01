@@ -119,6 +119,7 @@ cc.Class({
         net.on("enter_friend_ret",(_msg)=>{
             this.lbl_bar_title.string = "好友";
             this.node_friend.active = true;
+            this.node_friend.getComponent("comp_friend").init_friend(_msg.friend_info);
             this.show_bar();
         })
         net.on("use_props_ret", (_msg) => {
@@ -214,10 +215,10 @@ cc.Class({
     on_chick_active_bar(_event, state,_cb) {
         let _bar_move_to;
         let _state = parseInt(state);
-        if(_state===1){
-            tips.show('暂未开放，敬请期待');
-            return;
-        }
+        // if (_state === 1) {
+        //     tips.show('暂未开放，敬请期待');
+        //     return;
+        // }
         ui.emit("touch_enable", true);
         if (_state) {
             if(_state === 5){
