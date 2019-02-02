@@ -44,19 +44,19 @@ const HTTP = (function () {
                 } catch (e) {
                     Global.log(ajax_Data);
                     Global.log("http res json:", xhr.responseText);
-                    remedyCallback && remedyCallback(xhr.responseText);
+                    remedyCallback && remedyCallback(xhr.responseText, xhr);
                 }
                 if (ret.state == '000') {
-                    callback && callback(ret);
+                    callback && callback(ret, xhr);
                     return;
                 }
                 Global.log(ajax_Data);
                 Global.log("http res obj:", ret);
-                remedyCallback && remedyCallback(ret);
+                remedyCallback && remedyCallback(ret, xhr);
             } else {
                 Global.log(ajax_Data);
                 Global.log("http res json:", xhr.responseText);
-                remedyCallback && remedyCallback(xhr.responseText);
+                remedyCallback && remedyCallback(xhr.responseText, xhr);
             }
         };
         ajax_Data = {
@@ -65,7 +65,7 @@ const HTTP = (function () {
             data: data,
             dataType: 'json',
             // xhrFields: {
-                // withCredentials: true
+            // withCredentials: true
             // },
             // contentType: "application/json",
             // crossDomain: true,

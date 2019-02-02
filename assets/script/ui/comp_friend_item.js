@@ -29,10 +29,11 @@ cc.Class({
     },
 
     _register_handler: function () {
-        net.on("add_friend_ret", () => {
+        net.on("add_friend_ret", (_msg) => {
             tips.show("好友添加成功!");
             this._tag = 0;
-            this.img_head.spriteFrame = this.head_atals.getSpriteFrame("head_"+ _msg.head_id);
+            var user_info = Global.all_user_game_data[_msg.friend_id].user_info;
+            this.img_head.spriteFrame = this.head_atals.getSpriteFrame("head_"+ user_info.head_id);
             this.lbl_click_btn.string = !this._tag?"拜访":"添加";
         }, this.node);
     },

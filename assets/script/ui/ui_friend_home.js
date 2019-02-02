@@ -50,7 +50,7 @@ cc.Class({
             tips.show('他的仓库空空如也,换个人看看吧~');
         }
 
-        var user_info = info.friend_info.user_info;
+        var user_info = this.user_info = info.friend_info.user_info;
         this.nickname_label.string = user_info.nickname + "的家";
         this.user_lv_label.string = fish.lv;
     },
@@ -60,6 +60,7 @@ cc.Class({
         this.icon_hand.runAction(cc.sequence(cc.moveTo(0.3, this.food_sprite.node.getPosition()), cc.callFunc(() => {
             net.emit(' wang', { id: this.food_info[0], num: 1 });
             this.steal.active = false;
+            Global.DataMgr.add_prop_state(this.user_info.user_id);
             ui.emit("touch_enable", false);
         })));
     },

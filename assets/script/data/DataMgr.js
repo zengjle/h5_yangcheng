@@ -69,6 +69,7 @@ const DataMgr = (function () {
             this.is_question = false;
             this.wen_chang_men_action_num = 3;
             this.data.prop_state = {};
+
             var mission = this.mission;
             for (let i in mission) {
                 mission[i].num = 0;
