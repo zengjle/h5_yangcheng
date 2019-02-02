@@ -1,0 +1,255 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "new_year_fire",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 1.1111111111111112,
+  "sample": 45,
+  "speed": 1,
+  "wrapMode": "2",
+  "curveData": {
+    "paths": {
+      "node_fire_1": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -77,
+                258
+              ]
+            },
+            {
+              "frame": 0.6222222222222222,
+              "value": [
+                -77,
+                558
+              ]
+            }
+          ],
+          "scale": [
+            {
+              "frame": 0.5777777777777777,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 0.6222222222222222,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 0.8444444444444444,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 0.8888888888888888,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            }
+          ]
+        },
+        "comps": {
+          "cc.Sprite": {
+            "spriteFrame": [
+              {
+                "frame": 0,
+                "value": {
+                  "__uuid__": "fb3e44b6-18ba-48a1-bb12-d88582309d21"
+                }
+              },
+              {
+                "frame": 0.6666666666666666,
+                "value": {
+                  "__uuid__": "a8a89cdc-8a47-4b9e-a43c-b28abd822b3c"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "node_fire_2": {
+        "props": {
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                -239,
+                300
+              ]
+            },
+            {
+              "frame": 0.4888888888888889,
+              "value": [
+                -239,
+                480
+              ]
+            }
+          ],
+          "scale": [
+            {
+              "frame": 0.4888888888888889,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 0.5333333333333333,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.5777777777777777,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 0.7111111111111111,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 0.7555555555555555,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            }
+          ]
+        },
+        "comps": {
+          "cc.Sprite": {
+            "spriteFrame": [
+              {
+                "frame": 0,
+                "value": {
+                  "__uuid__": "fb3e44b6-18ba-48a1-bb12-d88582309d21"
+                }
+              },
+              {
+                "frame": 0.5333333333333333,
+                "value": {
+                  "__uuid__": "a8a89cdc-8a47-4b9e-a43c-b28abd822b3c"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "node_fire_3": {
+        "props": {
+          "scale": [
+            {
+              "frame": 0.8666666666666667,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 0.9111111111111111,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            },
+            {
+              "frame": 0.9555555555555556,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 1.0888888888888888,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 1,
+                "y": 1
+              }
+            },
+            {
+              "frame": 1.1111111111111112,
+              "value": {
+                "__type__": "cc.Vec2",
+                "x": 0,
+                "y": 0
+              }
+            }
+          ],
+          "position": [
+            {
+              "frame": 0,
+              "value": [
+                164,
+                272
+              ]
+            },
+            {
+              "frame": 0.8666666666666667,
+              "value": [
+                164,
+                515
+              ]
+            }
+          ]
+        },
+        "comps": {
+          "cc.Sprite": {
+            "spriteFrame": [
+              {
+                "frame": 0,
+                "value": {
+                  "__uuid__": "fb3e44b6-18ba-48a1-bb12-d88582309d21"
+                }
+              },
+              {
+                "frame": 0.9111111111111111,
+                "value": {
+                  "__uuid__": "a8a89cdc-8a47-4b9e-a43c-b28abd822b3c"
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "events": []
+}

@@ -4,7 +4,8 @@ cc.Class({
     properties: {
         tel_editbox: cc.EditBox,
         code_editbox: cc.EditBox,
-        send_code_btn_label: cc.Label
+        send_code_btn_label: cc.Label,
+        node_mask:cc.Node,
     },
 
     start() {
@@ -15,7 +16,9 @@ cc.Class({
             cc.director.loadScene('game');
         } else {
             Global.Observer.on('DataMgr_init_data_ok', function () {
+                tips.show("登陆成功!");
                 cc.director.loadScene('game');
+               this.node_mask.active = true;
             }, this);
 
             var id = Global.getData('14325', null);
