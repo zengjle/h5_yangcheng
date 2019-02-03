@@ -28,9 +28,11 @@ const UserMgr = (function () {
             tel: tel,
             code: code
         }, function (res, xhr) {
+            tips.show("登陆成功!");
             var id = res.data.id;
             var token = this.get_token_by_string(xhr.responseText);
             this.init_storage_data(id, token);
+            Global.Observer.emit('login');
         }.bind(this), function (res) {
             tips.show(res.msg || '登入失败');
             Global.Observer.emit('login_fail');

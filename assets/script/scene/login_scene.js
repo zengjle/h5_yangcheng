@@ -5,7 +5,7 @@ cc.Class({
         tel_editbox: cc.EditBox,
         code_editbox: cc.EditBox,
         send_code_btn_label: cc.Label,
-        load_node: cc.Node,
+        node_mask:cc.Node,
     },
 
     start() {
@@ -15,9 +15,12 @@ cc.Class({
             Global.UserMgr.login();
             cc.director.loadScene('game');
         } else {
-            Global.Observer.on('DataMgr_init_data_ok', function () {
-                this.load_node.active = true;
+            Global.Observer.once('DataMgr_init_data_ok', function () {
                 cc.director.loadScene('game');
+            }, this);
+
+            Global.Observer.once('login', function () {
+               this.node_mask.active = true;
             }, this);
 
             var id = Global.getData('14325', null);

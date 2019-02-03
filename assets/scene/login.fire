@@ -78,10 +78,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 29
+        "__id__": 28
       },
       {
-        "__id__": 30
+        "__id__": 29
       }
     ],
     "_prefab": null,
@@ -210,7 +210,7 @@
       "__id__": 3
     },
     "_enabled": true,
-    "alignMode": 1,
+    "alignMode": 0,
     "_target": null,
     "_alignFlags": 45,
     "_left": 0,
@@ -560,7 +560,7 @@
       "__id__": 11
     },
     "_enabled": true,
-    "alignMode": 1,
+    "alignMode": 0,
     "_target": null,
     "_alignFlags": 18,
     "_left": 0,
@@ -895,7 +895,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "load",
+    "_name": "node_mask",
     "_objFlags": 0,
     "_parent": {
       "__id__": 2
@@ -913,19 +913,16 @@
       },
       {
         "__id__": 27
-      },
-      {
-        "__id__": 28
       }
     ],
     "_prefab": null,
-    "_id": "c7ERmFE7ZNoKoa4DTzC/YL",
-    "_opacity": 255,
+    "_id": "7fBpI0JipBw4FoEfBJZ/xq",
+    "_opacity": 175,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 0,
+      "g": 0,
+      "b": 0,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -971,13 +968,13 @@
       }
     ],
     "_prefab": null,
-    "_id": "6fNcp62HNNnLHhpFbBc5oL",
+    "_id": "d90sQ3jEBCIKLa/Xm4Wjvl",
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -988,7 +985,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 164,
+      "width": 320,
       "height": 40
     },
     "_rotationX": 0,
@@ -998,7 +995,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 0
+      "y": 106
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1023,46 +1020,11 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "加载中....",
+    "_N$string": "加载中,请稍后...",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
+    "_N$fontFamily": "simhei",
     "_N$overflow": 0
-  },
-  {
-    "__type__": "cc.Widget",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 23
-    },
-    "_enabled": true,
-    "alignMode": 1,
-    "_target": null,
-    "_alignFlags": 45,
-    "_left": 0,
-    "_right": 0,
-    "_top": 0,
-    "_bottom": 0,
-    "_verticalCenter": 0,
-    "_horizontalCenter": 0,
-    "_isAbsLeft": true,
-    "_isAbsRight": true,
-    "_isAbsTop": true,
-    "_isAbsBottom": true,
-    "_isAbsHorizontalCenter": true,
-    "_isAbsVerticalCenter": true,
-    "_originalWidth": 0,
-    "_originalHeight": 0
-  },
-  {
-    "__type__": "cc.BlockInputEvents",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 23
-    },
-    "_enabled": true
   },
   {
     "__type__": "cc.Sprite",
@@ -1073,7 +1035,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "75b1e6c8-9ef2-4474-8567-d9cc5dd2218e"
+      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -1089,6 +1051,15 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_atlas": null
+  },
+  {
+    "__type__": "cc.BlockInputEvents",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 23
+    },
+    "_enabled": true
   },
   {
     "__type__": "cc.Canvas",
@@ -1123,7 +1094,7 @@
     "send_code_btn_label": {
       "__id__": 12
     },
-    "load_node": {
+    "node_mask": {
       "__id__": 23
     }
   }

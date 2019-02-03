@@ -15,7 +15,7 @@ cc.Class({
         lbl_bar_title: cc.Label,
         icon_head: cc.Sprite,
         atlas_title_icon: cc.SpriteAtlas,
-        atlas_head:cc.SpriteAtlas,
+        atlas_head: cc.SpriteAtlas,
         progressbar_fish_exp: cc.ProgressBar,
         img_food: cc.Sprite,
         lbl_fish_lv: cc.Label,
@@ -28,9 +28,9 @@ cc.Class({
         node_friend: cc.Node,
         node_mission: cc.Node,
         node_bag: cc.Node,
-        node_map:cc.Node,
-        node_shop:cc.Node,
-        node_head_info:cc.Node,
+        node_map: cc.Node,
+        node_shop: cc.Node,
+        node_head_info: cc.Node,
 
     },
 
@@ -70,11 +70,11 @@ cc.Class({
             this.img_food.spriteFrame = this.spriteatlas_food.getSpriteFrame("bag_food_" + _msg.prop_id);
             this.on_chick_active_bar(null, false);
         }, this.node),
-        net.on("create_fish_data_ret", this.init_bar.bind(this));
-        net.on("get_daily_mission_reward_ret",(_msg)=>{
+            net.on("create_fish_data_ret", this.init_bar.bind(this));
+        net.on("get_daily_mission_reward_ret", (_msg) => {
             this.on_chick_active_bar(null, false);
-            ui.open("popup_reward_layer",_msg.prop);
-        },this.node);
+            ui.open("popup_reward_layer", _msg.prop);
+        }, this.node);
         net.on("feed_fish_ret", (_msg) => {
             ui.emit("touch_enable", true);
             var pos = Global.getNodeAToNodeBPoint(cc.vv.fish, this.img_food.node.parent);
@@ -89,8 +89,8 @@ cc.Class({
             ], 0, false, function () {
                 tips.show("福缘 + " + (_msg.integral - this.integral));
                 ui.emit("touch_enable", false);
-                if(+_msg.fish.lv > this.cur_lv && this.cur_lv === 29 || this.cur_lv === 59 || this.cur_lv === 89){
-                    ui.emit("change_fish_image",{lv:_msg.fish.lv});
+                if (+_msg.fish.lv > this.cur_lv && this.cur_lv === 29 || this.cur_lv === 59 || this.cur_lv === 89) {
+                    ui.emit("change_fish_image", { lv: _msg.fish.lv });
                 }
                 this.init_bar(_msg);
                 Global.ActionMgr.create('tremble', cc.vv.fish, [], 0, false);
@@ -101,9 +101,9 @@ cc.Class({
             //
             // }.bind(this));
         });
-        net.on("enter_shop_ret", (_msg)=>{
+        net.on("enter_shop_ret", (_msg) => {
             this.lbl_integral.string = _msg.integral;
-        },this.node);
+        }, this.node);
         net.on("enter_bag_ret", (_msg) => {
             this.lbl_bar_title.string = "库存";
             this.node_bag.active = true;
@@ -117,24 +117,24 @@ cc.Class({
             this.show_bar();
 
         }, this.node);
-        net.on("enter_friend_ret",(_msg)=>{
+        net.on("enter_friend_ret", (_msg) => {
             this.lbl_bar_title.string = "好友";
             this.node_friend.active = true;
             this.node_friend.getComponent("comp_friend").init_friend(_msg.friend_info);
             this.show_bar();
         })
         net.on("use_props_ret", (_msg) => {
-            ui.open("popup_reward_layer",_msg.info);
+            ui.open("popup_reward_layer", _msg.info);
             this.on_chick_active_bar(null, false);
         }, this.node);
 
-        net.on("save_user_info_ret",(_msg)=>{
+        net.on("save_user_info_ret", (_msg) => {
             this.icon_head.spriteFrame = this.atlas_head.getSpriteFrame("head_" + _msg.head_id);
-        },this.node);
+        }, this.node);
 
-        ui.on("close_bar",()=>{
+        ui.on("close_bar", () => {
             this.on_chick_active_bar(null, false);
-        },this.node);
+        }, this.node);
     },
 
     _unregister_handler: function () {
@@ -155,12 +155,15 @@ cc.Class({
         this.lbl_user_lv.string = _fish.lv;
         this.img_food.spriteFrame = null;
         this.lbl_feed_tips.string = "选择食物";
-        this.icon_head.spriteFrame = this.atlas_head.getSpriteFrame("head_" + _msg.user_info.head_id);
+
+        if (_msg.user_info && _msg.user_info.head_id) {
+            this.icon_head.spriteFrame = this.atlas_head.getSpriteFrame("head_" + _msg.user_info.head_id);
+        }
 
         if (_msg.level_up || _msg.level_up === 0) {
             var psbar_fish_exp = this.progressbar_fish_exp;
             Global.ActionMgr.create('progress', psbar_fish_exp.node, [psbar_fish_exp, _fish.exp / _fish.max_exp, _msg.level_up], 0, false);
-        } else{
+        } else {
             this.progressbar_fish_exp.progress = _fish.exp / _fish.max_exp;
         }
 
@@ -172,15 +175,15 @@ cc.Class({
     },
 
     on_open_sys: function (_, _uiName) {
-        ui.open(_uiName,0);
+        ui.open(_uiName, 0);
     },
 
-    on_open_shop:function(){
+    on_open_shop: function () {
         this.node_shop.active = true;
         net.emit("enter_shop");
     },
-    
-    on_close_shop:function(){
+
+    on_close_shop: function () {
         this.node_shop.active = false;
     },
 
@@ -194,7 +197,7 @@ cc.Class({
     },
 
     on_choose_sys: function (_, _uiName) {
-        this.on_chick_active_bar(null, false,()=>{
+        this.on_chick_active_bar(null, false, () => {
             ui.open(_uiName);
         });
     },
@@ -202,7 +205,7 @@ cc.Class({
     on_feed_fish: function () {
         this.img_food.node.setPosition(cc.v2());
         !this.food && this.on_chick_active_bar(null, 3)
-        !!this.food && net.emit("feed_fish", {food: this.food});
+        !!this.food && net.emit("feed_fish", { food: this.food });
     },
 
     on_chick_user_head: function () {
@@ -210,11 +213,11 @@ cc.Class({
         this.node_head_info.getComponent("comp_user_info").init_comp(Global.DataMgr.user_info);
     },
 
-    on_close_user_head:function(){
+    on_close_user_head: function () {
         this.node_head_info.active = false;
     },
 
-    on_chick_active_bar(_event, state,_cb) {
+    on_chick_active_bar(_event, state, _cb) {
         let _bar_move_to;
         let _state = parseInt(state);
         // if (_state === 1) {
@@ -223,7 +226,7 @@ cc.Class({
         // }
         ui.emit("touch_enable", true);
         if (_state) {
-            if(_state === 5){
+            if (_state === 5) {
                 this.lbl_bar_title.string = "地图";
                 this.title_icon.spriteFrame = _event.target.getComponent(cc.Sprite).spriteFrame;
                 this.node_map.active = true;

@@ -434,6 +434,9 @@ if (!CC_EDITOR) {
          * @param customEventData   携带的参数
          */
         addClickEvent: function (node, target, component, handler, customEventData) {
+            if(!node.$Button){
+                return;
+            }
             var eventHandler = new cc.Component.EventHandler();                                     //创建一个回调事件
             eventHandler.target = target;                                                           //目标节点
             eventHandler.component = component;                                                     //目标组件名
