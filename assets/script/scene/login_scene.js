@@ -4,7 +4,8 @@ cc.Class({
     properties: {
         tel_editbox: cc.EditBox,
         code_editbox: cc.EditBox,
-        send_code_btn_label: cc.Label
+        send_code_btn_label: cc.Label,
+        load_node: cc.Node,
     },
 
     start() {
@@ -15,6 +16,7 @@ cc.Class({
             cc.director.loadScene('game');
         } else {
             Global.Observer.on('DataMgr_init_data_ok', function () {
+                this.load_node.active = true;
                 cc.director.loadScene('game');
             }, this);
 
