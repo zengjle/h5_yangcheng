@@ -215,7 +215,7 @@ module.exports = {
             "name": "15橙车积分",
             "need_integral": 1000,
             "prop_id": 8,
-            "add_num": 15
+            "add_num": 25
         },
     },
     "mission": {        //任务信息
