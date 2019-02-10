@@ -54,7 +54,7 @@ cc.Class({
             return;
         }
         this.lbl_no_friend_tips.node.active = false;
-        this.node_list.getComponent("comp_tableview").init(1, (_idx, _item) => {
+        this.node_list.getComponent("comp_tableview").init(_bag_info.length, (_idx, _item) => {
             let user_info = _bag_info[_idx].user_info || _bag_info[_idx];
             let friend_tag = user_info.tag || 0;
             _item.getComponent("comp_friend_item").init_item(user_info, friend_tag);

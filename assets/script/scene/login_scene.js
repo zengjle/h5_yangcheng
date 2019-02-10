@@ -6,6 +6,7 @@ cc.Class({
         code_editbox: cc.EditBox,
         send_code_btn_label: cc.Label,
         node_mask:cc.Node,
+        node_editbox:cc.Node,
     },
 
     start() {
@@ -57,6 +58,15 @@ cc.Class({
         fn();
         this.schedule(fn, 1, 60);
     },
+
+    on_input_began(){
+        this.node_editbox.y = 0;
+    },
+
+    on_input_end(){
+        this.node_editbox.y = 400;
+    },
+
 
     send_code() {
         Global.UserMgr.send_code(this.tel_editbox.string);

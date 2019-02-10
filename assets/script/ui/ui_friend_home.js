@@ -58,7 +58,7 @@ cc.Class({
     get_friend_food: function () {
         ui.emit("touch_enable", true);
         this.icon_hand.runAction(cc.sequence(cc.moveTo(0.3, this.food_sprite.node.getPosition()), cc.callFunc(() => {
-            net.emit(' wang', { id: this.food_info[0], num: 1 });
+            net.emit("add_props", { id: this.food_info[0], num: 1 });
             this.steal.active = false;
             Global.DataMgr.add_prop_state(this.user_info.user_id);
             ui.emit("touch_enable", false);
