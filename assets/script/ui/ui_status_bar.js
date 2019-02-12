@@ -92,16 +92,23 @@ cc.Class({
                 if (+_msg.fish.lv > this.cur_lv && this.cur_lv === 29 || this.cur_lv === 59 || this.cur_lv === 89) {
                     ui.emit("change_fish_image", { lv: _msg.fish.lv });
                 }
-                this.init_bar(_msg);
                 Global.ActionMgr.create('tremble', cc.vv.fish, [], 0, false);
-                _msg = null;
+                if (Global.DataMgr.prop[this.food[0]].num < 1) {
+                    tips.show( data.prop[this.food[0]].name + "已经没有啦,看看有没有别的食物可以喂养锦鲤。");
+                } else {
+                    this.img_food.node.scale = 1;
+                    this.lbl_feed_tips.string = "喂食";
+                    this.img_food.node.setPosition(cc.p(0, 0));
+                    this.img_food.spriteFrame = this.spriteatlas_food.getSpriteFrame("bag_food_" + this.food[0]);
+                }
+                this.init_bar(_msg);
             }.bind(this));
             //
             // Global.ActionMgr.create('jumpTo', this.img_food.node, [pos], 0, false, function () {
             //
             // }.bind(this));
         });
-        net.on("enter_shop_ret", (_msg) => {
+        net.on("buy_commodity_ret", (_msg) => {
             this.lbl_integral.string = _msg.integral;
         }, this.node);
         net.on("enter_bag_ret", (_msg) => {
@@ -153,23 +160,22 @@ cc.Class({
         this.lbl_fish_lv.string = "lv." + _fish.lv;
         this.cur_lv = +_fish.lv;
         this.lbl_user_lv.string = _fish.lv;
-        this.img_food.spriteFrame = null;
-        this.lbl_feed_tips.string = "选择食物";
-
-        if (_msg.user_info && _msg.user_info.head_id) {
-            this.icon_head.spriteFrame = this.atlas_head.getSpriteFrame("head_" + _msg.user_info.head_id);
-        }
-
+        
+        this.icon_head.spriteFrame = this.atlas_head.getSpriteFrame("head_" + _msg.user_info.head_id);
+        
         if (_msg.level_up || _msg.level_up === 0) {
             var psbar_fish_exp = this.progressbar_fish_exp;
             Global.ActionMgr.create('progress', psbar_fish_exp.node, [psbar_fish_exp, _fish.exp / _fish.max_exp, _msg.level_up], 0, false);
         } else {
             this.progressbar_fish_exp.progress = _fish.exp / _fish.max_exp;
         }
-
-        this.food = null;
+        if( !this.food || Global.DataMgr.prop[this.food[0]].num < 1){
+            this.lbl_feed_tips.string = "选择食物";
+            this.food = null;
+            this.img_food.spriteFrame = null;
+        }
     },
-
+    
     init_plate: function (_id) {
 
     },
@@ -203,7 +209,7 @@ cc.Class({
     },
 
     on_feed_fish: function () {
-        this.img_food.node.setPosition(cc.v2());
+        this.img_food.node.setPosition(cc.v2(0,0));
         !this.food && this.on_chick_active_bar(null, 3)
         !!this.food && net.emit("feed_fish", { food: this.food });
     },
