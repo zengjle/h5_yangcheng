@@ -161,9 +161,6 @@ const DataMgr = (function () {
         cc.js.getset(this, 'is_question', function () {                     //今日是否已经答题
             return this.data.is_question
         }, function (val) {
-            if (val < this.data.is_question) {
-                return;
-            }
             this.data.is_question = val;
         });
 
