@@ -160,8 +160,8 @@ cc.Class({
         this.lbl_fish_lv.string = "lv." + _fish.lv;
         this.cur_lv = +_fish.lv;
         this.lbl_user_lv.string = _fish.lv;
+        !!_msg.user_info  && (this.icon_head.spriteFrame = this.atlas_head.getSpriteFrame("head_" + _msg.user_info.head_id));
         
-        this.icon_head.spriteFrame = this.atlas_head.getSpriteFrame("head_" + _msg.user_info.head_id);
         
         if (_msg.level_up || _msg.level_up === 0) {
             var psbar_fish_exp = this.progressbar_fish_exp;

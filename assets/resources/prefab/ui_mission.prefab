@@ -50,10 +50,13 @@
     "_components": [
       {
         "__id__": 139
+      },
+      {
+        "__id__": 140
       }
     ],
     "_prefab": {
-      "__id__": 140
+      "__id__": 141
     },
     "_id": "",
     "_opacity": 255,
@@ -4395,6 +4398,15 @@
     "btn_introduction": {
       "__id__": 134
     }
+  },
+  {
+    "__type__": "cc.BlockInputEvents",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true
   },
   {
     "__type__": "cc.PrefabInfo",
