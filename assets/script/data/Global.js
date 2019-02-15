@@ -73,8 +73,27 @@ if (!CC_EDITOR) {
             Global.initgetset();
             Global.initMgr();
             Global.online();
+            Global.onResize();
             Global.onPopstate();
             Global.init_game();
+        },
+
+
+        /**监听屏幕改变并强制改为竖屏
+         *
+         */
+        onResize() {
+            if (!cc.sys.isNative) {
+                cc.view.setResizeCallback(function () {
+                    if (cc.sys.os === cc.sys.OS_IOS) {
+                        if (document.body.scrollWidth > document.body.scrollHeight) {
+                            cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
+                        } else {
+                            cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
+                        }
+                    }
+                });
+            }
         },
 
         /**初始化时间
@@ -434,7 +453,7 @@ if (!CC_EDITOR) {
          * @param customEventData   携带的参数
          */
         addClickEvent: function (node, target, component, handler, customEventData) {
-            if(!node.$Button){
+            if (!node.$Button) {
                 return;
             }
             var eventHandler = new cc.Component.EventHandler();                                     //创建一个回调事件
