@@ -86,9 +86,9 @@ if (!CC_EDITOR) {
             if (!cc.sys.isNative) {
                 cc.view.setResizeCallback(function () {
                     if (document.body.scrollWidth > document.body.scrollHeight) {
-                        cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
-                    } else {
                         cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
+                    } else {
+                        cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
                     }
                 });
             }
