@@ -85,12 +85,10 @@ if (!CC_EDITOR) {
         onResize() {
             if (!cc.sys.isNative) {
                 cc.view.setResizeCallback(function () {
-                    if (cc.sys.os === cc.sys.OS_IOS) {
-                        if (document.body.scrollWidth > document.body.scrollHeight) {
-                            cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
-                        } else {
-                            cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
-                        }
+                    if (document.body.scrollWidth > document.body.scrollHeight) {
+                        cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
+                    } else {
+                        cc.view.setOrientation(cc.macro.ORIENTATION_LANDSCAPE);
                     }
                 });
             }
