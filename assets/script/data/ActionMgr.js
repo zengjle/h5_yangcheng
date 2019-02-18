@@ -60,7 +60,8 @@ const ActionMgr = (function () {
             cc.moveBy(0.02, cc.p(0, -16)),
             cc.moveBy(0.02, cc.p(0, -20)),
             cc.moveBy(0.02, cc.p(0, 20)),
-            cc.moveBy(0.02, cc.p(0, -16))
+            cc.moveBy(0.02, cc.p(0, -16)),
+            cc.moveBy(0.02, cc.p(0, 8))
         );
     };
 
