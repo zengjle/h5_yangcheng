@@ -25,6 +25,7 @@ cc.Class({
     _register_handler: function () {
         net.on("enter_shop_ret", this.init_comp.bind(this));
         net.on("buy_commodity_ret", (_msg) => {
+            this.lbl_integral.string = _msg.integral;
             ui.open("popup_reward_layer", _msg.commodity);
         }, this.node);
     },
