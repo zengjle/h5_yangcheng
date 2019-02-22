@@ -3,7 +3,7 @@
     "__type__": "cc.SceneAsset",
     "_name": "",
     "_objFlags": 0,
-    "_native": "",
+    "_rawFiles": null,
     "scene": {
       "__id__": 1
     }
@@ -201,7 +201,7 @@
       "__id__": 3
     },
     "_enabled": true,
-    "alignMode": 0,
+    "isAlignOnce": true,
     "_target": null,
     "_alignFlags": 45,
     "_left": 0,
@@ -385,7 +385,7 @@
       "__id__": 7
     },
     "_enabled": true,
-    "alignMode": 1,
+    "isAlignOnce": true,
     "_target": {
       "__id__": 2
     },
@@ -510,7 +510,7 @@
       "__id__": 10
     },
     "_enabled": true,
-    "alignMode": 1,
+    "isAlignOnce": true,
     "_target": {
       "__id__": 2
     },
@@ -677,7 +677,7 @@
       "__id__": 14
     },
     "_enabled": true,
-    "alignMode": 0,
+    "isAlignOnce": true,
     "_target": null,
     "_alignFlags": 18,
     "_left": 0,
@@ -794,7 +794,7 @@
       "__id__": 13
     },
     "_enabled": true,
-    "alignMode": 1,
+    "isAlignOnce": true,
     "_target": {
       "__id__": 2
     },
@@ -1049,7 +1049,7 @@
       "__id__": 21
     },
     "_enabled": true,
-    "alignMode": 1,
+    "isAlignOnce": true,
     "_target": {
       "__id__": 2
     },

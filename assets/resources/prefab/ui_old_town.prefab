@@ -38,10 +38,13 @@
       },
       {
         "__id__": 161
+      },
+      {
+        "__id__": 162
       }
     ],
     "_prefab": {
-      "__id__": 162
+      "__id__": 163
     },
     "_id": "",
     "_opacity": 255,
@@ -60,8 +63,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 0,
-      "height": 0
+      "width": 720,
+      "height": 1280
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -69,8 +72,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
+      "x": 360,
+      "y": 640
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -5259,6 +5262,32 @@
       "__id__": 1
     },
     "_enabled": true
+  },
+  {
+    "__type__": "cc.Widget",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 1
+    },
+    "_enabled": true,
+    "isAlignOnce": true,
+    "_target": null,
+    "_alignFlags": 45,
+    "_left": 0,
+    "_right": 0,
+    "_top": 0,
+    "_bottom": 0,
+    "_verticalCenter": 0,
+    "_horizontalCenter": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_isAbsHorizontalCenter": true,
+    "_isAbsVerticalCenter": true,
+    "_originalWidth": 300,
+    "_originalHeight": 200
   },
   {
     "__type__": "cc.PrefabInfo",
