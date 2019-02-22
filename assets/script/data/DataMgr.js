@@ -327,6 +327,7 @@ const DataMgr = (function () {
     //购买商品
     _p.buy_commodity = function (_msg) {
         this.integration_num -= _msg.need_integral;
+        Global.DataMgr.mission[4].num++;
         Global.DataMgr.add_prop(_msg.prop_id, _msg.add_num);
     };
 
