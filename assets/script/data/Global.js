@@ -45,6 +45,7 @@ if (!CC_EDITOR) {
         AudioMgr: AudioMgr,
 
         all_user_game_data: {},      //用户游戏数据
+        widget: [],
 
         /**初始化游戏相关功能
          * 
@@ -73,7 +74,7 @@ if (!CC_EDITOR) {
             Global.initgetset();
             Global.initMgr();
             Global.online();
-            Global.onResize();
+            // Global.onResize();
             Global.onPopstate();
             Global.init_game();
         },

@@ -1,0 +1,30 @@
+{
+  "ver": "2.0.0",
+  "uuid": "f812ee5b-9d69-4f8f-af95-a2d93d193b26",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "cccx_logo": {
+      "ver": "1.0.3",
+      "uuid": "d610fb9d-37ba-4ce7-b984-302e2e79dc9d",
+      "rawTextureUuid": "f812ee5b-9d69-4f8f-af95-a2d93d193b26",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 700,
+      "height": 700,
+      "rawWidth": 700,
+      "rawHeight": 700,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

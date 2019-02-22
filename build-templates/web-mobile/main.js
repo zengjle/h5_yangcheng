@@ -93,8 +93,8 @@
             cc.view.enableAutoFullScreen(true);
 
             //刷新游戏试图大小
-            $("canvas").width($(document).innerWidth());
-            $("canvas").height($(document).innerHeight());
+            // $("canvas").width($(document).innerWidth());
+            // $("canvas").height($(document).innerHeight());
             
             if (!false && !false) {
                 if (cc.sys.isBrowser) {
