@@ -5,12 +5,13 @@ cc.Class({
         tel_editbox: cc.EditBox,
         code_editbox: cc.EditBox,
         send_code_btn_label: cc.Label,
-        node_mask:cc.Node,
-        node_editbox:cc.Node,
+        node_mask: cc.Node,
+        node_editbox: cc.Node,
     },
 
     start() {
         require('Global')();
+        return;
 
         if (Global.DEBUG) {
             Global.UserMgr.login();
@@ -21,7 +22,7 @@ cc.Class({
             }, this);
 
             Global.Observer.once('login', function () {
-               this.node_mask.active = true;
+                this.node_mask.active = true;
             }, this);
 
             var id = Global.getData('14325', null);
@@ -59,11 +60,11 @@ cc.Class({
         this.schedule(fn, 1, 60);
     },
 
-    on_input_began(){
+    on_input_began() {
         this.node_editbox.y = 0;
     },
 
-    on_input_end(){
+    on_input_end() {
         this.node_editbox.y = 400;
     },
 
