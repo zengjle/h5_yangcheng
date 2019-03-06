@@ -11,7 +11,6 @@ cc.Class({
 
     start() {
         require('Global')();
-        return;
 
         if (Global.DEBUG) {
             Global.UserMgr.login();

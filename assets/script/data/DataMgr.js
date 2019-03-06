@@ -361,14 +361,55 @@ const DataMgr = (function () {
      * @param  add_num 需要增加多少橙车积分
      */
     _p.add_chengche_integral = function (add_num) {
-        Global.HTTP.send('GET', '', {
-            module: 'StorageService.addPoint',
-            point: add_num
-        }, function () {
-            tips.show('兑换成功');
-        }, function () {
-            tips.show('兑换失败');
-        }, 'http://api.cccx.ltd');
+        add_num = add_num === 10 ? 1000 : 1500;
+        const fn = function (xhr, status) {
+            var callback = function () {
+                tips.show('兑换成功');
+            },
+                remedyCallback = function () {
+                    tips.show('兑换失败');
+                };
+            if (status === 'success') {
+                // Global.log("http res json:", xhr.responseText);
+                var ret = null;
+                try {
+                    ret = JSON.parse(xhr.responseText);
+                    // Global.log("http res obj:", ret);
+
+                } catch (e) {
+                    Global.log(ajax_Data);
+                    Global.log("http res json:", xhr.responseText);
+                    remedyCallback && remedyCallback(xhr.responseText, xhr);
+                }
+                if (ret.code == "00000") {
+                    callback && callback(ret, xhr);
+                    return;
+                }
+                Global.log(ajax_Data);
+                Global.log("http res obj:", ret);
+                remedyCallback && remedyCallback(ret, xhr);
+            } else {
+                Global.log(ajax_Data);
+                Global.log("http res json:", xhr.responseText);
+                remedyCallback && remedyCallback(xhr.responseText, xhr);
+            }
+        };
+        var ajax_Data = {
+            url: 'http://101.37.152.106:9090/account/fortuneToPoint',
+            type: 'POST',
+            data: {
+                userId: Global.UserMgr.id,
+                fortune: add_num
+            },
+            dataType: 'json',
+            // xhrFields: {
+            // withCredentials: true
+            // },
+            // contentType: "application/json",
+            // crossDomain: true,
+            complete: fn
+        };
+        $.ajax(ajax_Data);
     };
 
     /**是否还能偷取过某个好友
