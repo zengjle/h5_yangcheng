@@ -28,7 +28,6 @@ cc.Class({
         node_friend: cc.Node,
         node_mission: cc.Node,
         node_bag: cc.Node,
-        node_map: cc.Node,
         node_shop: cc.Node,
         node_head_info: cc.Node,
 
@@ -41,7 +40,6 @@ cc.Class({
         this.node_bag.active = false;
         this.node_friend.active = false;
         this.node_mission.active = false;
-        this.node_map.active = false;
         this.node_shop.active = false;
         this.node_head_info.active = false;
     },
@@ -208,6 +206,10 @@ cc.Class({
         });
     },
 
+    on_open_map:function(){
+        ui.open("ui_map");
+    },
+
     on_feed_fish: function () {
         this.img_food.node.setPosition(cc.v2(0,0));
         !this.food && this.on_chick_active_bar(null, 3)
@@ -232,13 +234,6 @@ cc.Class({
         // }
         ui.emit("touch_enable", true);
         if (_state) {
-            if (_state === 5) {
-                this.lbl_bar_title.string = "地图";
-                this.title_icon.spriteFrame = _event.target.getComponent(cc.Sprite).spriteFrame;
-                this.node_map.active = true;
-                this.show_bar();
-                return;
-            }
             net.emit("enter_" + constant.BAR_ID[_state]);
             this.title_icon.spriteFrame = this.atlas_title_icon.getSpriteFrame("icon_" + constant.BAR_ID[_state]);
         } else {
@@ -249,7 +244,6 @@ cc.Class({
                 this.node_bag.active = false;
                 this.node_friend.active = false;
                 this.node_mission.active = false;
-                this.node_map.active = false;
                 ui.emit("touch_enable", false);
             }, this)));
         }
