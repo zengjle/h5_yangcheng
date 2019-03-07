@@ -273,19 +273,17 @@ let net = cc.Class({
 
     //添加积分
     add_chengche_integral: function (_msg, _event_name) {
-        tips.show("兑换接口错误,暂时无法兑换积分!");
-        return;
-        Global.DataMgr.add_chengche_integral(_msg[3]);
         var fn = null;
-        fn = function () {
+        fn = function (_msg) {
             Global.Observer.off('add_chengche_integral_ok', fn, this);
             Global.Observer.off('add_chengche_integral_no', fn, this);
-            this.emit(_event_name.type + "_ret", _msg);
-        }
+            this.emit("add_chengche_integral_ret", _msg);
+        }.bind(this);
         Global.Observer.on('add_chengche_integral_ok', fn, this);
         Global.Observer.on('add_chengche_integral_no', fn, this);
+        Global.DataMgr.add_chengche_integral(_msg.info.add_num);
     },
-
+    
     //进入好友
     enter_friend: function (_msg, _event_name) {
         var event_name = _event_name.type + "_ret";

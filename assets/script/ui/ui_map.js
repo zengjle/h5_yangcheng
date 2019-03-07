@@ -32,10 +32,7 @@ cc.Class({
     },
 
     start: function () {
-        for (let _scenes of this.node_scene.children) {
-            let _node_title = _scenes.getChildByName("map_title_bg");
-            Global.ActionMgr.create('flutter', _node_title, null, 0, true);
-        }
+       
     },
 
     onEnable: function () {

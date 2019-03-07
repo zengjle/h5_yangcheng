@@ -73,6 +73,10 @@ cc.Class({
             this.on_chick_active_bar(null, false);
             ui.open("popup_reward_layer", _msg.prop);
         }, this.node);
+        net.on("add_chengche_integral_ret",(_msg)=>{
+            this.lbl_integral.string = _msg.integral;
+            let _add_num = _msg.add_num;
+        },this.node);
         net.on("feed_fish_ret", (_msg) => {
             ui.emit("touch_enable", true);
             var pos = Global.getNodeAToNodeBPoint(cc.vv.fish, this.img_food.node.parent);

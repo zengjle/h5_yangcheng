@@ -281,7 +281,7 @@ const DataMgr = (function () {
      * @param num   数量
      */
     _p.add_prop = function (id, num) {
-        this.prop[id].num += num;
+        id!== 8 && (this.prop[id].num += num);
     };
 
     /**使用道具
@@ -360,11 +360,13 @@ const DataMgr = (function () {
       * @param  add_num 需要增加多少橙车积分
       */
     _p.add_chengche_integral = function (add_num) {
-        add_num = add_num === 10 ? 1000 : 1500;
+        let fortune = add_num === 10 ? 1000 : 1500;
         const fn = function (xhr, status) {
             var callback = function () {
-                tips.show('兑换成功');
-            },
+                this.data.integration_num -= fortune;
+                // tips.show('兑换成功,当前福缘:' + this.data.integration_num);
+                Global.Observer.emit('add_chengche_integral_ok',{integral:this.integration_num,add_num: add_num});
+            }.bind(this),
                 remedyCallback = function () {
                     tips.show('兑换失败');
                 };
@@ -392,13 +394,13 @@ const DataMgr = (function () {
                 Global.log("http res json:", xhr.responseText);
                 remedyCallback && remedyCallback(xhr.responseText, xhr);
             }
-        };
+        }.bind(this);
         var ajax_Data = {
             url: 'http://101.37.152.106:9090/account/fortuneToPoint',
             type: 'POST',
             data: {
                 userId: Global.UserMgr.id,
-                fortune: add_num
+                fortune: fortune,
             },
             dataType: 'json',
             // xhrFields: {

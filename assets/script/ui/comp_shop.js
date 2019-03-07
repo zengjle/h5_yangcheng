@@ -24,6 +24,11 @@ cc.Class({
     },
     _register_handler: function () {
         net.on("enter_shop_ret", this.init_comp.bind(this));
+        net.on("add_chengche_integral_ret",(_msg)=>{
+            this.lbl_integral.string = _msg.integral;
+            let _add_num = _msg.add_num;
+            net.emit("add_props",{id:8,num:_add_num});
+        },this.node);
         net.on("buy_commodity_ret", (_msg) => {
              this.lbl_integral.string = _msg.integral;
             ui.open("popup_reward_layer", _msg.commodity);
