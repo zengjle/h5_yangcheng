@@ -205,17 +205,17 @@ module.exports = {
             "id": 3,
             "sample": 'bag_food_8',
             "name": "10橙车积分",
-            "need_integral": 500,
+            "need_integral": 1000,
             "prop_id": 8,
             "add_num": 10
         },
         "4": {
             "id": 4,
             "sample": 'bag_food_8',
-            "name": "15橙车积分",
-            "need_integral": 1000,
+            "name": "20橙车积分",
+            "need_integral": 1500,
             "prop_id": 8,
-            "add_num": 25
+            "add_num": 20
         },
     },
     "mission": {        //任务信息

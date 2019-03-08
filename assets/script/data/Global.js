@@ -75,9 +75,18 @@ if (!CC_EDITOR) {
             Global.online();
             Global.onResize();
             Global.onPopstate();
+            Global.onSceneLaunch();
             Global.init_game();
         },
 
+        onSceneLaunch() {
+            cc.director.on(cc.Director.EVENT_AFTER_SCENE_LAUNCH, function () {
+                var canvas = cc.find('Canvas').$Canvas,
+                    isIos = cc.sys.os === cc.sys.OS_IOS;
+                canvas.fitHeight = isIos;
+                canvas.fitWidth = !isIos;
+            });
+        },
 
         /**监听屏幕改变并强制改为竖屏
          *
@@ -91,6 +100,13 @@ if (!CC_EDITOR) {
                         cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
                     }
                 });
+                
+                var isIos = cc.sys.os === cc.sys.OS_IOS,
+                    f = function () {
+                        $('#GameCanvas').css('height', '70%')
+                    }
+                isIos && f() || cc.view.setResizeCallback(f);
+                f = null;
             }
         },
 
