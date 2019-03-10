@@ -327,6 +327,7 @@ const DataMgr = (function () {
     //购买商品
     _p.buy_commodity = function (_msg) {
         this.integration_num -= _msg.need_integral;
+        this.mission[4].num++;
         Global.DataMgr.add_prop(_msg.prop_id, _msg.add_num);
     };
 
@@ -364,6 +365,7 @@ const DataMgr = (function () {
         const fn = function (xhr, status) {
             var callback = function () {
                 this.data.integration_num -= fortune;
+                this.set_game_info();
                 // tips.show('兑换成功,当前福缘:' + this.data.integration_num);
                 Global.Observer.emit('add_chengche_integral_ok',{integral:this.integration_num,add_num: add_num});
             }.bind(this),

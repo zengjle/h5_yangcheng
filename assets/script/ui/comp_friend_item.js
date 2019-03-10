@@ -49,6 +49,9 @@ cc.Class({
         this.img_tag.spriteFrame = this.friend_tag[_tag];
         this._tag = _tag;
         this.img_head.spriteFrame = this.head_atals.getSpriteFrame("head_"+ _msg.head_id);
+        if(this.user_id === Global.DataMgr.data.id){
+            this.lbl_click_btn.node.parent.active = false;
+        }
         this.lbl_click_btn.string = !this._tag?"拜访":"添加";
 
     },

@@ -81,7 +81,7 @@ if (!CC_EDITOR) {
 
         onSceneLaunch() {
             cc.director.on(cc.Director.EVENT_AFTER_SCENE_LAUNCH, function () {
-                var canvas = cc.find('Canvas').$Canvas,
+                var canvas = cc.find('Canvas').getComponent(cc.Canvas),
                     isIos = cc.sys.os === cc.sys.OS_IOS;
                 canvas.fitHeight = isIos;
                 canvas.fitWidth = !isIos;
@@ -103,7 +103,7 @@ if (!CC_EDITOR) {
                 
                 var isIos = cc.sys.os === cc.sys.OS_IOS,
                     f = function () {
-                        $('#GameCanvas').css('height', '70%')
+                        $('#GameCanvas').css('height', '70%');
                     }
                 isIos && f() || cc.view.setResizeCallback(f);
                 f = null;

@@ -3,10 +3,12 @@
     "__type__": "cc.Prefab",
     "_name": "",
     "_objFlags": 0,
-    "_rawFiles": null,
+    "_native": "",
     "data": {
       "__id__": 1
-    }
+    },
+    "optimizationPolicy": 0,
+    "asyncLoadAssets": false
   },
   {
     "__type__": "cc.Node",
@@ -117,7 +119,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 131,
+      "width": 130.6,
       "height": 30
     },
     "_rotationX": 0,
@@ -168,12 +170,12 @@
     "_enabled": true,
     "_color": {
       "__type__": "cc.Color",
-      "r": 255,
-      "g": 255,
-      "b": 255,
+      "r": 121,
+      "g": 115,
+      "b": 115,
       "a": 255
     },
-    "_width": 0.5
+    "_width": 0.3
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -208,9 +210,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 216,
-      "g": 216,
-      "b": 216,
+      "r": 224,
+      "g": 224,
+      "b": 224,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -249,8 +251,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 20,
-    "_fontSize": 20,
+    "_actualFontSize": 22,
+    "_fontSize": 22,
     "_lineHeight": 25,
     "_enableWrapText": true,
     "_N$file": null,
