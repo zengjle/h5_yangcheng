@@ -68,24 +68,68 @@ if (!CC_EDITOR) {
             //     Global.setData('game_data', null);
             // }
 
-
             Global.init_time();
             Global.initgetset();
             Global.initMgr();
             Global.online();
             Global.onResize();
             Global.onPopstate();
-            Global.onSceneLaunch();
+            Global.isIOS();
             Global.init_game();
         },
 
-        onSceneLaunch() {
-            cc.director.on(cc.Director.EVENT_AFTER_SCENE_LAUNCH, function () {
-                var canvas = cc.find('Canvas').$Canvas,
-                    isIos = cc.sys.os === cc.sys.OS_IOS;
-                canvas.fitHeight = isIos;
-                canvas.fitWidth = !isIos;
-            });
+        isIOS() {
+            var isIos = cc.sys.os === cc.sys.OS_IOS,
+                multiple = 0.8,
+                f = function () {
+                    $('#GameCanvas').css('height', `${multiple * 100}%`);
+                };
+            if (isIos) {
+                f();
+                cc.view.setResizeCallback(f);
+
+                cc.director.on(cc.Director.EVENT_AFTER_SCENE_LAUNCH, function () {
+                    var canvas = cc.find('Canvas').getComponent(cc.Canvas);
+                    canvas.fitHeight = isIos;
+                    canvas.fitWidth = !isIos;
+                    setTimeout(f, 500);
+                });
+
+                var eventManager = cc.eventManager,
+                    EventType = cc.Node.EventType,
+                    _events = [
+                        'mouse',
+                        'touch',
+                        EventType.TOUCH_START,
+                        EventType.TOUCH_MOVE,
+                        EventType.TOUCH_END,
+                        EventType.TOUCH_CANCEL,
+
+                        EventType.MOUSE_DOWN,
+                        EventType.MOUSE_ENTER,
+                        EventType.MOUSE_MOVE,
+                        EventType.MOUSE_LEAVE,
+                        EventType.MOUSE_UP,
+                        EventType.MOUSE_WHEEL
+                    ];
+                eventManager._dispatchEvent = eventManager.dispatchEvent;
+                eventManager.dispatchEvent = function (e) {
+                    var type = e.type,
+                        touches = e._touches,
+                        len = touches ? touches.length : 0,
+                        touch = null;
+                    if (-1 !== _events.indexOf(type) && len > 0) {
+                        for (let i = len - 1; i >= 0; i--) {
+                            touch = touches[i];
+                            touch._point.y /= multiple;
+                            touch._prevPoint.y /= multiple;
+                            touch._startPoint.y /= multiple;
+                            touch = null;
+                        }
+                    }
+                    this._dispatchEvent(e);
+                }.bind(eventManager);
+            }
         },
 
         /**监听屏幕改变并强制改为竖屏
@@ -100,13 +144,6 @@ if (!CC_EDITOR) {
                         cc.view.setOrientation(cc.macro.ORIENTATION_PORTRAIT);
                     }
                 });
-                
-                var isIos = cc.sys.os === cc.sys.OS_IOS,
-                    f = function () {
-                        $('#GameCanvas').css('height', '70%')
-                    }
-                isIos && f() || cc.view.setResizeCallback(f);
-                f = null;
             }
         },
 

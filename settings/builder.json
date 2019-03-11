@@ -11,7 +11,7 @@
   "inlineSpriteFrames": true,
   "inlineSpriteFrames_native": true,
   "jailbreakPlatform": false,
-  "md5Cache": true,
+  "md5Cache": false,
   "mergeStartScene": false,
   "oauthLoginServer": "",
   "optimizeHotUpdate": false,
@@ -27,7 +27,7 @@
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait"
   },
-  "renderMode": "2",
+  "renderMode": "0",
   "startScene": "8891b9b5-a42d-4466-bfa1-e571deba1459",
   "title": "h5kk",
   "webOrientation": "portrait",

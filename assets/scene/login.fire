@@ -314,7 +314,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 500,
-      "height": 60
+      "height": 120
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -323,7 +323,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 86
+      "y": -28
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -353,8 +353,8 @@
     "_N$returnType": 0,
     "_N$inputFlag": 5,
     "_N$inputMode": 3,
-    "_N$fontSize": 29,
-    "_N$lineHeight": 40,
+    "_N$fontSize": 50,
+    "_N$lineHeight": 30,
     "_N$fontColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -362,8 +362,8 @@
       "b": 255,
       "a": 255
     },
-    "_N$placeholder": "请输入手机号码",
-    "_N$placeholderFontSize": 20,
+    "_N$placeholder": "请输入手机号码 ",
+    "_N$placeholderFontSize": 70,
     "_N$placeholderFontColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -372,12 +372,12 @@
       "a": 255
     },
     "_N$maxLength": 9999,
-    "_N$stayOnTop": true
+    "_N$stayOnTop": false
   },
   {
     "__type__": "cc.Node",
     "_name": "code_editbox",
-    "_objFlags": 0,
+    "_objFlags": 512,
     "_parent": {
       "__id__": 6
     },
@@ -408,7 +408,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 250,
-      "height": 60
+      "height": 120
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -417,7 +417,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -6
+      "y": -238
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -447,7 +447,7 @@
     "_N$returnType": 1,
     "_N$inputFlag": 5,
     "_N$inputMode": 3,
-    "_N$fontSize": 29,
+    "_N$fontSize": 40,
     "_N$lineHeight": 40,
     "_N$fontColor": {
       "__type__": "cc.Color",
@@ -457,7 +457,7 @@
       "a": 255
     },
     "_N$placeholder": "请输入验证码",
-    "_N$placeholderFontSize": 20,
+    "_N$placeholderFontSize": 40,
     "_N$placeholderFontColor": {
       "__type__": "cc.Color",
       "r": 255,
@@ -466,7 +466,7 @@
       "a": 255
     },
     "_N$maxLength": 9999,
-    "_N$stayOnTop": true
+    "_N$stayOnTop": false
   },
   {
     "__type__": "cc.Node",
@@ -509,7 +509,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 250,
-      "height": 60
+      "height": 120
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -518,7 +518,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -6
+      "y": -238
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -563,8 +563,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 40
+      "width": 230,
+      "height": 80
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -591,9 +591,9 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 20,
-    "_fontSize": 20,
-    "_lineHeight": 40,
+    "_actualFontSize": 40,
+    "_fontSize": 40,
+    "_lineHeight": 80,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -602,7 +602,7 @@
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 0
+    "_N$overflow": 2
   },
   {
     "__type__": "cc.Widget",
@@ -762,7 +762,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 500,
-      "height": 60
+      "height": 120
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -771,7 +771,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -149
+      "y": -461
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -841,9 +841,9 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 20,
-    "_fontSize": 20,
-    "_lineHeight": 40,
+    "_actualFontSize": 40,
+    "_fontSize": 40,
+    "_lineHeight": 80,
     "_enableWrapText": false,
     "_N$file": null,
     "_isSystemFontUsed": true,
