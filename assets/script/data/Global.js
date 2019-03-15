@@ -80,7 +80,7 @@ if (!CC_EDITOR) {
 
         isIOS() {
             var isIos = cc.sys.os === cc.sys.OS_IOS,
-                multiple = 0.8,
+                multiple = 0.9,
                 f = function () {
                     $('#GameCanvas').css('height', `${multiple * 100}%`);
                 };
