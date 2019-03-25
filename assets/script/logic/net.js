@@ -175,7 +175,7 @@ let net = cc.Class({
         this.emit(_event_name.type + "_ret", {
             fish: Global.FishMgr.fish[1],
             level_up: level_up,
-            integral: Global.DataMgr.integration_num
+            integral: Global.DataMgr.integration_num,
         })
     },
 
@@ -205,7 +205,7 @@ let net = cc.Class({
     add_props: function (_msg, _event_name) {
         Global.DataMgr.add_prop(_msg.id, _msg.num);
         ui.open("popup_reward_layer", [_msg.id,data.prop[_msg.id].type,data.prop[_msg.id].addition,_msg.num]);
-        this.emit(_event_name.type + "_ret")
+        this.emit(_event_name.type + "_ret");
     },
 
     //每日领取食袋
@@ -221,16 +221,14 @@ let net = cc.Class({
     //每日问答
     daily_question_answer: function (_msg, _event_name) {
         var _question_id = Math.floor(Math.random() * data.question.answer.length);
-        Global.DataMgr.is_question = true;
-
         Global.DataMgr.mission[5].num++;
-
-        this.emit(_event_name.type + "_ret", { question_answer_id: _question_id })
+        this.emit(_event_name.type + "_ret", { question_answer_id: _question_id });
     },
-
+    
     //领取每日问答奖励
     get_daily_question_answer_reward: function (_msg, _event_name) {
         var prop = _msg.answer ? [7, 2, 0, 1] : [6, 2, 0, 1];
+        Global.DataMgr.is_question = true;
         Global.DataMgr.add_prop(prop[0], prop[3]);
         this.emit(_event_name.type + "_ret", { prop: prop })
     },
