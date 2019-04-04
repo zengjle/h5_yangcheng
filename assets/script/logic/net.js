@@ -112,6 +112,7 @@ let net  = cc.Class( {
 
         Global.DataMgr.mission[ 3 ].num++;
 
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", {
             info      : [ msg.shop_id, prop_data.type, prop_data.addition, num ],
             shop_info : Global.DataMgr.get_is_receive( msg.shop_id )
@@ -133,6 +134,7 @@ let net  = cc.Class( {
         Global.DataMgr.mission[ 2 ].num++;
 
         Global.DataMgr.add_prop( reward_prop[ 0 ][ 0 ], reward_prop[ 0 ][ 3 ] );
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", data );
     },
 
@@ -179,7 +181,7 @@ let net  = cc.Class( {
         Global.DataMgr.mission[ 6 ].num++;
 
         Global.DataMgr.integration_num += add_exp / 10;
-
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", {
             fish     : Global.FishMgr.fish[ 1 ],
             level_up : level_up,
@@ -190,6 +192,7 @@ let net  = cc.Class( {
     // 更改福缘
     change_score : function ( msg, _event_name ) {
         Global.DataMgr.integration_num += msg.score;
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", { integral : Global.DataMgr.integration_num } );
     },
 
@@ -205,6 +208,7 @@ let net  = cc.Class( {
         }
         Global.DataMgr.use_prop( prop[ 0 ], 1 );
         Global.DataMgr.add_prop( info[ 0 ], info[ 3 ] );
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", { info : info } );
     },
 
@@ -215,6 +219,7 @@ let net  = cc.Class( {
             data.prop[ _msg.id ].type,
             data.prop[ _msg.id ].addition,
             _msg.num ] );
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret" );
     },
 
@@ -225,6 +230,7 @@ let net  = cc.Class( {
 
         Global.DataMgr.mission[ 1 ].num++;
         Global.DataMgr.add_prop( 6, 1 );
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", { prop : prop } );
     },
 
@@ -232,6 +238,7 @@ let net  = cc.Class( {
     daily_question_answer : function ( _msg, _event_name ) {
         var _question_id = Math.floor( Math.random() * data.question.answer.length );
         Global.DataMgr.mission[ 5 ].num++;
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", { question_answer_id : _question_id } );
     },
 
@@ -240,6 +247,7 @@ let net  = cc.Class( {
         var prop                   = _msg.answer ? [ 7, 2, 0, 1 ] : [ 6, 2, 0, 1 ];
         Global.DataMgr.is_question = true;
         Global.DataMgr.add_prop( prop[ 0 ], prop[ 3 ] );
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", { prop : prop } );
     },
 
@@ -247,6 +255,7 @@ let net  = cc.Class( {
     get_daily_mission_reward : function ( _msg, _event_name ) {
         var prop = Global.DataMgr.get_daily_mission_reward( _msg.mission_id );
         Global.DataMgr.add_prop( prop[ 0 ], prop[ 3 ] );
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", { prop : prop } );
     },
 
@@ -261,6 +270,7 @@ let net  = cc.Class( {
     // 购买物品
     buy_commodity : function ( _msg, _event_name ) {
         Global.DataMgr.buy_commodity( _msg.info );
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", {
             integral  : Global.DataMgr.integration_num,
             commodity : Global.DataMgr.get_info_by_id( _msg.info.prop_id )
@@ -270,7 +280,7 @@ let net  = cc.Class( {
     // 保存用户信息
     save_user_info : function ( _msg, _event_name ) {
         Global.DataMgr.user_info = _msg.user_info;
-
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", _msg.user_info );
     },
 
@@ -285,6 +295,7 @@ let net  = cc.Class( {
         fn     = function ( _msg ) {
             Global.Observer.off( 'add_chengche_integral_ok', fn, this );
             Global.Observer.off( 'add_chengche_integral_no', fn, this );
+            Global.DataMgr.set_game_info();
             this.emit( "add_chengche_integral_ret", _msg );
         }.bind( this );
         Global.Observer.on( 'add_chengche_integral_ok', fn, this );
@@ -311,6 +322,7 @@ let net  = cc.Class( {
     add_friend : function ( _msg, _event_name ) {
         Global.UserMgr.add_friend( _msg.friend_id );
         Global.DataMgr.all_friend_id.push( _msg.friend_id );
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", _msg );
     },
 
@@ -335,6 +347,7 @@ let net  = cc.Class( {
     // 获取好友食物
     get_friend_food : function ( _msg, _event_name ) {
         var info = Global.DataMgr.get_friend_food( Global.all_user_game_data[ _msg.friend_id ].prop );
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", { info : info } );
     },
 
@@ -361,6 +374,7 @@ let net  = cc.Class( {
         if ( !pray_reward ) {
             return;
         }
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", { pray_reward : pray_reward } );
     },
 
@@ -370,6 +384,7 @@ let net  = cc.Class( {
         if ( !divination_result ) {
             return;
         }
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", { divination_result : divination_result } );
     }
 } );
