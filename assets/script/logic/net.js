@@ -54,6 +54,7 @@ let net  = cc.Class( {
         self.on( "get_friend_food", self.get_friend_food.bind( self ) );
         self.on( "enter_friend_home", self.enter_friend_home.bind( self ) );
 
+        self.on("enter_wen_temple",self.enter_wen_temple.bind( self ));
         self.on( "wen_temple_pray", self.wen_temple_pray.bind( self ) );
         self.on( "wen_divination", self.wen_divination.bind( self ) );
     },
@@ -355,13 +356,22 @@ let net  = cc.Class( {
         }.bind( this ) );
     },
 
+    //文庙祈福
+    enter_wen_temple : function(_msg,_event_name){
+        this.emit(_event_name.type + "_ret",{
+            pray_state: Global.DataMgr.wen_temple_pray.is,
+            practise_state: Global.DataMgr.wen_divination.num > 0,
+        })
+    },
+
     // 文庙祈福
     wen_temple_pray : function ( _msg, _event_name ) {
         var pray_reward = Global.DataMgr.play_wen_temple_pray();
+        Global.DataMgr.set_game_info();
         if ( !pray_reward ) {
             return;
         }
-        this.emit( _event_name.type + "_ret", { pray_reward : pray_reward } );
+        this.emit( _event_name.type + "_ret", { pray_reward : pray_reward} );
     },
 
     // 文庙掷珓
@@ -370,6 +380,7 @@ let net  = cc.Class( {
         if ( !divination_result ) {
             return;
         }
+        Global.DataMgr.set_game_info();
         this.emit( _event_name.type + "_ret", { divination_result : divination_result } );
     }
 } );

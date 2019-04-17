@@ -585,9 +585,10 @@ const DataMgr  = ( function () {
     _p.play_wen_temple_pray = function () {
         var wen_temple_pray = this.wen_temple_pray;
         if ( wen_temple_pray.is ) {
-            tips.show( '这个星期已经玩过了~~' );
+            tips.show( '本星期已祈福' );
             return null;
         }
+        this.wen_temple_pray.is = true;
         wen_temple_pray.time = Date.now();
         if ( Math.random() < 0.4 ) {
             this.add_prop( 7, 1 );
@@ -604,7 +605,7 @@ const DataMgr  = ( function () {
     _p.play_wen_divination = function () {
         var wen_divination = this.wen_divination;
         if ( wen_divination.num <= 0 ) {
-            tips.show( '这个星期已经没有次数啦~~~' );
+            tips.show( '本星期已掷珓' );
             return;
         }
         var random = Math.random();
@@ -615,7 +616,7 @@ const DataMgr  = ( function () {
                 time   : Date.now()
             };
             this.integration_num += 200;
-            return [ 1, 200 ];
+            return [ 1, 200 , this.wen_divination.num];
         } else if ( random < 0.75 ) {
             this.wen_divination = {
                 num    : 0,
@@ -623,14 +624,14 @@ const DataMgr  = ( function () {
                 time   : Date.now()
             };
             this.integration_num += 100;
-            return [ 2, 100 ];
+            return [ 2, 100 ,0];
         } else {
             this.wen_divination = {
                 num    : 0,
                 status : 3,
                 time   : Date.now()
             };
-            return [ 3, 0 ];
+            return [ 3, 50 , 0];
         }
     };
     return DataMgr;

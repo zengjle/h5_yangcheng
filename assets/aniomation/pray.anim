@@ -1,0 +1,55 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "pray",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 4,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "be_to_pray": {
+        "props": {
+          "y": [
+            {
+              "frame": 0,
+              "value": -820
+            },
+            {
+              "frame": 1,
+              "value": -490
+            },
+            {
+              "frame": 1.5,
+              "value": -605
+            },
+            {
+              "frame": 2,
+              "value": -490
+            },
+            {
+              "frame": 2.5,
+              "value": -605
+            },
+            {
+              "frame": 3,
+              "value": -490
+            },
+            {
+              "frame": 4,
+              "value": -820
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": [
+    {
+      "frame": 4,
+      "func": "pray_callback",
+      "params": []
+    }
+  ]
+}

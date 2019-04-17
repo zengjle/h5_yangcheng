@@ -1,14 +1,14 @@
 {
   "ver": "2.0.0",
-  "uuid": "ac31f139-91c0-4348-aa0f-1239eeef5dc2",
+  "uuid": "412c96e9-274a-46e0-894b-9250380f2065",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "wcm": {
+    "login_ball_btn": {
       "ver": "1.0.3",
-      "uuid": "2f1c9fc6-9a97-47a3-bca9-634713108275",
-      "rawTextureUuid": "ac31f139-91c0-4348-aa0f-1239eeef5dc2",
+      "uuid": "b45e4c51-6161-40b5-86d6-47a82f8324a0",
+      "rawTextureUuid": "412c96e9-274a-46e0-894b-9250380f2065",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 289,
-      "height": 330,
-      "rawWidth": 289,
-      "rawHeight": 330,
+      "width": 1154,
+      "height": 1271,
+      "rawWidth": 1154,
+      "rawHeight": 1271,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

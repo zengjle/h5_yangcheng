@@ -1,14 +1,14 @@
 {
   "ver": "2.0.0",
-  "uuid": "0dfe843e-bae6-42f7-9a53-6406bec21a71",
+  "uuid": "a2d1c898-c341-4482-a040-25fa1509c98d",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "zzgc": {
+    "map_old_town": {
       "ver": "1.0.3",
-      "uuid": "5dfefdd1-bcee-4f60-a05b-48e48d74f186",
-      "rawTextureUuid": "0dfe843e-bae6-42f7-9a53-6406bec21a71",
+      "uuid": "92e29c8a-b8de-43ea-8fdd-13f7ca331f2b",
+      "rawTextureUuid": "a2d1c898-c341-4482-a040-25fa1509c98d",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 234,
-      "height": 309,
-      "rawWidth": 234,
-      "rawHeight": 309,
+      "width": 94,
+      "height": 104,
+      "rawWidth": 94,
+      "rawHeight": 104,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

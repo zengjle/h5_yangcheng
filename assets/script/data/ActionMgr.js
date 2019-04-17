@@ -98,6 +98,17 @@ const ActionMgr = (function () {
         );
     };
 
+    /**显隐效果
+     * @param time  显隐时间
+     */
+
+    _p.fade = function (time){
+        return cc.sequence(
+            cc.fadeOut(time),
+            cc.fadeIn(time)
+        )
+
+    }
     /**进度条前进
      *
      * @param progress      进度条组件或他的节点

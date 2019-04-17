@@ -10,11 +10,18 @@ cc.Class({
         window_type :constant.WINDOW_TYPE.POPUP,
 
         node_reward_light:cc.Node,
+        lbl_tips:cc.Label,
     },
 
     onLoad:function () {
         this.node.runAction(cc.sequence(cc.scaleTo(0.1, 1, 1),cc.callFunc(()=>{
-        this.init_comp(this.args[0]);
+        if(this.args.length > 1){
+            this.lbl_tips.node.active = true;            
+            this.init_comp(this.args[0],this.args[1]);
+        }else{
+            this.lbl_tips.node.active = false;
+            this.init_comp(this.args[0]);
+        }
     })))
     },
 
@@ -31,7 +38,8 @@ cc.Class({
 
     },
 
-    init_comp:function(_food,_integral){
+    init_comp:function(_food,_tips_str){
+        this.lbl_tips.string = _tips_str;
         this.node_reward_light.getComponent("comp_reward_light").init_comp(_food);
         this.node_reward_light.scale = 0;
         this.scheduleOnce(()=>{

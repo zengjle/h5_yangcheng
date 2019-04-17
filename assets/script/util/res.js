@@ -16,6 +16,7 @@ module.exports = {
         ui_mission_prefab: "prefab/ui_mission",
         ui_old_town_prefab: 'prefab/ui_old_town',
         ui_map_prefab:"prefab/ui_map",
+        ui_wen_temple_prefab:"prefab/ui_wen_temple",
         ui_friend_home_prefab:"prefab/ui_friend_home",
         popup_reward_layer_prefab: "prefab/popup_reward_layer",
         popup_gameplay_introduced_prefab:"prefab/popup_gameplay_introduced",
