@@ -30,6 +30,7 @@ cc.Class({
         node_bag: cc.Node,
         node_shop: cc.Node,
         node_head_info: cc.Node,
+        node_notice: cc.Node,
 
     },
 
@@ -42,6 +43,8 @@ cc.Class({
         this.node_mission.active = false;
         this.node_shop.active = false;
         this.node_head_info.active = false;
+
+        this.node_notice.active = true;
     },
 
     start: function () {
@@ -176,6 +179,7 @@ cc.Class({
             this.food = null;
             this.img_food.spriteFrame = null;
         }
+        this.node_notice.getChildByName("bar_introduction").runAction(cc.scaleTo(0.2,1));
     },
     
     init_plate: function (_id) {
@@ -227,6 +231,14 @@ cc.Class({
 
     on_close_user_head: function () {
         this.node_head_info.active = false;
+    },
+
+    on_close_notice: function () {
+        this.node_notice.active = false;
+    },
+
+    on_open_map: function(){
+        ui.open("ui_map");
     },
 
     on_chick_active_bar(_event, state, _cb) {

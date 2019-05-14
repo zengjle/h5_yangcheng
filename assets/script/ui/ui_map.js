@@ -59,7 +59,12 @@ cc.Class({
         ui.close();
     },
 
-    on_open_sys: function (_, _uiName) {
+    on_open_wen_temple:function()
+    {
+        ui.open("ui_wen_temple");
+    },
+
+    on_open_sys: function (_,_uiName) {
         ui.open(_uiName);
     },
     /**摄像机移动

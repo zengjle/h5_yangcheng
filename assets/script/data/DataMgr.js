@@ -150,7 +150,7 @@ const DataMgr  = ( function () {
 
         function set_last_receive ( val ) { this.data.last_receive = val;}
 
-        function set_wen_chang_men_max_source () {
+        function set_wen_chang_men_max_source (val) {
             if ( val < this.data.wen_chang_men_max_source ) {
                 return;
             }
